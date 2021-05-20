@@ -38,7 +38,9 @@
   --black: #111111;
   --blue: #0c3cb4;
   --white: #fdfdfd;
-  --tan: #fff7ea;
+  --orange: #ffab00;
+  /* --tan: #fff7ea; */
+  --tan: #ffebcb;
 }
 
 html,
