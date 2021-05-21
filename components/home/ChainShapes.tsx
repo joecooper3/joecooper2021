@@ -7,11 +7,19 @@ import { createChain } from "@utils/homepage";
 export default function ChainShapes() {
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
+  const [ropeArr, setRopeArr] = useState([]);
+  const [dimensions, setDimensions] = useState<DOMRect | null>(null);
+  const [scene, setScene] = useState<Matter.Render | null>(null);
+
+  const handleResize = () => {
+    setDimensions(containerRef.current.getBoundingClientRect());
+  };
 
   useEffect(() => {
     const {
       Composite,
       Body,
+      Bodies,
       Mouse,
       MouseConstraint,
       Engine,
@@ -21,6 +29,9 @@ export default function ChainShapes() {
     } = Matter;
     const engine = Engine.create();
 
+    const container = containerRef.current.getBoundingClientRect();
+    setDimensions(container);
+
     let render = Render.create({
       element: containerRef.current,
       engine: engine,
@@ -28,6 +39,8 @@ export default function ChainShapes() {
       options: {
         background: "rgba(0,0,0,0)",
         wireframes: false,
+        width: container.width,
+        height: container.height,
       },
     });
 
@@ -36,12 +49,29 @@ export default function ChainShapes() {
     const groupB = Body.nextGroup(true);
     const groupC = Body.nextGroup(true);
 
-    const ropeA = createChain(75, 50, 8, group);
-    const ropeB = createChain(190, 80, 7, group);
-    const ropeC = createChain(305, 50, 8, group);
+    const ropeA = createChain(50, 30, 8, container.height, group);
+    const ropeB = createChain(125, 45, 7, container.height, group);
+    const ropeC = createChain(200, 30, 8, container.height, group);
+    console.log(container.height)
 
-    World.add(engine.world, [ropeA, ropeB, ropeC]);
+    const floor = Bodies.rectangle(0, container.height / 2 + 10, container.width, 20, {
+      label: "floor",
+      isStatic: true,
+      render: {
+        fillStyle: "white",
+      },
+    });
+
+    setRopeArr([ropeA, ropeB, ropeC]);
+
+    // @ts-ignore
+    World.add(engine.world, [ropeA, ropeB, ropeC, floor]);
+    // @ts-ignore
+    Render.setPixelRatio(render, 2);
     Runner.run(engine);
+
+    setDimensions(containerRef.current.getBoundingClientRect());
+    window.addEventListener("resize", handleResize);
 
     // after chains are done falling from sky, allow shapes from adjacent
     // chains to collide my loosening up collision filters
@@ -52,7 +82,6 @@ export default function ChainShapes() {
       ropeC.bodies.forEach((shape) => {
         shape.collisionFilter.group = groupC;
       });
-      console.log(ropeB.bodies);
     }, 2500);
 
     // add mouse control
@@ -69,9 +98,69 @@ export default function ChainShapes() {
     });
 
     Composite.add(engine.world, mouseConstraint);
-
     Render.run(render);
+    setScene(render);
   }, []);
+
+  useEffect(() => {
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (dimensions) {
+      let { width, height } = dimensions;
+      // Dynamically update canvas and bounds
+      // scene.bounds.max.x = width;
+      // scene.bounds.max.y = height;
+      // scene.options.width = width;
+      // scene.options.height = height;
+      scene.canvas.width = width;
+      scene.canvas.height = height;
+      // Dynamically update floor
+      // @ts-ignore
+      const floor = scene.engine.world.bodies.find(
+        (body) => body.label === "floor"
+      );
+      console.log(floor)
+      // Matter.Body.setPosition(floor, {
+      //   x: width / 2,
+      //   y: height + STATIC_DENSITY / 2,
+      // });
+      // Matter.Body.setVertices(floor, [
+      //   { x: 0, y: height },
+      //   { x: width, y: height },
+      //   { x: width, y: height + STATIC_DENSITY },
+      //   { x: 0, y: height + STATIC_DENSITY },
+      // ]);
+    }
+  }, [scene, dimensions]);
+
+  const breakRopes = () => {
+    // TODO: Remove all collision filters
+    if (ropeArr.length > 0) {
+      ropeArr.forEach((rope) => {
+        if (rope.constraints.length > 0) {
+          rope.constraints = [];
+        }
+      });
+    }
+  };
+
+  // debugging functions
+  const pressedJ = (e: KeyboardEvent) => {
+    if (e.key === "j") {
+      breakRopes();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("keydown", (e) => pressedJ(e));
+    return () => {
+      window.removeEventListener("keydown", (e) => pressedJ(e));
+    };
+  }, [ropeArr]);
 
   return (
     <Container ref={containerRef}>
@@ -91,5 +180,6 @@ const Container = styled.div`
 `;
 
 const Canvas = styled.canvas`
-  height: 100%;
+  height: 100% !important;
+  width: 100% !important;
 `;
