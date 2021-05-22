@@ -102,6 +102,7 @@ export default function ChainShapes() {
       },
     });
 
+    // @ts-ignore
     Composite.add(engine.world, mouseConstraint);
     Render.run(render);
     setScene(render);
