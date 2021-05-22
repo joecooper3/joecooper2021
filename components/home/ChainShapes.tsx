@@ -7,7 +7,7 @@ import { createChain } from "@utils/homepage";
 export default function ChainShapes() {
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
-  const [ropeArr, setRopeArr] = useState([]);
+  const [ropeArr, setRopeArr] = useState<Matter.Composite[]>([]);
   const [dimensions, setDimensions] = useState<DOMRect | null>(null);
   const [scene, setScene] = useState<Matter.Render | null>(null);
 
@@ -52,15 +52,20 @@ export default function ChainShapes() {
     const ropeA = createChain(50, 30, 8, container.height, group);
     const ropeB = createChain(125, 45, 7, container.height, group);
     const ropeC = createChain(200, 30, 8, container.height, group);
-    console.log(container.height)
 
-    const floor = Bodies.rectangle(0, container.height / 2 + 10, container.width, 20, {
-      label: "floor",
-      isStatic: true,
-      render: {
-        fillStyle: "white",
-      },
-    });
+    const floor = Bodies.rectangle(
+      0,
+      container.height / 2 + 10,
+      container.width,
+      20,
+      {
+        label: "floor",
+        isStatic: true,
+        render: {
+          fillStyle: "white",
+        },
+      }
+    );
 
     setRopeArr([ropeA, ropeB, ropeC]);
 
@@ -108,40 +113,33 @@ export default function ChainShapes() {
     };
   }, []);
 
+  // resizes canvas to fit screen, re-adjust position of floor
   useEffect(() => {
     if (dimensions) {
       let { width, height } = dimensions;
-      // Dynamically update canvas and bounds
-      // scene.bounds.max.x = width;
-      // scene.bounds.max.y = height;
-      // scene.options.width = width;
-      // scene.options.height = height;
       scene.canvas.width = width;
       scene.canvas.height = height;
-      // Dynamically update floor
+      // Dynamically update floor on resizing
       // @ts-ignore
-      const floor = scene.engine.world.bodies.find(
+      const floor: Matter.Body = scene.engine.world.bodies.find(
         (body) => body.label === "floor"
       );
-      console.log(floor)
-      // Matter.Body.setPosition(floor, {
-      //   x: width / 2,
-      //   y: height + STATIC_DENSITY / 2,
-      // });
-      // Matter.Body.setVertices(floor, [
-      //   { x: 0, y: height },
-      //   { x: width, y: height },
-      //   { x: width, y: height + STATIC_DENSITY },
-      //   { x: 0, y: height + STATIC_DENSITY },
-      // ]);
+      console.log(floor);
+      Matter.Body.setPosition(floor, {
+        x: 0,
+        y: height / 2 + 10,
+      });
     }
   }, [scene, dimensions]);
 
   const breakRopes = () => {
-    // TODO: Remove all collision filters
     if (ropeArr.length > 0) {
       ropeArr.forEach((rope) => {
         if (rope.constraints.length > 0) {
+          rope.bodies.forEach((shape) => {
+            // clear collision filters, allowing shapes from same rope to collide
+            shape.collisionFilter.group = 2;
+          });
           rope.constraints = [];
         }
       });
@@ -151,6 +149,9 @@ export default function ChainShapes() {
   // debugging functions
   const pressedJ = (e: KeyboardEvent) => {
     if (e.key === "j") {
+      breakRopes();
+    }
+    if (e.key === "k") {
       breakRopes();
     }
   };
