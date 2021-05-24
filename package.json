@@ -10,6 +10,7 @@
   "dependencies": {
     "@types/matter-js": "^0.14.12",
     "@types/styled-components": "^5.1.9",
+    "gsap": "^3.6.1",
     "lodash": "^4.17.21",
     "matter-js": "^0.17.1",
     "next": "^10.2.0",
