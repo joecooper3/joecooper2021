@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
-import Matter from "matter-js";
+import Matter, { Events } from "matter-js";
 import styled from "styled-components";
 
-import { createChain } from "@utils/homepage";
+import { pulsate, stopPulsating } from "@animations/homepage";
+import { Shape, createRope, getParentRope, breakRopes } from "@utils/homepage";
 
 export default function ChainShapes() {
   const canvasRef = useRef(null);
@@ -10,24 +11,36 @@ export default function ChainShapes() {
   const [ropeArr, setRopeArr] = useState<Matter.Composite[]>([]);
   const [dimensions, setDimensions] = useState<DOMRect | null>(null);
   const [scene, setScene] = useState<Matter.Render | null>(null);
+  const [hitBox, setHitBox] = useState<Matter.Body | null>(null);
+  const [engine, setEngine] = useState(null);
 
   const handleResize = () => {
     setDimensions(containerRef.current.getBoundingClientRect());
   };
 
+  // create engine; will need to be referenced in a few useEffects, so just
+  // going to explicitly define this first and put in a useState
   useEffect(() => {
+    const { Engine } = Matter;
+    const engine = Engine.create();
+    setEngine(engine);
+  }, []);
+
+  // creates world, adds shapes/chains, mouse constraints, sets up runner and render
+  useEffect(() => {
+    if (!engine) {
+      return;
+    }
     const {
       Composite,
       Body,
       Bodies,
       Mouse,
       MouseConstraint,
-      Engine,
       Runner,
       Render,
       World,
     } = Matter;
-    const engine = Engine.create();
 
     const container = containerRef.current.getBoundingClientRect();
     setDimensions(container);
@@ -49,9 +62,9 @@ export default function ChainShapes() {
     const groupB = Body.nextGroup(true);
     const groupC = Body.nextGroup(true);
 
-    const ropeA = createChain(50, 30, 8, container.height, group);
-    const ropeB = createChain(125, 45, 7, container.height, group);
-    const ropeC = createChain(200, 30, 8, container.height, group);
+    const ropeA = createRope(50, 45, 8, container.height, group, 7, 0);
+    const ropeB = createRope(125, 60, 7, container.height, group, 5, 1);
+    const ropeC = createRope(200, 45, 8, container.height, group, 5, 2);
 
     const floor = Bodies.rectangle(
       0,
@@ -67,10 +80,28 @@ export default function ChainShapes() {
       }
     );
 
+    const stretchWidth = 250;
+    const stretchX = (container.width - stretchWidth) / 2;
+    const stretchDetector = Bodies.rectangle(
+      stretchX,
+      0,
+      stretchWidth,
+      container.height,
+      {
+        label: "stretchDetector",
+        isStatic: true,
+        isSensor: true,
+        render: {
+          fillStyle: "#ffebcb",
+        },
+      }
+    );
+    setHitBox(stretchDetector);
+
     setRopeArr([ropeA, ropeB, ropeC]);
 
     // @ts-ignore
-    World.add(engine.world, [ropeA, ropeB, ropeC, floor]);
+    World.add(engine.world, [ropeA, ropeB, ropeC, floor, stretchDetector]);
     // @ts-ignore
     Render.setPixelRatio(render, 2);
     Runner.run(engine);
@@ -106,7 +137,50 @@ export default function ChainShapes() {
     Composite.add(engine.world, mouseConstraint);
     Render.run(render);
     setScene(render);
-  }, []);
+  }, [engine]);
+
+  // add event for stretching out ropes too far
+  useEffect(() => {
+    if (engine) {
+      Events.on(engine, "collisionStart", (e) => {
+        const { bodyA, bodyB } = e.pairs[0];
+        if (
+          (bodyA === hitBox && bodyB.label.includes("trigger")) ||
+          (bodyB === hitBox && bodyA.label.includes("trigger"))
+        ) {
+          console.log("my god today");
+          const shape: Shape = bodyA === hitBox ? bodyB : bodyA;
+          const parentRope = getParentRope(shape, ropeArr);
+          if (parentRope) {
+            pulsate(parentRope, dimensions.height, breakRopes);
+          }
+          // trigger chainBreak when passing five second threshold
+        }
+      });
+
+      Events.on(engine, "collisionEnd", (e) => {
+        const { bodyA, bodyB } = e.pairs[0];
+        if (
+          (bodyA === hitBox && bodyB.label.includes("trigger")) ||
+          (bodyB === hitBox && bodyA.label.includes("trigger"))
+        ) {
+          const shape = bodyA === hitBox ? bodyB : bodyA;
+          const parentRope = getParentRope(shape, ropeArr);
+          if (parentRope) {
+            stopPulsating(parentRope);
+          }
+        }
+      });
+    }
+    return () => {
+      if (engine) {
+        // @ts-ignore
+        Events.off(engine, "collisionStart");
+        // @ts-ignore
+        Events.off(engine, "collisionEnd");
+      }
+    };
+  }, [engine, hitBox, dimensions]);
 
   useEffect(() => {
     return () => {
@@ -125,7 +199,6 @@ export default function ChainShapes() {
       const floor: Matter.Body = scene.engine.world.bodies.find(
         (body) => body.label === "floor"
       );
-      console.log(floor);
       Matter.Body.setPosition(floor, {
         x: 0,
         y: height / 2 + 10,
@@ -133,27 +206,16 @@ export default function ChainShapes() {
     }
   }, [scene, dimensions]);
 
-  const breakRopes = () => {
-    if (ropeArr.length > 0) {
-      ropeArr.forEach((rope) => {
-        if (rope.constraints.length > 0) {
-          rope.bodies.forEach((shape) => {
-            // clear collision filters, allowing shapes from same rope to collide
-            shape.collisionFilter.group = 2;
-          });
-          rope.constraints = [];
-        }
-      });
-    }
-  };
-
   // debugging functions
   const pressedJ = (e: KeyboardEvent) => {
     if (e.key === "j") {
-      breakRopes();
+      breakRopes(ropeArr);
     }
     if (e.key === "k") {
-      breakRopes();
+      if (ropeArr.length > 0) {
+        ropeArr[1].bodies[2].render.sprite.xScale = 0.5;
+        Matter.Body.scale(ropeArr[1].bodies[2], 1.25, 1.25);
+      }
     }
   };
 
