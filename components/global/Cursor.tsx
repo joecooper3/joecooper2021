@@ -12,8 +12,6 @@ export default function Cursor() {
   }, []);
 
   const updateCursorPosition = (e) => {
-    console.log("updateCursorPosition");
-    console.log(e);
     smoothedMouse.update({
       x: e.clientX,
       y: e.clientY,

@@ -10,14 +10,15 @@ export const convertUnits = (unit: number, userHeight: number): number => {
   return (unit / DEV_HEIGHT) * userHeight;
 };
 
-export const getParentRope = (shape: Shape, ropeArr: Matter.Composite[]): Matter.Composite => {
+export const getParentRope = (
+  shape: Shape,
+  ropeArr: Matter.Composite[]
+): Matter.Composite => {
   const labelRegex = /^rope[0-9]/g;
   const parentRopeLabel = shape.label.match(labelRegex)[0];
-  const parentRopeIndex: number = parseInt(
-    parentRopeLabel.replace(/rope/, "")
-  );
+  const parentRopeIndex: number = parseInt(parentRopeLabel.replace(/rope/, ""));
   return ropeArr[parentRopeIndex];
-}
+};
 
 // will generate a random shape (square, circle, or triangle) with a random color
 const generateShape = (
@@ -64,6 +65,7 @@ export const createRope = (
   y: number,
   numOfShapes: number,
   containerHeight: number,
+  containerWidth: number,
   group,
   triggerNum?: number,
   index?: number
@@ -86,10 +88,14 @@ export const createRope = (
   Composite.add(chainComp, anchor);
 
   for (let i = 1; i < numOfShapes; i++) {
-    const convertedX = (x / 730) * containerHeight;
+    const convertedX = (x / 1440) * containerWidth;
     const convertedY = (y / 730) * containerHeight;
-    const newX = convertedX - convertUnits(10, containerHeight) * -i;
+    // const newX = convertedX - convertUnits(10, containerHeight) * -i;
+    const newX = x;
     const newY = convertedY - (i - 1) * convertUnits(10, containerHeight);
+    console.log(x);
+    console.log(convertedX);
+    console.log(newX);
     const length = i === 1 ? containerHeight * 0.04 : containerHeight * 0.065;
     const triggerShape = i === triggerNum;
     const randomShape = generateShape(

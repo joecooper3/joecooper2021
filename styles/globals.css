@@ -34,6 +34,33 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Maison Extended";
+  src: url("/fonts/MaisonNeue-ExtendedExtraThin.woff2") format("woff2"),
+    url("/fonts/MaisonNeue-ExtendedExtraThin.woff") format("woff");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Maison Extended";
+  src: url("/fonts/MaisonNeue-ExtendedExtraThinIt.woff2") format("woff2"),
+    url("/fonts/MaisonNeue-ExtendedExtraThinIt.woff") format("woff");
+  font-weight: 200;
+  font-style: oblique;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Maison Extended";
+  src: url("/fonts/MaisonNeue-ExtendedExtendedBold.woff2") format("woff2"),
+    url("/fonts/MaisonNeue-ExtendedExtendedBold.woff") format("woff");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --black: #111111;
   --blue: #0c3cb4;
@@ -41,6 +68,8 @@
   --orange: #ffab00;
   /* --tan: #fff7ea; */
   --tan: #ffebcb;
+  --header-font: "Maison Extended", sans-serif;
+  --body-font: "Maison Neue", sans-serif;
 }
 
 html,
@@ -49,5 +78,15 @@ body {
   color: var(--black);
   padding: 0;
   margin: 0;
-  font-family: "Maison Neue", sans-serif;
+  font-family: var(--body-font);
+}
+
+.sr-only:not(:focus):not(:active) {
+  clip: rect(0 0 0 0); 
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap; 
+  width: 1px;
 }

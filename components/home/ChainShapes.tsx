@@ -62,9 +62,48 @@ export default function ChainShapes() {
     const groupB = Body.nextGroup(true);
     const groupC = Body.nextGroup(true);
 
-    const ropeA = createRope(50, 45, 8, container.height, group, 7, 0);
-    const ropeB = createRope(125, 60, 7, container.height, group, 5, 1);
-    const ropeC = createRope(200, 45, 8, container.height, group, 5, 2);
+    // will calculate correct x value to map rope onto
+    const xCalc = (
+      fullWidth: number,
+      height: number,
+      offset: number
+    ): number => {
+      const CONTAINER_PERCENT = 0.868; // based on <main> element width in vw
+      const DEV_WIDTH = 1440;
+      const whatever = ((DEV_WIDTH - DEV_WIDTH * CONTAINER_PERCENT) / 2) / 2;
+      return (whatever / DEV_WIDTH) * fullWidth + offset;
+    };
+
+    const ropeA = createRope(
+      xCalc(container.width, container.height, 30),
+      45,
+      8,
+      container.height,
+      container.width,
+      group,
+      7,
+      0
+    );
+    const ropeB = createRope(
+      xCalc(container.width, container.height, 105),
+      60,
+      7,
+      container.height,
+      container.width,
+      group,
+      5,
+      1
+    );
+    const ropeC = createRope(
+      xCalc(container.width, container.height, 180),
+      45,
+      8,
+      container.height,
+      container.width,
+      group,
+      5,
+      2
+    );
 
     const floor = Bodies.rectangle(
       0,
