@@ -5,7 +5,7 @@ export type Shape = Matter.Body & {
   activeTL?: gsap.core.Timeline | null;
 };
 
-export const convertUnits = (unit: number, userHeight: number): number => {
+export const convertHeightUnits = (unit: number, userHeight: number): number => {
   const DEV_HEIGHT = 730; // viewport height of my laptop to use as a baseline unit
   return (unit / DEV_HEIGHT) * userHeight;
 };
@@ -73,9 +73,9 @@ export const createRope = (
   const chainComp: Composite = Composite.create();
   // anchor will be static and invisible; other shapes will connect to it
   const anchor = Bodies.circle(
-    convertUnits(x, containerHeight),
-    convertUnits(y - 40, containerHeight),
-    convertUnits(2, containerHeight),
+    convertHeightUnits(x, containerHeight),
+    convertHeightUnits(y - 40, containerHeight),
+    convertHeightUnits(2, containerHeight),
     {
       isStatic: true,
       render: {
@@ -88,18 +88,12 @@ export const createRope = (
   Composite.add(chainComp, anchor);
 
   for (let i = 1; i < numOfShapes; i++) {
-    const convertedX = (x / 1440) * containerWidth;
     const convertedY = (y / 730) * containerHeight;
-    // const newX = convertedX - convertUnits(10, containerHeight) * -i;
-    const newX = x;
-    const newY = convertedY - (i - 1) * convertUnits(10, containerHeight);
-    console.log(x);
-    console.log(convertedX);
-    console.log(newX);
+    const newY = convertedY - (i - 1) * convertHeightUnits(10, containerHeight);
     const length = i === 1 ? containerHeight * 0.04 : containerHeight * 0.065;
     const triggerShape = i === triggerNum;
     const randomShape = generateShape(
-      newX,
+      x,
       newY,
       group,
       containerHeight,

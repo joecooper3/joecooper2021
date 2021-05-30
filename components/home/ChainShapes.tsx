@@ -63,19 +63,28 @@ export default function ChainShapes() {
     const groupC = Body.nextGroup(true);
 
     // will calculate correct x value to map rope onto
+    // TODO: actually probably never will "to do" this again
     const xCalc = (
       fullWidth: number,
-      height: number,
-      offset: number
+      fullHeight: number,
+      index: number
     ): number => {
       const CONTAINER_PERCENT = 0.868; // based on <main> element width in vw
-      const DEV_WIDTH = 1440;
-      const whatever = ((DEV_WIDTH - DEV_WIDTH * CONTAINER_PERCENT) / 2) / 2;
-      return (whatever / DEV_WIDTH) * fullWidth + offset;
+      const MARGIN_LEFT = 60; // again from <main> element
+      const SHAPE_FACTOR = 0.045; // based on containerHeight * x on rectangle shape in generateShape
+      const OFFSET_GAP = 75;
+
+      const responsiveEdge = (fullWidth - fullWidth * CONTAINER_PERCENT) / 2;
+      const shapeMargin = fullHeight * SHAPE_FACTOR;
+      const finalX =
+        (responsiveEdge + MARGIN_LEFT / 2 + shapeMargin) / 2 + OFFSET_GAP * index;
+        console.log(finalX)
+      return finalX;
     };
 
     const ropeA = createRope(
-      xCalc(container.width, container.height, 30),
+      // xCalc(container.width, container.height, 0),
+      87,
       45,
       8,
       container.height,
@@ -85,7 +94,8 @@ export default function ChainShapes() {
       0
     );
     const ropeB = createRope(
-      xCalc(container.width, container.height, 105),
+      // xCalc(container.width, container.height, 1),
+      162,
       60,
       7,
       container.height,
@@ -95,7 +105,8 @@ export default function ChainShapes() {
       1
     );
     const ropeC = createRope(
-      xCalc(container.width, container.height, 180),
+      // xCalc(container.width, container.height, 2),
+      237,
       45,
       8,
       container.height,

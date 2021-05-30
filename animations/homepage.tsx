@@ -1,7 +1,7 @@
 import gsap from "gsap";
 import Matter from "matter-js";
 
-import { Shape, convertUnits } from "@utils/homepage";
+import { Shape, convertHeightUnits } from "@utils/homepage";
 
 export const pulsate = (
   rope: Matter.Composite,
@@ -12,13 +12,13 @@ export const pulsate = (
     const tl = gsap.timeline();
     shape.activeTL = tl;
     tl.to(shape.render, {
-      lineWidth: convertUnits(10, userHeight),
+      lineWidth: convertHeightUnits(10, userHeight),
       duration: 0.3,
       repeat: 3,
       yoyo: true,
     });
     tl.to(shape.render, {
-      lineWidth: convertUnits(15, userHeight),
+      lineWidth: convertHeightUnits(15, userHeight),
       duration: 0.2,
       repeat: 7,
       yoyo: true,
