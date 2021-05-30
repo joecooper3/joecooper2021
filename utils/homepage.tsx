@@ -42,7 +42,8 @@ const generateShape = (
     collisionFilter: { group: group },
     render: {
       fillStyle: color,
-      strokeStyle: color,
+      lineWidth: 1,
+      strokeStyle: "rgba(12, 60, 180, 1)",
     },
   };
   if (shapeNum === 1) {
@@ -81,6 +82,7 @@ export const createRope = (
       render: {
         fillStyle: "#ffebcb",
         strokeStyle: "#ffebcb",
+        opacity: 0
       },
     }
   );
