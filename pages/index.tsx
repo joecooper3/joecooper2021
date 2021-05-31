@@ -1,8 +1,10 @@
 import Head from "next/head";
 import styled from "styled-components";
+import { Tween } from "react-gsap";
 
 import Button from "@components/global/Button";
 import ChainShapes from "@components/home/ChainShapes";
+import Logo from "@components/home/Logo"
 
 export default function Home() {
   return (
@@ -19,10 +21,7 @@ export default function Home() {
       <Main>
         <ChainShapes />
         <CopyContainer>
-          <Header>
-            Joe <br />
-            Cooper
-          </Header>
+          <Logo />
           <SubCopy>
             <span className="sr-only">Joe Cooper </span>
             is a New York-based
@@ -48,6 +47,7 @@ const Main = styled.main`
   grid-template-columns: 1fr 1fr;
   max-width: 86.8vw;
   margin: 0 auto;
+  overflow: hidden;
 `;
 
 const CopyContainer = styled.div`
@@ -65,20 +65,11 @@ const CopyContainer = styled.div`
   pointer-events: none;
 `;
 
-const Header = styled.h1`
-  margin: 0;
-  font-size: 16.23vh;
-  font-family: "Quarto";
-  color: var(--blue);
-  line-height: 0.9;
-  pointer-events: none;
-`;
-
 const SubCopy = styled.p`
   font-family: var(--header-font);
   color: var(--blue);
   font-size: 4.26vh;
-  margin: 6.8vh 0;
+  margin: 3.9vh 0 6.8vh;
   z-index: 2;
 `;
 

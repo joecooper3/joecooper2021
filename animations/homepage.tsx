@@ -10,7 +10,6 @@ export const pulsate = (
 ) => {
   rope.bodies.forEach((shape: Shape) => {
     const tl = gsap.timeline();
-    console.log(shape)
 
     shape.activeTL = tl;
     tl.to(shape.render, {
