@@ -1,6 +1,8 @@
 import Link from "next/link";
 import styled, { css } from "styled-components";
 
+import { mobileQuery } from "@styles/mediaQueries";
+
 type ArrowProps = {
   responsiveHeight?: boolean;
 };
@@ -109,6 +111,13 @@ const shared = css<ElProps>`
       }
     }
   }
+
+  @media ${mobileQuery} {
+    width: 145px;
+    height: 48px;
+    justify-content: flex-start;
+    padding: 2px 0 0 26px;
+  }
 `;
 
 const ButtonEl = styled.button`
@@ -126,5 +135,11 @@ const ArrowSvg = styled.svg<ArrowProps>`
 
   path {
     fill: var(--blue);
+  }
+
+  @media ${mobileQuery} {
+    height: 16px !important;
+    width: 16px !important;
+    padding-bottom: 2px;
   }
 `;

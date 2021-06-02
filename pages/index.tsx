@@ -5,6 +5,7 @@ import { Tween } from "react-gsap";
 import Button from "@components/global/Button";
 import ChainShapes from "@components/home/ChainShapes";
 import Logo from "@components/home/Logo";
+import { mobileQuery } from "@styles/mediaQueries";
 
 export default function Home() {
   return (
@@ -35,7 +36,7 @@ export default function Home() {
               </noscript>
             </Tween>
           </SubCopy>
-          <Tween to={{y: 0, opacity: 1}} delay={4.2}>
+          <Tween to={{ y: 0, opacity: 1 }} delay={4.2}>
             <ButtonContainer>
               <Button href="/work" arrow responsiveHeight>
                 Work
@@ -58,6 +59,10 @@ const Main = styled.main`
   max-width: 86.8vw;
   margin: 0 auto;
   overflow: hidden;
+  @media ${mobileQuery} {
+    grid-template-columns: 1fr;
+    max-width: calc(100vw - 44px);
+  }
 `;
 
 const CopyContainer = styled.div`
@@ -73,6 +78,11 @@ const CopyContainer = styled.div`
   margin-right: 60px;
   z-index: 2;
   pointer-events: none;
+
+  @media ${mobileQuery} {
+    margin-right: 0;
+    overflow: auto;
+  }
 `;
 
 const SubCopy = styled.p`
@@ -81,6 +91,10 @@ const SubCopy = styled.p`
   font-size: 4.26vh;
   margin: 3.9vh 0 6.8vh;
   z-index: 2;
+
+  @media ${mobileQuery} {
+    font-size: 25px;
+  }
 `;
 
 const CopyLine = styled.span`

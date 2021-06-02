@@ -1,10 +1,14 @@
 import styled from "styled-components";
 import { Tween } from "react-gsap";
 
+import { mobileQuery } from "@styles/mediaQueries";
+
 type LetterContainerProps = {
   height: number;
   width: number;
 };
+
+const DEV_HEIGHT = 733;
 
 const letterSizeObj = [
   {
@@ -40,18 +44,20 @@ const letterSizeObj = [
 ];
 
 const convertToVh = (num: number): number => {
-  const DEV_HEIGHT = 733;
   return (num / DEV_HEIGHT) * 100;
+};
+
+const convertToMobilePx = (num: number): number => {
+  const MULTIPLIER = 0.64; // just eyeballed this, seems to work 
+  return num * MULTIPLIER;
 };
 
 const stringToSpans = (text: string): React.ReactElement[] => {
   const stringArr = text.split("");
   const spanArr = stringArr.map((letter, i) => {
     const { w, h } = letterSizeObj.find((obj) => obj.char === letter);
-    const width = convertToVh(w);
-    const height = convertToVh(h);
     return (
-      <LetterContainer width={width} height={height} key={letter + i}>
+      <LetterContainer width={w} height={h} key={letter + i}>
         <Tween to={{ x: 0, opacity: 1, delay: 1 }}>
           <Letter>{letter}</Letter>
         </Tween>
@@ -94,6 +100,10 @@ const Header = styled.h1`
   div {
     overflow: hidden;
   }
+
+  @media ${mobileQuery} {
+    font-size: 76px;
+  }
 `;
 
 const Row = styled.div`
@@ -108,8 +118,13 @@ const Row = styled.div`
 
 const LetterContainer = styled.div<LetterContainerProps>`
   position: relative;
-  width: ${(props) => props.width}vh;
-  height: ${(props) => props.height}vh;
+  width: ${(props) => convertToVh(props.width)}vh;
+  height: ${(props) => convertToVh(props.height)}vh;
+
+  @media ${mobileQuery} {
+    width: ${(props) => convertToMobilePx(props.width)}px;
+    height: ${(props) => convertToMobilePx(props.height)}px;
+  }
 `;
 
 const Letter = styled.div`

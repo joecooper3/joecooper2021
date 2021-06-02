@@ -15,16 +15,24 @@ export default function ChainShapes() {
   const [engine, setEngine] = useState(null);
 
   const handleResize = () => {
-    setDimensions(containerRef.current.getBoundingClientRect());
+    if (containerRef && containerRef.current) {
+      setDimensions(containerRef.current.getBoundingClientRect());
+    }
   };
+
+  useEffect(() => {
+    handleResize();
+  }, []);
 
   // create engine; will need to be referenced in a few useEffects, so just
   // going to explicitly define this first and put in a useState
   useEffect(() => {
-    const { Engine } = Matter;
-    const engine = Engine.create();
-    setEngine(engine);
-  }, []);
+    if (dimensions && dimensions.width > 600 && !engine) {
+      const { Engine } = Matter;
+      const engine = Engine.create();
+      setEngine(engine);
+    }
+  }, [dimensions]);
 
   // creates world, adds shapes/chains, mouse constraints, sets up runner and render
   useEffect(() => {
@@ -77,8 +85,9 @@ export default function ChainShapes() {
       const responsiveEdge = (fullWidth - fullWidth * CONTAINER_PERCENT) / 2;
       const shapeMargin = fullHeight * SHAPE_FACTOR;
       const finalX =
-        (responsiveEdge + MARGIN_LEFT / 2 + shapeMargin) / 2 + OFFSET_GAP * index;
-        console.log(finalX)
+        (responsiveEdge + MARGIN_LEFT / 2 + shapeMargin) / 2 +
+        OFFSET_GAP * index;
+      console.log(finalX);
       return finalX;
     };
 
@@ -239,7 +248,7 @@ export default function ChainShapes() {
 
   // resizes canvas to fit screen, re-adjust position of floor
   useEffect(() => {
-    if (dimensions) {
+    if (dimensions && scene) {
       let { width, height } = dimensions;
       scene.canvas.width = width;
       scene.canvas.height = height;
