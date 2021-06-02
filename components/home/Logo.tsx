@@ -41,18 +41,18 @@ const letterSizeObj = [
 
 const convertToVh = (num: number): number => {
   const DEV_HEIGHT = 733;
-  return num / DEV_HEIGHT * 100;
+  return (num / DEV_HEIGHT) * 100;
 };
 
 const stringToSpans = (text: string): React.ReactElement[] => {
   const stringArr = text.split("");
-  const spanArr = stringArr.map((letter) => {
+  const spanArr = stringArr.map((letter, i) => {
     const { w, h } = letterSizeObj.find((obj) => obj.char === letter);
     const width = convertToVh(w);
     const height = convertToVh(h);
     return (
-      <LetterContainer width={width} height={height}>
-        <Tween from={{ x: 100, opacity: 0, delay: 1 }}>
+      <LetterContainer width={width} height={height} key={letter + i}>
+        <Tween to={{ x: 0, opacity: 1, delay: 1 }}>
           <Letter>{letter}</Letter>
         </Tween>
       </LetterContainer>
@@ -70,6 +70,11 @@ export default function Logo() {
       <Header aria-hidden="true">
         <Row>{first}</Row>
         <Row>{last}</Row>
+        <noscript>
+          Joe
+          <br />
+          Cooper
+        </noscript>
       </Header>
     </>
   );
@@ -108,9 +113,11 @@ const LetterContainer = styled.div<LetterContainerProps>`
 `;
 
 const Letter = styled.div`
+  opacity: 0;
   position: absolute;
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
+  transform: translateX(100px);
 `;

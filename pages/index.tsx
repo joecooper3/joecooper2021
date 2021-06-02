@@ -4,7 +4,7 @@ import { Tween } from "react-gsap";
 
 import Button from "@components/global/Button";
 import ChainShapes from "@components/home/ChainShapes";
-import Logo from "@components/home/Logo"
+import Logo from "@components/home/Logo";
 
 export default function Home() {
   return (
@@ -23,18 +23,28 @@ export default function Home() {
         <CopyContainer>
           <Logo />
           <SubCopy>
-            <span className="sr-only">Joe Cooper </span>
-            is a New York-based
-            <br /> web developer and
-            <br />
-            creative technologist.
+            <Tween to={{ y: 0, opacity: 1 }} stagger={0.45} delay={2.5}>
+              <CopyLine>
+                <span className="sr-only">Joe Cooper </span>is a New York-based
+              </CopyLine>
+              <CopyLine>web developer and</CopyLine>
+              <CopyLine>creative technologist.</CopyLine>
+              <noscript>
+                Joe Cooper is a New York-based web developer and creative
+                technologist.
+              </noscript>
+            </Tween>
           </SubCopy>
-          <ButtonContainer>
-            <Button href="/work" arrow>
-              Work
-            </Button>
-            <Button>About</Button>
-          </ButtonContainer>
+          <Tween to={{y: 0, opacity: 1}} delay={4.2}>
+            <ButtonContainer>
+              <Button href="/work" arrow responsiveHeight>
+                Work
+              </Button>
+              <Button arrow responsiveHeight>
+                About
+              </Button>
+            </ButtonContainer>
+          </Tween>
         </CopyContainer>
       </Main>
     </div>
@@ -73,10 +83,22 @@ const SubCopy = styled.p`
   z-index: 2;
 `;
 
+const CopyLine = styled.span`
+  display: block;
+  opacity: 0;
+  transform: translateY(30px);
+`;
+
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
-  gap: 20px;
   flex-flow: row nowrap;
   pointer-events: auto;
+  opacity: 0;
+  transform: translateY(30px);
+
+  a:first-child,
+  button:first-child {
+    margin-right: 2.73vh;
+  }
 `;

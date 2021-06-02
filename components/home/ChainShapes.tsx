@@ -198,7 +198,6 @@ export default function ChainShapes() {
           (bodyA === hitBox && bodyB.label.includes("trigger")) ||
           (bodyB === hitBox && bodyA.label.includes("trigger"))
         ) {
-          console.log("my god today");
           const shape: Shape = bodyA === hitBox ? bodyB : bodyA;
           const parentRope = getParentRope(shape, ropeArr);
           if (parentRope) {

@@ -1,28 +1,36 @@
 import Link from "next/link";
 import styled, { css } from "styled-components";
 
+type ArrowProps = {
+  responsiveHeight?: boolean;
+};
+
 type ButtonProps = {
   onClick?: () => {};
   href?: string;
   children?: React.ReactNode;
   external?: boolean;
   arrow?: boolean;
+  responsiveHeight?: boolean;
 };
 
 type ElProps = {
   arrow?: boolean;
+  responsiveHeight?: boolean;
 };
 
-function Arrow() {
+function Arrow({ responsiveHeight }: ArrowProps): JSX.Element {
+  const size = responsiveHeight ? "2.73vh" : "20";
   return (
     <ArrowSvg
-      width="20"
-      height="20"
+      width={size}
+      height={size}
       xmlns="http://www.w3.org/2000/svg"
       fill-rule="evenodd"
       clip-rule="evenodd"
       viewBox="0 0 24 24"
       aria-hidden="true"
+      responsiveHeight={responsiveHeight}
     >
       <path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z" />
     </ArrowSvg>
@@ -35,22 +43,39 @@ export default function Button({
   children,
   external,
   arrow,
+  responsiveHeight,
 }: ButtonProps): JSX.Element {
   if (href && !external) {
     return (
       <Link href={href}>
-        <Anchor href={href} arrow={arrow}>
+        <Anchor href={href} arrow={arrow} responsiveHeight={responsiveHeight}>
           {children}
-          {arrow && <Arrow />}
+          {arrow && <Arrow responsiveHeight={responsiveHeight} />}
         </Anchor>
       </Link>
     );
   } else if (href && external) {
-    <Anchor href={href} target="_blank" rel="noopener">
+    <Anchor
+      href={href}
+      arrow={arrow}
+      responsiveHeight={responsiveHeight}
+      target="_blank"
+      rel="noopener"
+    >
       {children}
+      {arrow && <Arrow responsiveHeight={responsiveHeight} />}
     </Anchor>;
   }
-  return <ButtonEl onClick={onClick}>{children}</ButtonEl>;
+  return (
+    <ButtonEl
+      onClick={onClick}
+      arrow={arrow}
+      responsiveHeight={responsiveHeight}
+    >
+      {children}
+      {arrow && <Arrow responsiveHeight={responsiveHeight} />}
+    </ButtonEl>
+  );
 }
 
 const shared = css<ElProps>`
@@ -61,12 +86,13 @@ const shared = css<ElProps>`
   font-weight: 300;
   text-transform: uppercase;
   font-size: 14px;
+  font-size: ${(props) => (props.responsiveHeight ? "1.9vh" : "14px")};
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 175px;
-  height: 56px;
-  border-radius: 75px;
+  width: ${(props) => (props.responsiveHeight ? "23.88vh" : "175px")};
+  height: ${(props) => (props.responsiveHeight ? "7.64vh" : "56px")};
+  border-radius: 999px;
   line-height: 1;
   text-decoration: none;
   position: relative;
@@ -94,9 +120,9 @@ const Anchor = styled.a`
   cursor: pointer;
 `;
 
-const ArrowSvg = styled.svg`
+const ArrowSvg = styled.svg<ArrowProps>`
   position: absolute;
-  right: 20px;
+  right: ${(props) => (props.responsiveHeight ? "2.73vh" : "20px")};
 
   path {
     fill: var(--blue);
