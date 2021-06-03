@@ -9,21 +9,22 @@ import Logo from "@components/home/Logo";
 import { smDesktopQuery, mobileQuery, tabletQuery } from "@styles/mediaQueries";
 
 export default function Home() {
-  const [isMobile, setIsMobile] = useState(true);
+  const [isMobile, setIsMobile] = useState(null);
   const [isSmDesktop, setSmDesktop] = useState(false);
-  function handleWindowSizeChange() {
+
+  const handleWindowSizeChange = () => {
     if (window.innerWidth > 1200) {
       setIsMobile(false);
       setSmDesktop(false);
     } else if (window.innerWidth > 768) {
       setIsMobile(false);
       setSmDesktop(true);
-    }
-    else {
+    } else {
       setIsMobile(true);
       setSmDesktop(false);
     }
-  }
+  };
+
   useEffect(() => {
     handleWindowSizeChange();
     window.addEventListener("resize", handleWindowSizeChange);
@@ -46,30 +47,39 @@ export default function Home() {
       <Main>
         {!isMobile && <ChainShapes isSmDesktop={isSmDesktop} />}
         <CopyContainer>
-          <Logo />
+          {isMobile !== null && <Logo animDelay={isMobile ? 0.25 : 1} />}
           <SubCopy>
-            <Tween to={{ y: 0, opacity: 1 }} stagger={0.45} delay={2.5}>
-              <CopyLine>
-                <span className="sr-only">Joe Cooper </span>is a New York-based
-              </CopyLine>
-              <CopyLine>web developer and</CopyLine>
-              <CopyLine>creative technologist.</CopyLine>
-              <noscript>
-                Joe Cooper is a New York-based web developer and creative
-                technologist.
-              </noscript>
-            </Tween>
+            {isMobile !== null && (
+              <Tween
+                to={{ y: 0, opacity: 1 }}
+                stagger={0.45}
+                delay={isMobile ? 1.75 : 2.5}
+              >
+                <CopyLine>
+                  <span className="sr-only">Joe Cooper </span>is a New
+                  York-based
+                </CopyLine>
+                <CopyLine>web developer and</CopyLine>
+                <CopyLine>creative technologist.</CopyLine>
+                <noscript>
+                  Joe Cooper is a New York-based web developer and creative
+                  technologist.
+                </noscript>
+              </Tween>
+            )}
           </SubCopy>
-          <Tween to={{ y: 0, opacity: 1 }} delay={4.2}>
-            <ButtonContainer>
-              <Button href="/work" arrow responsiveHeight>
-                Work
-              </Button>
-              <Button arrow responsiveHeight>
-                About
-              </Button>
-            </ButtonContainer>
-          </Tween>
+          {isMobile !== null && (
+            <Tween to={{ y: 0, opacity: 1 }} delay={isMobile ? 3.5 : 4.2}>
+              <ButtonContainer>
+                <Button href="/work" arrow responsiveHeight>
+                  Work
+                </Button>
+                <Button arrow responsiveHeight>
+                  About
+                </Button>
+              </ButtonContainer>
+            </Tween>
+          )}
         </CopyContainer>
       </Main>
     </>

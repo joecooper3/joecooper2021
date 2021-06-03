@@ -3,6 +3,10 @@ import { Tween } from "react-gsap";
 
 import { mobileQuery } from "@styles/mediaQueries";
 
+type LogoProps = {
+  animDelay: number;
+}
+
 type LetterContainerProps = {
   height: number;
   width: number;
@@ -52,13 +56,13 @@ const convertToMobilePx = (num: number): number => {
   return num * MULTIPLIER;
 };
 
-const stringToSpans = (text: string): React.ReactElement[] => {
+const stringToSpans = (text: string, animDelay: number): React.ReactElement[] => {
   const stringArr = text.split("");
   const spanArr = stringArr.map((letter, i) => {
     const { w, h } = letterSizeObj.find((obj) => obj.char === letter);
     return (
       <LetterContainer width={w} height={h} key={letter + i}>
-        <Tween to={{ x: 0, opacity: 1, delay: 1 }}>
+        <Tween to={{ x: 0, opacity: 1, delay: animDelay }}>
           <Letter>{letter}</Letter>
         </Tween>
       </LetterContainer>
@@ -67,9 +71,9 @@ const stringToSpans = (text: string): React.ReactElement[] => {
   return spanArr;
 };
 
-export default function Logo() {
-  const first = stringToSpans("Joe");
-  const last = stringToSpans("Cooper");
+export default function Logo({ animDelay }: LogoProps): JSX.Element {
+  const first = stringToSpans("Joe", animDelay);
+  const last = stringToSpans("Cooper", animDelay);
   return (
     <>
       <Header className="sr-only">Joe Cooper</Header>
