@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Head from "next/head";
 import styled from "styled-components";
 import { Tween } from "react-gsap";
@@ -5,11 +6,34 @@ import { Tween } from "react-gsap";
 import Button from "@components/global/Button";
 import ChainShapes from "@components/home/ChainShapes";
 import Logo from "@components/home/Logo";
-import { mobileQuery } from "@styles/mediaQueries";
+import { smDesktopQuery, mobileQuery, tabletQuery } from "@styles/mediaQueries";
 
 export default function Home() {
+  const [isMobile, setIsMobile] = useState(true);
+  const [isSmDesktop, setSmDesktop] = useState(false);
+  function handleWindowSizeChange() {
+    if (window.innerWidth > 1200) {
+      setIsMobile(false);
+      setSmDesktop(false);
+    } else if (window.innerWidth > 768) {
+      setIsMobile(false);
+      setSmDesktop(true);
+    }
+    else {
+      setIsMobile(true);
+      setSmDesktop(false);
+    }
+  }
+  useEffect(() => {
+    handleWindowSizeChange();
+    window.addEventListener("resize", handleWindowSizeChange);
+    return () => {
+      window.removeEventListener("resize", handleWindowSizeChange);
+    };
+  }, []);
+
   return (
-    <div>
+    <>
       <Head>
         <title>Joe Cooper</title>
         <meta
@@ -20,7 +44,7 @@ export default function Home() {
       </Head>
 
       <Main>
-        <ChainShapes />
+        {!isMobile && <ChainShapes isSmDesktop={isSmDesktop} />}
         <CopyContainer>
           <Logo />
           <SubCopy>
@@ -48,17 +72,23 @@ export default function Home() {
           </Tween>
         </CopyContainer>
       </Main>
-    </div>
+    </>
   );
 }
 
 const Main = styled.main`
-  height: 100vh;
+  min-height: 100vh;
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   max-width: 86.8vw;
   margin: 0 auto;
   overflow: hidden;
+  @media ${tabletQuery} {
+    height: 100%;
+    overflow: auto;
+    min-height: -webkit-fill-available;
+  }
   @media ${mobileQuery} {
     grid-template-columns: 1fr;
     max-width: calc(100vw - 44px);
@@ -78,6 +108,10 @@ const CopyContainer = styled.div`
   margin-right: 60px;
   z-index: 2;
   pointer-events: none;
+
+  @media ${smDesktopQuery} {
+    margin-right: 0;
+  }
 
   @media ${mobileQuery} {
     margin-right: 0;

@@ -5,7 +5,11 @@ import styled from "styled-components";
 import { pulsate, stopPulsating } from "@animations/homepage";
 import { Shape, createRope, getParentRope, breakRopes } from "@utils/homepage";
 
-export default function ChainShapes() {
+type ChainShapesProps = {
+  isSmDesktop: boolean;
+};
+
+export default function ChainShapes({ isSmDesktop }: ChainShapesProps) {
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
   const [ropeArr, setRopeArr] = useState<Matter.Composite[]>([]);
@@ -91,9 +95,12 @@ export default function ChainShapes() {
       return finalX;
     };
 
+    const ROPE_GAP = isSmDesktop ? 68 : 75;
+    const BASE_X = isSmDesktop ? 45 : 87;
+
     const ropeA = createRope(
       // xCalc(container.width, container.height, 0),
-      87,
+      BASE_X,
       45,
       8,
       container.height,
@@ -104,7 +111,7 @@ export default function ChainShapes() {
     );
     const ropeB = createRope(
       // xCalc(container.width, container.height, 1),
-      162,
+      BASE_X + ROPE_GAP,
       60,
       7,
       container.height,
@@ -115,7 +122,7 @@ export default function ChainShapes() {
     );
     const ropeC = createRope(
       // xCalc(container.width, container.height, 2),
-      237,
+      BASE_X + ROPE_GAP * 2,
       45,
       8,
       container.height,

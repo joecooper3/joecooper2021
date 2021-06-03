@@ -7,9 +7,9 @@ const mobileBreakpoint = "600px";
 
 // Media Queries
 
-export const lgdesktopQuery =
+export const lgDesktopQuery =
   "only screen and (max-width: " + lgdesktopBreakpoint + ")";
-export const smdesktopQuery =
+export const smDesktopQuery =
   "only screen and (max-width: " + smdesktopBreakpoint + ")";
 export const tabletQuery =
   "only screen and (max-width: " + tabletBreakpoint + ")";
