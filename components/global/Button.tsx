@@ -57,17 +57,20 @@ export default function Button({
       </Link>
     );
   } else if (href && external) {
-    <Anchor
-      href={href}
-      arrow={arrow}
-      responsiveHeight={responsiveHeight}
-      target="_blank"
-      rel="noopener"
-    >
-      {children}
-      {arrow && <Arrow responsiveHeight={responsiveHeight} />}
-    </Anchor>;
+    return (
+      <Anchor
+        href={href}
+        arrow={arrow}
+        responsiveHeight={responsiveHeight}
+        target="_blank"
+        rel="noopener"
+      >
+        {children}
+        {arrow && <Arrow responsiveHeight={responsiveHeight} />}
+      </Anchor>
+    );
   }
+
   return (
     <ButtonEl
       onClick={onClick}
@@ -87,7 +90,6 @@ const shared = css<ElProps>`
   color: var(--blue);
   font-weight: 300;
   text-transform: uppercase;
-  font-size: 14px;
   font-size: ${(props) => (props.responsiveHeight ? "1.9vh" : "14px")};
   display: flex;
   justify-content: center;

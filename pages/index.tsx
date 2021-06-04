@@ -1,16 +1,27 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import styled from "styled-components";
 import { Tween } from "react-gsap";
 
+import { exitAnimation } from "@animations/homepage";
 import Button from "@components/global/Button";
 import ChainShapes from "@components/home/ChainShapes";
 import Logo from "@components/home/Logo";
+import { useStore } from "@store/store";
 import { smDesktopQuery, mobileQuery, tabletQuery } from "@styles/mediaQueries";
 
 export default function Home() {
   const [isMobile, setIsMobile] = useState(null);
   const [isSmDesktop, setSmDesktop] = useState(false);
+
+  const router = useRouter();
+  const engine = useStore((state) => state.matterEngine);
+  const ropeArr = useStore((state) => state.ropes);
+
+  const logo = useRef<HTMLHeadingElement>(null);
+  const subCopy = useRef<HTMLParagraphElement>(null);
+  const buttonContainer = useRef<HTMLDivElement>(null);
 
   const handleWindowSizeChange = () => {
     if (window.innerWidth > 1200) {
@@ -47,8 +58,10 @@ export default function Home() {
       <Main>
         {!isMobile && <ChainShapes isSmDesktop={isSmDesktop} />}
         <CopyContainer>
-          {isMobile !== null && <Logo animDelay={isMobile ? 0.25 : 1} />}
-          <SubCopy>
+          {isMobile !== null && (
+            <Logo ref={logo} animDelay={isMobile ? 0.25 : 1} />
+          )}
+          <SubCopy ref={subCopy}>
             {isMobile !== null && (
               <Tween
                 to={{ y: 0, opacity: 1 }}
@@ -70,11 +83,24 @@ export default function Home() {
           </SubCopy>
           {isMobile !== null && (
             <Tween to={{ y: 0, opacity: 1 }} delay={isMobile ? 3.5 : 4.2}>
-              <ButtonContainer>
+              <ButtonContainer ref={buttonContainer}>
                 <Button href="/work" arrow responsiveHeight>
                   Work
                 </Button>
-                <Button arrow responsiveHeight>
+                <Button
+                  onClick={async () =>
+                    exitAnimation(
+                      router,
+                      ropeArr,
+                      engine,
+                      logo.current,
+                      subCopy.current,
+                      buttonContainer.current
+                    )
+                  }
+                  arrow
+                  responsiveHeight
+                >
                   About
                 </Button>
               </ButtonContainer>

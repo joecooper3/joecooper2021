@@ -3,6 +3,7 @@ import Matter, { Events } from "matter-js";
 import styled from "styled-components";
 
 import { pulsate, stopPulsating } from "@animations/homepage";
+import { useStore } from "@store/store";
 import { Shape, createRope, getParentRope, breakRopes } from "@utils/homepage";
 
 type ChainShapesProps = {
@@ -16,7 +17,9 @@ export default function ChainShapes({ isSmDesktop }: ChainShapesProps) {
   const [dimensions, setDimensions] = useState<DOMRect | null>(null);
   const [scene, setScene] = useState<Matter.Render | null>(null);
   const [hitBox, setHitBox] = useState<Matter.Body | null>(null);
-  const [engine, setEngine] = useState(null);
+  const [engine, setEngine] = useState<Matter.Engine | null>(null);
+  const changeMatterEngine = useStore((state) => state.changeMatterEngine);
+  const changeRopes = useStore((state) => state.changeRopes);
 
   const handleResize = () => {
     if (containerRef && containerRef.current) {
@@ -35,6 +38,7 @@ export default function ChainShapes({ isSmDesktop }: ChainShapesProps) {
       const { Engine } = Matter;
       const engine = Engine.create();
       setEngine(engine);
+      changeMatterEngine(engine);
     }
   }, [dimensions]);
 
@@ -74,32 +78,10 @@ export default function ChainShapes({ isSmDesktop }: ChainShapesProps) {
     const groupB = Body.nextGroup(true);
     const groupC = Body.nextGroup(true);
 
-    // will calculate correct x value to map rope onto
-    // TODO: actually probably never will "to do" this again
-    const xCalc = (
-      fullWidth: number,
-      fullHeight: number,
-      index: number
-    ): number => {
-      const CONTAINER_PERCENT = 0.868; // based on <main> element width in vw
-      const MARGIN_LEFT = 60; // again from <main> element
-      const SHAPE_FACTOR = 0.045; // based on containerHeight * x on rectangle shape in generateShape
-      const OFFSET_GAP = 75;
-
-      const responsiveEdge = (fullWidth - fullWidth * CONTAINER_PERCENT) / 2;
-      const shapeMargin = fullHeight * SHAPE_FACTOR;
-      const finalX =
-        (responsiveEdge + MARGIN_LEFT / 2 + shapeMargin) / 2 +
-        OFFSET_GAP * index;
-      console.log(finalX);
-      return finalX;
-    };
-
     const ROPE_GAP = isSmDesktop ? 68 : 75;
     const BASE_X = isSmDesktop ? 45 : 87;
 
     const ropeA = createRope(
-      // xCalc(container.width, container.height, 0),
       BASE_X,
       45,
       8,
@@ -110,7 +92,6 @@ export default function ChainShapes({ isSmDesktop }: ChainShapesProps) {
       0
     );
     const ropeB = createRope(
-      // xCalc(container.width, container.height, 1),
       BASE_X + ROPE_GAP,
       60,
       7,
@@ -121,7 +102,6 @@ export default function ChainShapes({ isSmDesktop }: ChainShapesProps) {
       1
     );
     const ropeC = createRope(
-      // xCalc(container.width, container.height, 2),
       BASE_X + ROPE_GAP * 2,
       45,
       8,
@@ -165,10 +145,11 @@ export default function ChainShapes({ isSmDesktop }: ChainShapesProps) {
     setHitBox(stretchDetector);
 
     setRopeArr([ropeA, ropeB, ropeC]);
+    changeRopes([ropeA, ropeB, ropeC]);
 
     // @ts-ignore
     World.add(engine.world, [ropeA, ropeB, ropeC, floor, stretchDetector]);
-    // @ts-ignore
+
     Render.setPixelRatio(render, 2);
     Runner.run(engine);
 
@@ -277,9 +258,10 @@ export default function ChainShapes({ isSmDesktop }: ChainShapesProps) {
       breakRopes(ropeArr);
     }
     if (e.key === "k") {
-      if (ropeArr.length > 0) {
-        ropeArr[1].bodies[2].render.sprite.xScale = 0.5;
-        Matter.Body.scale(ropeArr[1].bodies[2], 1.25, 1.25);
+      if (engine) {
+        console.log(engine);
+        engine.gravity.x = -1;
+        engine.gravity.y = 0;
       }
     }
   };

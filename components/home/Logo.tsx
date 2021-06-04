@@ -1,3 +1,4 @@
+import { forwardRef, MutableRefObject } from "react";
 import styled from "styled-components";
 import { Tween } from "react-gsap";
 
@@ -5,7 +6,8 @@ import { mobileQuery } from "@styles/mediaQueries";
 
 type LogoProps = {
   animDelay: number;
-}
+  ref: MutableRefObject<any>;
+};
 
 type LetterContainerProps = {
   height: number;
@@ -52,11 +54,14 @@ const convertToVh = (num: number): number => {
 };
 
 const convertToMobilePx = (num: number): number => {
-  const MULTIPLIER = 0.64; // just eyeballed this, seems to work 
+  const MULTIPLIER = 0.64; // just eyeballed this, seems to work
   return num * MULTIPLIER;
 };
 
-const stringToSpans = (text: string, animDelay: number): React.ReactElement[] => {
+const stringToSpans = (
+  text: string,
+  animDelay: number
+): React.ReactElement[] => {
   const stringArr = text.split("");
   const spanArr = stringArr.map((letter, i) => {
     const { w, h } = letterSizeObj.find((obj) => obj.char === letter);
@@ -71,13 +76,15 @@ const stringToSpans = (text: string, animDelay: number): React.ReactElement[] =>
   return spanArr;
 };
 
-export default function Logo({ animDelay }: LogoProps): JSX.Element {
-  const first = stringToSpans("Joe", animDelay);
-  const last = stringToSpans("Cooper", animDelay);
+const Logo = forwardRef<any, LogoProps>((props, ref): JSX.Element => {
+  const first = stringToSpans("Joe", props.animDelay);
+  const last = stringToSpans("Cooper", props.animDelay);
   return (
     <>
-      <Header className="sr-only">Joe Cooper</Header>
-      <Header aria-hidden="true">
+      <Header className="sr-only">
+        Joe Cooper
+      </Header>
+      <Header aria-hidden="true" ref={ref}>
         <Row>{first}</Row>
         <Row>{last}</Row>
         <noscript>
@@ -88,7 +95,7 @@ export default function Logo({ animDelay }: LogoProps): JSX.Element {
       </Header>
     </>
   );
-}
+});
 
 const Header = styled.h1`
   margin: 0;
@@ -140,3 +147,5 @@ const Letter = styled.div`
   width: 100%;
   transform: translateX(100px);
 `;
+
+export default Logo;

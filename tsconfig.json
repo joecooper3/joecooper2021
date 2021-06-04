@@ -22,6 +22,7 @@
       "@animations/*": ["animations/*"],
       "@components/*": ["components/*"],
       "@utils/*": ["utils/*"],
+      "@store/*": ["store/*"],
       "@styles/*": ["styles/*"]
     }
   },
