@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 
-import Header from "@components/global/Header"
+import Header from "@components/global/Header";
 import "../styles/globals.css";
 
 const Cursor = dynamic(() => import("../components/global/Cursor"), {

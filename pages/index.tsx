@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import styled from "styled-components";
 import { Tween } from "react-gsap";
 
-import { exitAnimation } from "@animations/homepage";
+import { exitAnimArgs, exitAnimation } from "@animations/homepage";
 import Button from "@components/global/Button";
 import ChainShapes from "@components/home/ChainShapes";
 import Logo from "@components/home/Logo";
@@ -14,6 +14,7 @@ import { smDesktopQuery, mobileQuery, tabletQuery } from "@styles/mediaQueries";
 export default function Home() {
   const [isMobile, setIsMobile] = useState(null);
   const [isSmDesktop, setSmDesktop] = useState(false);
+  const [exitAnimArgs, setExitAnimArgs] = useState<exitAnimArgs | null>(null);
 
   const router = useRouter();
   const engine = useStore((state) => state.matterEngine);
@@ -23,6 +24,7 @@ export default function Home() {
   const logo = useRef<HTMLHeadingElement>(null);
   const subCopy = useRef<HTMLParagraphElement>(null);
   const buttonContainer = useRef<HTMLDivElement>(null);
+  const mobileWall = useRef<HTMLDivElement>(null);
 
   const handleWindowSizeChange = () => {
     if (window.innerWidth > 1200) {
@@ -44,6 +46,29 @@ export default function Home() {
       window.removeEventListener("resize", handleWindowSizeChange);
     };
   }, []);
+
+  useEffect(() => {
+    setExitAnimArgs({
+      router: router,
+      ropeArr: ropeArr,
+      wall: wall,
+      engine: engine,
+      logo: logo.current,
+      subCopy: subCopy.current,
+      buttonContainer: buttonContainer.current,
+      mobileWall: mobileWall.current,
+    });
+  }, [
+    isMobile,
+    router,
+    ropeArr,
+    wall,
+    engine,
+    logo,
+    subCopy,
+    buttonContainer,
+    mobileWall,
+  ]);
 
   return (
     <>
@@ -85,30 +110,25 @@ export default function Home() {
           {isMobile !== null && (
             <Tween to={{ y: 0, opacity: 1 }} delay={isMobile ? 3.5 : 4.2}>
               <ButtonContainer ref={buttonContainer}>
-                <Button href="/work" arrow responsiveHeight>
-                  Work
-                </Button>
                 <Button
-                  onClick={async () =>
-                    exitAnimation(
-                      router,
-                      ropeArr,
-                      wall,
-                      engine,
-                      logo.current,
-                      subCopy.current,
-                      buttonContainer.current
-                    )
-                  }
+                  onClick={async () => exitAnimation("/about", exitAnimArgs)}
                   arrow
                   responsiveHeight
                 >
                   About
                 </Button>
+                <Button
+                  onClick={async () => exitAnimation("/work", exitAnimArgs)}
+                  arrow
+                  responsiveHeight
+                >
+                  Work
+                </Button>
               </ButtonContainer>
             </Tween>
           )}
         </CopyContainer>
+        <MobileWall ref={mobileWall} />
       </Main>
     </>
   );
@@ -123,13 +143,17 @@ const Main = styled.main`
   margin: 0 auto;
   overflow: hidden;
   @media ${tabletQuery} {
-    height: 100%;
-    overflow: auto;
+    position: relative;
+    max-height: -webkit-fill-available;
+    overflow: hidden;
     min-height: -webkit-fill-available;
+    max-width: 100%;
+    padding: 0 45px;
+    box-sizing: border-box;
   }
   @media ${mobileQuery} {
     grid-template-columns: 1fr;
-    max-width: calc(100vw - 44px);
+    padding: 0 22px;
   }
 `;
 
@@ -186,5 +210,17 @@ const ButtonContainer = styled.div`
   a:first-child,
   button:first-child {
     margin-right: 2.73vh;
+  }
+`;
+
+const MobileWall = styled.div`
+  display: none;
+  @media ${tabletQuery} {
+    display: block;
+    background: var(--white);
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    top: 100vh;
   }
 `;

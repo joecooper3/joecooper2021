@@ -4,6 +4,17 @@ import { NextRouter } from "next/router";
 
 import { Shape, convertHeightUnits, breakRopes } from "@utils/homepage";
 
+export type exitAnimArgs = {
+  router: NextRouter;
+  ropeArr: Matter.Composite[];
+  wall: Matter.Body;
+  engine: Matter.Engine;
+  logo: HTMLHeadingElement;
+  subCopy: HTMLParagraphElement;
+  buttonContainer: HTMLDivElement;
+  mobileWall: HTMLDivElement;
+};
+
 export const pulsate = (
   rope: Matter.Composite,
   userHeight: number,
@@ -57,6 +68,7 @@ const getLogoLetters = (el: HTMLHeadingElement) => {
 };
 
 const recursiveWallMoving = (
+  href: string,
   router: NextRouter,
   engine: Matter.Engine,
   initTimestamp: number,
@@ -64,7 +76,7 @@ const recursiveWallMoving = (
 ) => {
   if (wall.position.x < 0) {
     setTimeout(() => {
-      router.push("/work");
+      router.push(href);
     }, 800);
     return;
   }
@@ -75,24 +87,36 @@ const recursiveWallMoving = (
     y: 0,
   });
   setTimeout(
-    () => recursiveWallMoving(router, engine, initTimestamp, wall),
+    () => recursiveWallMoving(href, router, engine, initTimestamp, wall),
     10
   );
 };
 
-export const exitAnimation = (
-  router: NextRouter,
-  ropeArr: Matter.Composite[],
-  wall: Matter.Body,
-  engine: Matter.Engine,
-  logo: HTMLHeadingElement,
-  subCopy: HTMLParagraphElement,
-  buttonContainer: HTMLDivElement
-): void => {
+export const exitAnimation = (href: string, args: exitAnimArgs): void => {
+  const {
+    router,
+    ropeArr,
+    wall,
+    engine,
+    logo,
+    subCopy,
+    buttonContainer,
+    mobileWall,
+  } = args;
   const tl = gsap.timeline({
     onComplete: () => {
       setTimeout(() => {
-        recursiveWallMoving(router, engine, engine.timing.timestamp, wall);
+        if (engine) {
+          recursiveWallMoving(
+            href,
+            router,
+            engine,
+            engine.timing.timestamp,
+            wall
+          );
+        } else {
+          router.push(href);
+        }
       }, 500);
     },
   });
@@ -105,4 +129,8 @@ export const exitAnimation = (
   });
   tl.to(subCopy.children, { opacity: 0, y: -50 }, "<");
   tl.to(buttonContainer, { opacity: 0, y: -35 }, "<");
+  // mobile only
+  if (!engine) {
+    tl.to(mobileWall, { top: 0, duration: 0.9 }, "-=0.75");
+  }
 };
