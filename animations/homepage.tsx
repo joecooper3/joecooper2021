@@ -56,30 +56,53 @@ const getLogoLetters = (el: HTMLHeadingElement) => {
   return letterEls;
 };
 
+const recursiveWallMoving = (
+  router: NextRouter,
+  engine: Matter.Engine,
+  initTimestamp: number,
+  wall: Matter.Body
+) => {
+  if (wall.position.x < 0) {
+    setTimeout(() => {
+      router.push("/work");
+    }, 800);
+    return;
+  }
+  const VELOCITY = 0.0125;
+  const currentTimestamp = engine.timing.timestamp;
+  Matter.Body.translate(wall, {
+    x: -VELOCITY * (currentTimestamp - initTimestamp),
+    y: 0,
+  });
+  setTimeout(
+    () => recursiveWallMoving(router, engine, initTimestamp, wall),
+    10
+  );
+};
+
 export const exitAnimation = (
   router: NextRouter,
   ropeArr: Matter.Composite[],
+  wall: Matter.Body,
   engine: Matter.Engine,
   logo: HTMLHeadingElement,
-  subCopy: any,
-  buttonContainer: any
+  subCopy: HTMLParagraphElement,
+  buttonContainer: HTMLDivElement
 ): void => {
   const tl = gsap.timeline({
     onComplete: () => {
       setTimeout(() => {
-        router.push("/work");
-      }, 1500);
+        recursiveWallMoving(router, engine, engine.timing.timestamp, wall);
+      }, 500);
     },
   });
   const logoLetters = getLogoLetters(logo);
   breakRopes(ropeArr);
   tl.to(logoLetters, {
     x: -100,
-    duration: 1
+    duration: 1,
+    opacity: 0,
   });
-  // tl.to(subCopy.children, { opacity: 0, y: -50, stagger: 0.15 }, "<");
-  // tl.to(buttonContainer, { opacity: 0, y: -35 }, "-=0.5");
-  tl.to(subCopy.children, { opacity: 0, y: -50}, "<");
+  tl.to(subCopy.children, { opacity: 0, y: -50 }, "<");
   tl.to(buttonContainer, { opacity: 0, y: -35 }, "<");
-  tl.to(engine.gravity, { x: -1, y: 0, delay: 1.2 });
 };

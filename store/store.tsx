@@ -6,6 +6,8 @@ type AppState = {
   changeMatterEngine: (Engine: Matter.Engine) => void;
   ropes: Matter.Composite[];
   changeRopes: (arr: Matter.Composite[]) => void;
+  wall: Matter.Body;
+  changeWall: (wall: Matter.Body) => void;
 };
 
 export const useStore = create<AppState>((set) => ({
@@ -16,5 +18,9 @@ export const useStore = create<AppState>((set) => ({
   ropes: [],
   changeRopes: (arr) => {
     set({ ropes: arr });
+  },
+  wall: null,
+  changeWall: (wall) => {
+    set({ wall: wall });
   },
 }));

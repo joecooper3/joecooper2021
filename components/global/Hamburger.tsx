@@ -8,7 +8,12 @@ type OpenProps = {
 const Hamburger = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <Container open={isOpen} onClick={() => setIsOpen(!isOpen)}>
+    <Container
+      open={isOpen}
+      onClick={() => setIsOpen(!isOpen)}
+      aria-label="Main menu"
+      aria-expanded={isOpen}
+    >
       <Box>
         <Inner open={isOpen} />
       </Box>

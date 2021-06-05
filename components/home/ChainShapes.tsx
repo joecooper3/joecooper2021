@@ -20,6 +20,8 @@ export default function ChainShapes({ isSmDesktop }: ChainShapesProps) {
   const [engine, setEngine] = useState<Matter.Engine | null>(null);
   const changeMatterEngine = useStore((state) => state.changeMatterEngine);
   const changeRopes = useStore((state) => state.changeRopes);
+  const wall = useStore((state) => state.wall);
+  const changeWall = useStore((state) => state.changeWall);
 
   const handleResize = () => {
     if (containerRef && containerRef.current) {
@@ -115,7 +117,7 @@ export default function ChainShapes({ isSmDesktop }: ChainShapesProps) {
     const floor = Bodies.rectangle(
       0,
       container.height / 2 + 10,
-      container.width,
+      container.width * 10,
       20,
       {
         label: "floor",
@@ -125,6 +127,21 @@ export default function ChainShapes({ isSmDesktop }: ChainShapesProps) {
         },
       }
     );
+
+    const wall = Bodies.rectangle(
+      container.width * 1.5,
+      0,
+      container.width * 2,
+      container.height * 2,
+      {
+        label: "wall",
+        isStatic: true,
+        render: {
+          fillStyle: "#fdfdfd",
+        },
+      }
+    );
+    changeWall(wall);
 
     const stretchWidth = 250;
     const stretchX = (container.width - stretchWidth) / 2;
@@ -138,7 +155,7 @@ export default function ChainShapes({ isSmDesktop }: ChainShapesProps) {
         isStatic: true,
         isSensor: true,
         render: {
-          fillStyle: "#ffebcb",
+          fillStyle: "rgba(0, 0, 0, 0)",
         },
       }
     );
@@ -147,8 +164,9 @@ export default function ChainShapes({ isSmDesktop }: ChainShapesProps) {
     setRopeArr([ropeA, ropeB, ropeC]);
     changeRopes([ropeA, ropeB, ropeC]);
 
+    const toWorldArr = [ropeA, ropeB, ropeC, floor, wall, stretchDetector];
     // @ts-ignore
-    World.add(engine.world, [ropeA, ropeB, ropeC, floor, stretchDetector]);
+    World.add(engine.world, toWorldArr);
 
     Render.setPixelRatio(render, 2);
     Runner.run(engine);
@@ -259,9 +277,7 @@ export default function ChainShapes({ isSmDesktop }: ChainShapesProps) {
     }
     if (e.key === "k") {
       if (engine) {
-        console.log(engine);
-        engine.gravity.x = -1;
-        engine.gravity.y = 0;
+        console.log(engine.timing);
       }
     }
   };

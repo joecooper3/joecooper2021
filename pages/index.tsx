@@ -18,6 +18,7 @@ export default function Home() {
   const router = useRouter();
   const engine = useStore((state) => state.matterEngine);
   const ropeArr = useStore((state) => state.ropes);
+  const wall = useStore((state) => state.wall);
 
   const logo = useRef<HTMLHeadingElement>(null);
   const subCopy = useRef<HTMLParagraphElement>(null);
@@ -92,6 +93,7 @@ export default function Home() {
                     exitAnimation(
                       router,
                       ropeArr,
+                      wall,
                       engine,
                       logo.current,
                       subCopy.current,
