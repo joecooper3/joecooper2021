@@ -78,7 +78,6 @@ export default function Home() {
           name="description"
           content="Joe Cooper is a creative technologist in the New York City area"
         />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <Main>

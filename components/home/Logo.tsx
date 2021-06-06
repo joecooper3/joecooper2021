@@ -12,6 +12,7 @@ type LogoProps = {
 type LetterContainerProps = {
   height: number;
   width: number;
+  xOffset: number;
 };
 
 const DEV_HEIGHT = 733;
@@ -21,6 +22,7 @@ const letterSizeObj = [
     char: "J",
     w: 55,
     h: 120,
+    x: 60,
   },
   {
     char: "o",
@@ -64,9 +66,10 @@ const stringToSpans = (
 ): React.ReactElement[] => {
   const stringArr = text.split("");
   const spanArr = stringArr.map((letter, i) => {
-    const { w, h } = letterSizeObj.find((obj) => obj.char === letter);
+    const { w, h, x } = letterSizeObj.find((obj) => obj.char === letter);
+    const xOffset = x ?? 0;
     return (
-      <LetterContainer width={w} height={h} key={letter + i}>
+      <LetterContainer width={w} height={h} xOffset={xOffset} key={letter + i}>
         <Tween to={{ x: 0, opacity: 1, delay: animDelay }}>
           <Letter>{letter}</Letter>
         </Tween>
@@ -81,9 +84,7 @@ const Logo = forwardRef<any, LogoProps>((props, ref): JSX.Element => {
   const last = stringToSpans("Cooper", props.animDelay);
   return (
     <>
-      <Header className="sr-only">
-        Joe Cooper
-      </Header>
+      <Header className="sr-only">Joe Cooper</Header>
       <Header aria-hidden="true" ref={ref}>
         <Row>{first}</Row>
         <Row>{last}</Row>
@@ -131,6 +132,7 @@ const LetterContainer = styled.div<LetterContainerProps>`
   position: relative;
   width: ${(props) => convertToVh(props.width)}vh;
   height: ${(props) => convertToVh(props.height)}vh;
+  transform: translateX(${(props) => convertToVh(props.xOffset)}px);
 
   @media ${mobileQuery} {
     width: ${(props) => convertToMobilePx(props.width)}px;

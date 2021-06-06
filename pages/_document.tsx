@@ -27,7 +27,14 @@ export default class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
-        <Head />
+        <Head>
+          <link
+            rel="mask-icon"
+            href="/favicons/safari-pinned-tab.svg"
+            color="#0c3cb4"
+          />
+          <link rel="icon" type="image/svg+xml" href="/favicons/favicon.svg" />
+        </Head>
         <body>
           <Main />
           <NextScript />

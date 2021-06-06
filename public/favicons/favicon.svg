@@ -1,0 +1,13 @@
+<svg width="305" height="305" fill="none" xmlns="http://www.w3.org/2000/svg">
+<style>
+path {
+      fill: #0c3cb4;
+    }
+    @media (prefers-color-scheme: dark) {
+      path {
+        fill: #ffebcb;
+      }
+    }
+</style>
+<path d="M305 152.5c0 84.223-68.277 152.5-152.5 152.5S0 236.723 0 152.5 68.277 0 152.5 0 305 68.277 305 152.5z"/>
+</svg>
