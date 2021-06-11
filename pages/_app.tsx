@@ -12,7 +12,7 @@ function MyApp({ Component, pageProps }) {
     <>
       <Header />
       <Component {...pageProps} />
-      <Cursor />
+      {/* <Cursor /> */}
     </>
   );
 }

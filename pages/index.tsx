@@ -80,7 +80,7 @@ export default function Home() {
         />
       </Head>
 
-      <Main>
+      <HomeMain>
         {!isMobile && <ChainShapes isSmDesktop={isSmDesktop} />}
         <CopyContainer>
           {isMobile !== null && (
@@ -128,12 +128,12 @@ export default function Home() {
           )}
         </CopyContainer>
         <MobileWall ref={mobileWall} />
-      </Main>
+      </HomeMain>
     </>
   );
 }
 
-const Main = styled.main`
+const HomeMain = styled.main`
   min-height: 100vh;
   width: 100%;
   display: grid;
