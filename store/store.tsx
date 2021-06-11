@@ -1,8 +1,6 @@
 import Matter from "matter-js";
 import create from "zustand";
 
-import { PreviewImage, previewImages } from "@utils/work";
-
 type AppState = {
   matterEngine: Matter.Engine | null;
   changeMatterEngine: (Engine: Matter.Engine) => void;
@@ -10,7 +8,7 @@ type AppState = {
   changeRopes: (arr: Matter.Composite[]) => void;
   wall: Matter.Body;
   changeWall: (wall: Matter.Body) => void;
-  previewImage: PreviewImage | null;
+  previewImage: string;
   changePreviewImage: (id: string) => void;
 };
 
@@ -32,7 +30,6 @@ export const useStore = create<AppState>((set) => ({
   // work landing page
   previewImage: null,
   changePreviewImage: (id) => {
-    const selectedImage = previewImages.find((obj) => id === obj.id);
-    set({ previewImage: selectedImage });
+    set({ previewImage: id });
   },
 }));

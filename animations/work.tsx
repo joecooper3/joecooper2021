@@ -54,3 +54,13 @@ export const previewImageEnter = (
     ease: "sine.out",
   });
 };
+
+export const previewImageExit = (
+  container: HTMLDivElement,
+) => {
+  gsap.to(container, {
+    opacity: 0,
+    y: -500,
+    rotation: -40
+  })
+}
