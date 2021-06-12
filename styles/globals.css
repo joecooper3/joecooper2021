@@ -72,8 +72,9 @@
   --body-font: "Maison Neue", sans-serif;
   --desktop-side-mg: 55px;
   --mobile-side-mg: 22px;
-  --lg-font-size: 3.052rem; /* 54.93px */
-  --font-size: 1rem;
+  --lg-font-size: 5.493rem;
+  --lg-font-size-mobile: 3.516rem;
+  --font-size: 1.8rem;
   --container-max-width: 1280px;
 }
 
@@ -83,7 +84,7 @@ body {
   color: var(--black);
   padding: 0;
   margin: 0;
-  font-size: 18px;
+  font-size: 10px;
   font-family: var(--body-font);
   height: 100%;
   min-height: -webkit-fill-available;

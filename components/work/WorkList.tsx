@@ -37,10 +37,13 @@ const LinkItem = ({
 
 export default function WorkList() {
   const container = useRef<HTMLUListElement>(null);
+  const isDesktop = useStore((state) => state.isDesktop);
 
   useEffect(() => {
-    workListEnter(container.current);
-  }, [container.current]);
+    if (isDesktop !== null) {
+      workListEnter(container.current, isDesktop);
+    }
+  }, [container.current, isDesktop]);
 
   return (
     <Nav aria-label="Work Navigation">
@@ -81,8 +84,8 @@ const Container = styled.ul`
 
 const ItemContainer = styled.li`
   font-family: var(--header-font);
-  margin-bottom: clamp(36px, 4.9vh, 54px);
-  font-size: clamp(var(--lg-font-size), 7.5vh, 81px);
+  margin-bottom: clamp(3.6rem, 4.9vh, 5.4rem);
+  font-size: clamp(var(--lg-font-size), 7.5vh, 8.1rem);
   line-height: 0.9;
   font-weight: 800;
   position: relative;
@@ -91,6 +94,14 @@ const ItemContainer = styled.li`
 
   @media ${tabletQuery} {
     text-align: center;
+  }
+
+  @media ${mobileQuery} {
+    font-size: var(--lg-font-size-mobile)
+  }
+
+  &:last-child {
+    margin-bottom: 0;
   }
 `;
 

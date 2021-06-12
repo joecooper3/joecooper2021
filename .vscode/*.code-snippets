@@ -1,0 +1,7 @@
+{
+  "Import store": {
+    "prefix": "imp-store",
+    "body": ["import { useStore } from \"@store/store\";"],
+    "scope": "javascript,typescript,typescriptreact"
+  }
+}

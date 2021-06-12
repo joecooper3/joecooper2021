@@ -3,8 +3,8 @@ import { NextRouter } from "next/router";
 
 export const spinningSquareEnter = (
   container: HTMLDivElement,
-  square: HTMLDivElement,
-  text: HTMLHeadingElement
+  text: HTMLHeadingElement,
+  isDesktop: boolean
 ): void => {
   gsap.to(container, {
     y: 0,
@@ -12,15 +12,32 @@ export const spinningSquareEnter = (
     duration: 3.0,
     startAt: { y: -500 },
   });
-  gsap.to(text, { opacity: 0.8, duration: 5, startAt: { opacity: 1 } });
+  gsap.to(text, {
+    scaleX: 1,
+    duration: 2.5,
+    ease: "elastic.out(0.5, 0.2)",
+    startAt: { scaleX: 1.5 },
+    delay: 0.3,
+  });
+
+  if (!isDesktop) {
+    gsap.to(text, {
+      opacity: 0,
+      delay: 3.0,
+      duration: 0.5,
+      y: -20,
+    });
+  }
 };
 
-export const workListEnter = (listArr: HTMLUListElement): void => {
+export const workListEnter = (listArr: HTMLUListElement, isDesktop: boolean): void => {
+  const delay = isDesktop ? 1 : 3;
+  
   gsap.to(listArr.children, {
     y: 0,
     opacity: 1,
     duration: 1,
-    delay: 1,
+    delay: delay,
     stagger: 0.3,
     startAt: {
       y: 50,
@@ -55,12 +72,10 @@ export const previewImageEnter = (
   });
 };
 
-export const previewImageExit = (
-  container: HTMLDivElement,
-) => {
+export const previewImageExit = (container: HTMLDivElement) => {
   gsap.to(container, {
     opacity: 0,
     y: -500,
-    rotation: -40
-  })
-}
+    rotation: -40,
+  });
+};

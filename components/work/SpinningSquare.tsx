@@ -3,20 +3,23 @@ import styled, { keyframes } from "styled-components";
 
 import { spinningSquareEnter } from "@animations/work";
 import PreviewImage from "@components/work/PreviewImage";
+import { useStore } from "@store/store";
 import { smDesktopQuery, mobileQuery, tabletQuery } from "@styles/mediaQueries";
 
 export default function SpnningSquare() {
   const container = useRef<HTMLDivElement>(null);
-  const square = useRef<HTMLDivElement>(null);
   const text = useRef<HTMLHeadingElement>(null);
+  const isDesktop = useStore((state) => state.isDesktop);
 
   useEffect(() => {
-    spinningSquareEnter(container.current, square.current, text.current);
-  }, [container.current, square.current, text.current]);
+    if (isDesktop !== null) {
+      spinningSquareEnter(container.current, text.current, isDesktop);
+    }
+  }, [container.current, text.current, isDesktop]);
 
   return (
     <Container ref={container} role="presentation">
-      <Square ref={square} role="presentation" />
+      <Square role="presentation" />
       <Heading ref={text}>Work</Heading>
       <PreviewImage />
     </Container>
@@ -63,13 +66,23 @@ const Square = styled.div`
     height: 300px;
     width: 300px;
   }
+
+  @media ${tabletQuery} {
+    height: 400px;
+    width: 400px;
+  }
+
+  @media ${mobileQuery} {
+    height: 300px;
+    width: 300px;
+  }
 `;
 
 const Heading = styled.h2`
   text-transform: lowercase;
   color: var(--white);
   font-family: var(--header-font);
-  font-size: 85px;
+  font-size: 8.5rem;
   position: absolute;
   margin: 0;
   top: 150px;
@@ -78,9 +91,20 @@ const Heading = styled.h2`
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
+  transform: scaleX(1.5);
 
   @media ${smDesktopQuery} {
-    font-size: 64px;
+    font-size: 6.4rem;
+    top: 162px;
+  }
+
+  @media ${tabletQuery} {
+    font-size: 8.5rem;
+    top: 150px;
+  }
+
+  @media ${mobileQuery} {
+    font-size: 6.4rem;
     top: 162px;
   }
 `;
