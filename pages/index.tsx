@@ -12,11 +12,11 @@ import { useStore } from "@store/store";
 import { smDesktopQuery, mobileQuery, tabletQuery } from "@styles/mediaQueries";
 
 export default function Home() {
-  const [isMobile, setIsMobile] = useState(null);
-  const [isSmDesktop, setSmDesktop] = useState(false);
   const [exitAnimArgs, setExitAnimArgs] = useState<exitAnimArgs | null>(null);
 
   const router = useRouter();
+  const deviceSize = useStore((state) => state.deviceSize);
+  const isDesktop = useStore((state) => state.isDesktop);
   const engine = useStore((state) => state.matterEngine);
   const ropeArr = useStore((state) => state.ropes);
   const wall = useStore((state) => state.wall);
@@ -25,27 +25,6 @@ export default function Home() {
   const subCopy = useRef<HTMLParagraphElement>(null);
   const buttonContainer = useRef<HTMLDivElement>(null);
   const mobileWall = useRef<HTMLDivElement>(null);
-
-  const handleWindowSizeChange = () => {
-    if (window.innerWidth > 1200) {
-      setIsMobile(false);
-      setSmDesktop(false);
-    } else if (window.innerWidth > 768) {
-      setIsMobile(false);
-      setSmDesktop(true);
-    } else {
-      setIsMobile(true);
-      setSmDesktop(false);
-    }
-  };
-
-  useEffect(() => {
-    handleWindowSizeChange();
-    window.addEventListener("resize", handleWindowSizeChange);
-    return () => {
-      window.removeEventListener("resize", handleWindowSizeChange);
-    };
-  }, []);
 
   useEffect(() => {
     setExitAnimArgs({
@@ -59,7 +38,7 @@ export default function Home() {
       mobileWall: mobileWall.current,
     });
   }, [
-    isMobile,
+    deviceSize,
     router,
     ropeArr,
     wall,
@@ -81,17 +60,17 @@ export default function Home() {
       </Head>
 
       <HomeMain>
-        {!isMobile && <ChainShapes isSmDesktop={isSmDesktop} />}
+        {isDesktop && <ChainShapes isSmDesktop={deviceSize === "smDesktop"} />}
         <CopyContainer>
-          {isMobile !== null && (
-            <Logo ref={logo} animDelay={isMobile ? 0.25 : 1} />
+          {deviceSize !== null && (
+            <Logo ref={logo} animDelay={isDesktop ? 1 : 0.25} />
           )}
           <SubCopy ref={subCopy}>
-            {isMobile !== null && (
+            {deviceSize !== null && (
               <Tween
                 to={{ y: 0, opacity: 1 }}
                 stagger={0.45}
-                delay={isMobile ? 1.75 : 2.5}
+                delay={isDesktop ? 2.5 : 1.75}
               >
                 <CopyLine>
                   <span className="sr-only">Joe Cooper </span>is a New
@@ -106,8 +85,8 @@ export default function Home() {
               </Tween>
             )}
           </SubCopy>
-          {isMobile !== null && (
-            <Tween to={{ y: 0, opacity: 1 }} delay={isMobile ? 3.5 : 4.2}>
+          {deviceSize !== null && (
+            <Tween to={{ y: 0, opacity: 1 }} delay={isDesktop ? 4.2 : 3.5}>
               <ButtonContainer ref={buttonContainer}>
                 <Button
                   onClick={async () => exitAnimation("/about", exitAnimArgs)}
