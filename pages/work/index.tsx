@@ -1,9 +1,8 @@
 import styled from "styled-components";
-import { Tween } from "react-gsap";
-import Link from "next/link";
 
 import SpinningSquare from "@components/work/SpinningSquare";
 import WorkList from "@components/work/WorkList";
+import { smDesktopQuery, mobileQuery, tabletQuery } from "@styles/mediaQueries";
 
 export default function Work() {
   return (
@@ -29,8 +28,22 @@ const Main = styled.main`
 const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr 400px;
+  gap: 40px;
   width: 100%;
   margin: 0 90px 0 var(--desktop-side-mg);
-  max-width: var(--container-max-width);
+  max-width: clamp(var(--container-max-width), 89vw, 1600px);
   align-items: center;
+
+  @media ${smDesktopQuery} {
+    grid-template-columns: 1fr 300px;
+  }
+
+  @media ${tabletQuery} {
+    grid-template-columns: 1fr;
+    margin: 0 var(--desktop-side-mg);
+  }
+
+  @media ${mobileQuery} {
+    margin: 0 var(--mobile-side-mg);
+  }
 `;

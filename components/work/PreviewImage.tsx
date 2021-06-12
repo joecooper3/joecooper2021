@@ -11,11 +11,8 @@ import Image from "next/image";
 
 import { previewImageEnter, previewImageExit } from "@animations/work";
 import { useStore } from "@store/store";
+import { smDesktopQuery, mobileQuery, tabletQuery } from "@styles/mediaQueries";
 import { previewImages } from "@utils/work";
-
-// return fragment with five different image containers
-// some kind of setState which will manage which is visible
-// create functions that will add animations to image previews
 
 export default function PreviewImage(): JSX.Element {
   const previewImage = useStore((state) => state.previewImage);
@@ -31,7 +28,6 @@ export default function PreviewImage(): JSX.Element {
   );
 
   useEffect(() => {
-    console.log(previewImage);
     if (previewImage !== activeImage) {
       // play entrance animation
       if (previewImage !== null) {
@@ -79,10 +75,21 @@ const ImageContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media ${smDesktopQuery} {
+    width: 300px;
+    height: 300px;
+    margin-top: 50px;
+  }
 `;
 
 const InnerContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media ${smDesktopQuery} {
+    img {
+    }
+  }
 `;

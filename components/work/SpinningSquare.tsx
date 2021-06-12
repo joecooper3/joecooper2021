@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import styled, { keyframes } from "styled-components";
 
-import PreviewImage from "@components/work/PreviewImage";
 import { spinningSquareEnter } from "@animations/work";
+import PreviewImage from "@components/work/PreviewImage";
+import { smDesktopQuery, mobileQuery, tabletQuery } from "@styles/mediaQueries";
 
 export default function SpnningSquare() {
   const container = useRef<HTMLDivElement>(null);
@@ -40,6 +41,12 @@ const Container = styled.div`
   pointer-events: none;
   grid-column: 2;
   height: 400px;
+
+  @media ${tabletQuery} {
+    grid-column: 1;
+    grid-row: 1;
+    z-index: 1;
+  }
 `;
 
 const Square = styled.div`
@@ -51,6 +58,11 @@ const Square = styled.div`
   height: 400px;
   width: 400px;
   animation: ${rotate} 25s linear infinite;
+
+  @media ${smDesktopQuery} {
+    height: 300px;
+    width: 300px;
+  }
 `;
 
 const Heading = styled.h2`
@@ -66,4 +78,9 @@ const Heading = styled.h2`
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
+
+  @media ${smDesktopQuery} {
+    font-size: 64px;
+    top: 162px;
+  }
 `;

@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { workListEnter } from "@animations/work";
 import { useStore } from "@store/store";
+import { mobileQuery, tabletQuery } from "@styles/mediaQueries";
 
 type LinkItemProps = {
   previewId: string;
@@ -42,7 +43,7 @@ export default function WorkList() {
   }, [container.current]);
 
   return (
-    <nav aria-label="Work Navigation">
+    <Nav aria-label="Work Navigation">
       <Container ref={container}>
         <LinkItem href="/" previewId="ueb">
           Unlimited EyeBrowsing
@@ -60,9 +61,17 @@ export default function WorkList() {
           Knomad
         </LinkItem>
       </Container>
-    </nav>
+    </Nav>
   );
 }
+
+const Nav = styled.nav`
+  @media ${tabletQuery} {
+    grid-column: 1;
+    grid-row: 1;
+    z-index: 2;
+  }
+`;
 
 const Container = styled.ul`
   list-style: none;
@@ -71,14 +80,18 @@ const Container = styled.ul`
 `;
 
 const ItemContainer = styled.li`
-  margin-bottom: 2rem;
   font-family: var(--header-font);
-  font-size: var(--lg-font-size);
+  margin-bottom: clamp(36px, 4.9vh, 54px);
+  font-size: clamp(var(--lg-font-size), 7.5vh, 81px);
   line-height: 0.9;
   font-weight: 800;
   position: relative;
   line-height: 1;
   opacity: 0;
+
+  @media ${tabletQuery} {
+    text-align: center;
+  }
 `;
 
 const Anchor = styled.a`
@@ -100,4 +113,9 @@ const TextStroke = styled.span`
   left: 0;
   z-index: 1;
   pointer-events: none;
+
+  @media ${tabletQuery} {
+    width: 100%;
+    text-align: center;
+  }
 `;
