@@ -1,12 +1,15 @@
-import Hamburger from "@components/global/Hamburger";
-import { mobileQuery } from "@styles/mediaQueries";
 import styled from "styled-components";
+
+import Hamburger from "@components/global/Hamburger";
+import Navigation from "@components/global/Navigation";
+import { mobileQuery } from "@styles/mediaQueries";
 
 export default function Header() {
   return (
     <Container>
       <Name className="sr-only">Joe Cooper</Name>
       <Hamburger />
+      <Navigation />
     </Container>
   );
 }

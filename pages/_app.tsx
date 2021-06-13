@@ -15,7 +15,7 @@ const Cursor = dynamic(() => import("../components/global/Cursor"), {
   ssr: false,
 });
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps, router }) {
   const changeDeviceSize = useStore((state) => state.changeDeviceSize);
   const deviceSize = useStore((state) => state.deviceSize);
 
@@ -33,6 +33,7 @@ function MyApp({ Component, pageProps }) {
   };
 
   useEffect(() => {
+    console.log(router);
     handleWindowSizeChange();
     window.addEventListener("resize", handleWindowSizeChange);
     return () => {
