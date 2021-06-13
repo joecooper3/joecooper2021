@@ -1,16 +1,27 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
+import { mobileQuery } from "@styles/mediaQueries";
+
+type HamburgerProps = {
+  toggleMenuFn: (isOpen: boolean) => void;
+};
+
 type OpenProps = {
   open: boolean;
 };
 
-const Hamburger = () => {
+const Hamburger = ({ toggleMenuFn }: HamburgerProps): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
+  const clickFn = () => {
+    setIsOpen(!isOpen);
+    toggleMenuFn(isOpen);
+  };
+
   return (
     <Container
       open={isOpen}
-      onClick={() => setIsOpen(!isOpen)}
+      onClick={() => clickFn()}
       aria-label="Main menu"
       aria-expanded={isOpen}
     >
@@ -56,7 +67,13 @@ justify-content: center;
   padding: 0 10px 20px;
   box-sizing: content-box;
   overflow: visible;
+  z-index: 2;
+  margin-right: 15px;
   opacity: ${(props) => (props.open ? "0.7" : "1")};
+
+  @media ${mobileQuery} {
+    margin-right: 2px;
+  }
   &:hover {
       opacity: 0.7;
     }
