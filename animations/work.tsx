@@ -1,6 +1,15 @@
 import gsap from "gsap";
 import { NextRouter } from "next/router";
 
+export type workExitAnimArgs = {
+  router: NextRouter;
+  squareContainer: HTMLDivElement;
+  squareText: HTMLHeadingElement;
+  workList: HTMLUListElement;
+  nextPageBg: string;
+  isDesktop: boolean;
+};
+
 export const spinningSquareEnter = (
   container: HTMLDivElement,
   text: HTMLHeadingElement,
@@ -30,9 +39,12 @@ export const spinningSquareEnter = (
   }
 };
 
-export const workListEnter = (listArr: HTMLUListElement, isDesktop: boolean): void => {
+export const workListEnter = (
+  listArr: HTMLUListElement,
+  isDesktop: boolean
+): void => {
   const delay = isDesktop ? 1 : 3;
-  
+
   gsap.to(listArr.children, {
     y: 0,
     opacity: 1,
@@ -77,5 +89,31 @@ export const previewImageExit = (container: HTMLDivElement) => {
     opacity: 0,
     y: -500,
     rotation: -40,
+  });
+};
+
+export const pageExit = (href: string, args: workExitAnimArgs) => {
+  console.log("free");
+  const {
+    router,
+    squareContainer,
+    squareText,
+    workList,
+    nextPageBg,
+    isDesktop,
+  } = args;
+  const tl = gsap.timeline({
+    onComplete: () => {
+      setTimeout(() => {
+        router.push(href);
+      }, 500);
+    },
+  });
+  tl.to(squareText, {
+    opacity: 0,
+  });
+  tl.to(squareContainer, {
+    scale: 8,
+    duration: 3.5,
   });
 };

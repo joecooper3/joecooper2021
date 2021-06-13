@@ -11,11 +11,21 @@ export default function SpnningSquare() {
   const text = useRef<HTMLHeadingElement>(null);
   const isDesktop = useStore((state) => state.isDesktop);
 
+  const changeWorkSquareContainer = useStore(
+    (state) => state.changeWorkSquareContainer
+  );
+  const changeWorkSquareText = useStore((state) => state.changeWorkSquareText);
+
   useEffect(() => {
     if (isDesktop !== null) {
       spinningSquareEnter(container.current, text.current, isDesktop);
     }
   }, [container.current, text.current, isDesktop]);
+
+  useEffect(() => {
+    changeWorkSquareContainer(container.current);
+    changeWorkSquareText(text.current);
+  }, [container.current, text.current]);
 
   return (
     <Container ref={container} role="presentation">

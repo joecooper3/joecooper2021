@@ -7,14 +7,26 @@ type AppState = {
   changeDeviceSize: (
     size: "lgDesktop" | "smDesktop" | "tablet" | "mobile"
   ) => void;
+  nextPageBg: "white" | "tan";
+  changeNextPageBg: (color: "white" | "tan") => void;
+
+  // home page
   matterEngine: Matter.Engine | null;
   changeMatterEngine: (Engine: Matter.Engine) => void;
   ropes: Matter.Composite[];
   changeRopes: (arr: Matter.Composite[]) => void;
   wall: Matter.Body;
   changeWall: (wall: Matter.Body) => void;
+
+  // work landing page
   previewImage: string;
   changePreviewImage: (id: string) => void;
+  workSquareContainer: HTMLDivElement;
+  changeWorkSquareContainer: (el: HTMLDivElement) => void;
+  workSquareText: HTMLHeadingElement;
+  changeWorkSquareText: (el: HTMLHeadingElement) => void;
+  workList: HTMLUListElement;
+  changeWorkList: (el: HTMLUListElement) => void;
 };
 
 export const useStore = create<AppState>((set) => ({
@@ -30,6 +42,10 @@ export const useStore = create<AppState>((set) => ({
     } else {
       set({ isDesktop: null });
     }
+  },
+  nextPageBg: "white",
+  changeNextPageBg: (color) => {
+    set({ nextPageBg: color });
   },
 
   // landing page
@@ -50,5 +66,17 @@ export const useStore = create<AppState>((set) => ({
   previewImage: null,
   changePreviewImage: (id) => {
     set({ previewImage: id });
+  },
+  workSquareContainer: null,
+  changeWorkSquareContainer: (el) => {
+    set({ workSquareContainer: el });
+  },
+  workSquareText: null,
+  changeWorkSquareText: (el) => {
+    set({ workSquareText: el });
+  },
+  workList: null,
+  changeWorkList: (el) => {
+    set({ workList: el });
   },
 }));

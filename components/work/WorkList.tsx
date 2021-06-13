@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
-import Link from "next/link";
+import { useRouter } from "next/router";
 
-import { workListEnter } from "@animations/work";
+import { workListEnter, pageExit } from "@animations/work";
 import { useStore } from "@store/store";
 import { mobileQuery, tabletQuery } from "@styles/mediaQueries";
 
@@ -17,19 +17,38 @@ const LinkItem = ({
   children,
   href,
 }: LinkItemProps): JSX.Element => {
+  const router = useRouter();
+  const workSquareContainer = useStore((state) => state.workSquareContainer);
+  const workSquareText = useStore((state) => state.workSquareText);
+  const workList = useStore((state) => state.workList);
   const changePreviewImage = useStore((state) => state.changePreviewImage);
+
+  const tempClicker = (e: React.MouseEvent, href: string) => {
+    e.preventDefault();
+    changePreviewImage(null);
+    console.log("clicker");
+    console.log(href);
+    const args = {
+      router: router,
+      squareContainer: workSquareContainer,
+      squareText: workSquareText,
+      workList: workList,
+      nextPageBg: "tan",
+      isDesktop: true,
+    };
+    pageExit(href, args);
+  };
 
   return (
     <ItemContainer>
-      <Link href={href}>
-        <Anchor
-          href={href}
-          onMouseEnter={() => changePreviewImage(previewId)}
-          onMouseLeave={() => changePreviewImage(null)}
-        >
-          {children}
-        </Anchor>
-      </Link>
+      <Anchor
+        href={href}
+        onClick={(e) => tempClicker(e, href)}
+        onMouseEnter={() => changePreviewImage(previewId)}
+        onMouseLeave={() => changePreviewImage(null)}
+      >
+        {children}
+      </Anchor>
       <TextStroke aria-hidden="true">{children}</TextStroke>
     </ItemContainer>
   );
@@ -97,7 +116,7 @@ const ItemContainer = styled.li`
   }
 
   @media ${mobileQuery} {
-    font-size: var(--lg-font-size-mobile)
+    font-size: var(--lg-font-size-mobile);
   }
 
   &:last-child {
