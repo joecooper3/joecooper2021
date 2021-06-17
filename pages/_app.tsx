@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 
+import AnimationsProvider from "@components/animations/AnimationsProvider";
 import Header from "@components/global/Header";
 import "../styles/globals.css";
 
@@ -33,7 +34,7 @@ function MyApp({ Component, pageProps, router }) {
   };
 
   useEffect(() => {
-    console.log(router);
+    // console.log(router);
     handleWindowSizeChange();
     window.addEventListener("resize", handleWindowSizeChange);
     return () => {
@@ -42,11 +43,11 @@ function MyApp({ Component, pageProps, router }) {
   }, []);
 
   return (
-    <>
+    <AnimationsProvider route={router.route}>
       <Header />
       <Component {...pageProps} />
       {/* <Cursor /> */}
-    </>
+    </AnimationsProvider>
   );
 }
 

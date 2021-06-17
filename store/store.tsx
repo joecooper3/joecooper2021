@@ -1,14 +1,20 @@
 import Matter from "matter-js";
 import create from "zustand";
 
+type ExitTransition = (href: string) => void;
+
 type AppState = {
   deviceSize: "lgDesktop" | "smDesktop" | "tablet" | "mobile" | null;
   isDesktop: boolean;
   changeDeviceSize: (
     size: "lgDesktop" | "smDesktop" | "tablet" | "mobile"
   ) => void;
+  currentPageBg: "white" | "tan";
+  changeCurrentPageBg: (color: "white" | "tan") => void;
   nextPageBg: "white" | "tan";
   changeNextPageBg: (color: "white" | "tan") => void;
+  exitTransition: ExitTransition;
+  changeExitTransition: (ExitTransition) => void;
 
   // home page
   matterEngine: Matter.Engine | null;
@@ -17,6 +23,14 @@ type AppState = {
   changeRopes: (arr: Matter.Composite[]) => void;
   wall: Matter.Body;
   changeWall: (wall: Matter.Body) => void;
+  homeLogo: HTMLHeadingElement;
+  changeHomeLogo: (el: HTMLHeadingElement) => void;
+  homeSubCopy: HTMLParagraphElement;
+  changeHomeSubCopy: (el: HTMLParagraphElement) => void;
+  homeButtonContainer: HTMLDivElement;
+  changeHomeButtonContainer: (el: HTMLDivElement) => void;
+  homeMobileWall: HTMLDivElement;
+  changeHomeMobileWall: (el: HTMLDivElement) => void;
 
   // work landing page
   previewImage: string;
@@ -43,9 +57,17 @@ export const useStore = create<AppState>((set) => ({
       set({ isDesktop: null });
     }
   },
+  currentPageBg: "tan",
+  changeCurrentPageBg: (color) => {
+    set({ nextPageBg: color });
+  },
   nextPageBg: "white",
   changeNextPageBg: (color) => {
     set({ nextPageBg: color });
+  },
+  exitTransition: null,
+  changeExitTransition: (func) => {
+    set({ exitTransition: func });
   },
 
   // landing page
@@ -60,6 +82,22 @@ export const useStore = create<AppState>((set) => ({
   wall: null,
   changeWall: (wall) => {
     set({ wall: wall });
+  },
+  homeLogo: null,
+  changeHomeLogo: (el) => {
+    set({ homeLogo: el });
+  },
+  homeSubCopy: null,
+  changeHomeSubCopy: (el) => {
+    set({ homeSubCopy: el });
+  },
+  homeButtonContainer: null,
+  changeHomeButtonContainer: (el) => {
+    set({ homeButtonContainer: el });
+  },
+  homeMobileWall: null,
+  changeHomeMobileWall: (el) => {
+    set({ homeMobileWall: el });
   },
 
   // work landing page

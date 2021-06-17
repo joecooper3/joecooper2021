@@ -21,6 +21,7 @@
     "paths": {
       "@animations/*": ["animations/*"],
       "@components/*": ["components/*"],
+      "@hooks/*": ["hooks/*"],
       "@utils/*": ["utils/*"],
       "@store/*": ["store/*"],
       "@styles/*": ["styles/*"]

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+import { useTransitionLink } from "@hooks/hooks";
 import { mobileQuery, tabletQuery } from "@styles/mediaQueries";
 
 type LinkItemProps = {
@@ -9,23 +10,30 @@ type LinkItemProps = {
 };
 
 function LinkItem({ children, href }: LinkItemProps): JSX.Element {
+  const pageTransition = useTransitionLink(href);
+
+  const clickFn = (e: React.MouseEvent) => {
+    e.preventDefault();
+    pageTransition();
+  };
+
   return (
     <ItemContainer>
-      <Anchor href={href}>{children}</Anchor>
+      <Anchor href={href} onClick={(e) => clickFn(e)}>
+        {children}
+      </Anchor>
       <TextStroke aria-hidden="true">{children}</TextStroke>
     </ItemContainer>
   );
 }
 
 export const Navigation = React.forwardRef<HTMLElement>(({}, ref) => {
-  console.log(ref);
-
   return (
     <Nav ref={ref}>
       <ListContainer>
-        <LinkItem href="#!">About</LinkItem>
-        <LinkItem href="#!">Work</LinkItem>
-        <LinkItem href="#!">Contact</LinkItem>
+        <LinkItem href="/about">About</LinkItem>
+        <LinkItem href="/work">Work</LinkItem>
+        <LinkItem href="/">Contact</LinkItem>
       </ListContainer>
       <BottomBorder role="presentation" />
     </Nav>

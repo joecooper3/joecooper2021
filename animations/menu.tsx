@@ -32,7 +32,10 @@ export const closeNavigation = (nav: HTMLElement): void => {
   const navList = nav.children[0];
   const bottomLine = nav.children[1];
 
-  gsap.to(navList.children, {
+  const navListArr = Array.from(navList.children);
+  const listReversed = navListArr.reverse();
+
+  gsap.to(listReversed, {
     x: 900,
     stagger: 0.15,
     duration: 1,

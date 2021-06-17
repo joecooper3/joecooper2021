@@ -20,11 +20,30 @@ export default function Home() {
   const engine = useStore((state) => state.matterEngine);
   const ropeArr = useStore((state) => state.ropes);
   const wall = useStore((state) => state.wall);
+  const changeHomeLogo = useStore((state) => state.changeHomeLogo);
+  const changeHomeSubCopy = useStore((state) => state.changeHomeSubCopy);
+  const changeHomeButtonContainer = useStore(
+    (state) => state.changeHomeButtonContainer
+  );
+  const changeHomeMobileWall = useStore((state) => state.changeHomeMobileWall);
 
   const logo = useRef<HTMLHeadingElement>(null);
   const subCopy = useRef<HTMLParagraphElement>(null);
   const buttonContainer = useRef<HTMLDivElement>(null);
   const mobileWall = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    changeHomeLogo(logo.current);
+  }, [logo.current]);
+  useEffect(() => {
+    changeHomeSubCopy(subCopy.current);
+  }, [subCopy.current]);
+  useEffect(() => {
+    changeHomeButtonContainer(buttonContainer.current);
+  }, [buttonContainer.current]);
+  useEffect(() => {
+    changeHomeMobileWall(mobileWall.current);
+  }, [mobileWall.current]);
 
   useEffect(() => {
     setExitAnimArgs({
