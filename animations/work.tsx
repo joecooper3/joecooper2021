@@ -6,7 +6,6 @@ export type workExitAnimArgs = {
   squareContainer: HTMLDivElement;
   squareText: HTMLHeadingElement;
   workList: HTMLUListElement;
-  nextPageBg: string;
   isDesktop: boolean;
 };
 
@@ -92,16 +91,15 @@ export const previewImageExit = (container: HTMLDivElement) => {
   });
 };
 
-export const pageExit = (href: string, args: workExitAnimArgs) => {
-  console.log("free");
+export const pageExit = (href: string, color: string, args: workExitAnimArgs) => {
   const {
     router,
     squareContainer,
     squareText,
     workList,
-    nextPageBg,
     isDesktop,
   } = args;
+
   const tl = gsap.timeline({
     onComplete: () => {
       setTimeout(() => {
@@ -109,11 +107,46 @@ export const pageExit = (href: string, args: workExitAnimArgs) => {
       }, 500);
     },
   });
-  tl.to(squareText, {
-    opacity: 0,
-  });
-  tl.to(squareContainer, {
-    scale: 8,
-    duration: 3.5,
-  });
+
+  if (color === "tan") {
+    const duration = isDesktop ? 3.25 : 1.25;
+    const scale = isDesktop ? 8 : 4;
+
+    tl.to(squareText, {
+      opacity: 0,
+    });
+    tl.to(squareContainer, {
+      scale: scale,
+      duration: duration,
+    });
+
+    if (!isDesktop) {
+      tl.to(
+        workList.children,
+        {
+          opacity: 0,
+          y: -50,
+        },
+        "<"
+      );
+    }
+  } else {
+    tl.to(squareContainer, {
+      y: -50,
+      duration: 0.2,
+    });
+    tl.to(squareContainer, {
+      y: "80vh",
+      duration: 0.4,
+    });
+    tl.to(
+      workList.children,
+      {
+        stagger: 0.1,
+        opacity: 0,
+        y: -50,
+      },
+      "<"
+    );
+  }
 };

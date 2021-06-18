@@ -18,7 +18,7 @@ const LinkItem = ({
   href,
 }: LinkItemProps): JSX.Element => {
   const changePreviewImage = useStore((state) => state.changePreviewImage);
-  const pageTransition = useTransitionLink(href);
+  const pageTransition = useTransitionLink(href, "tan");
 
   const clickFn = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -43,12 +43,17 @@ const LinkItem = ({
 export default function WorkList() {
   const container = useRef<HTMLUListElement>(null);
   const isDesktop = useStore((state) => state.isDesktop);
+  const changeWorkList = useStore((state) => state.changeWorkList);
 
   useEffect(() => {
     if (isDesktop !== null) {
       workListEnter(container.current, isDesktop);
     }
   }, [container.current, isDesktop]);
+
+  useEffect(() => {
+    changeWorkList(container.current);
+  }, [container.current]);
 
   return (
     <Nav aria-label="Work Navigation">

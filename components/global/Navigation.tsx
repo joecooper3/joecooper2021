@@ -7,10 +7,11 @@ import { mobileQuery, tabletQuery } from "@styles/mediaQueries";
 type LinkItemProps = {
   children: React.ReactNode;
   href: string;
+  color: "white" | "tan"
 };
 
-function LinkItem({ children, href }: LinkItemProps): JSX.Element {
-  const pageTransition = useTransitionLink(href);
+function LinkItem({ children, href, color }: LinkItemProps): JSX.Element {
+  const pageTransition = useTransitionLink(href, color);
 
   const clickFn = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -31,9 +32,9 @@ export const Navigation = React.forwardRef<HTMLElement>(({}, ref) => {
   return (
     <Nav ref={ref}>
       <ListContainer>
-        <LinkItem href="/about">About</LinkItem>
-        <LinkItem href="/work">Work</LinkItem>
-        <LinkItem href="/">Contact</LinkItem>
+        <LinkItem href="/about" color="white">About</LinkItem>
+        <LinkItem href="/work" color="white">Work</LinkItem>
+        <LinkItem href="/" color="tan">Contact</LinkItem>
       </ListContainer>
       <BottomBorder role="presentation" />
     </Nav>

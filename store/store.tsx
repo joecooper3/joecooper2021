@@ -1,7 +1,7 @@
 import Matter from "matter-js";
 import create from "zustand";
 
-type ExitTransition = (href: string) => void;
+type ExitTransition = (href: string, color?: string) => void;
 
 type AppState = {
   deviceSize: "lgDesktop" | "smDesktop" | "tablet" | "mobile" | null;
@@ -9,10 +9,6 @@ type AppState = {
   changeDeviceSize: (
     size: "lgDesktop" | "smDesktop" | "tablet" | "mobile"
   ) => void;
-  currentPageBg: "white" | "tan";
-  changeCurrentPageBg: (color: "white" | "tan") => void;
-  nextPageBg: "white" | "tan";
-  changeNextPageBg: (color: "white" | "tan") => void;
   exitTransition: ExitTransition;
   changeExitTransition: (ExitTransition) => void;
 
@@ -56,14 +52,6 @@ export const useStore = create<AppState>((set) => ({
     } else {
       set({ isDesktop: null });
     }
-  },
-  currentPageBg: "tan",
-  changeCurrentPageBg: (color) => {
-    set({ nextPageBg: color });
-  },
-  nextPageBg: "white",
-  changeNextPageBg: (color) => {
-    set({ nextPageBg: color });
   },
   exitTransition: null,
   changeExitTransition: (func) => {

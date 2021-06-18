@@ -23,14 +23,22 @@ function MyApp({ Component, pageProps, router }) {
   const handleWindowSizeChange = () => {
     if (window.innerWidth > smDesktopBreakpoint && deviceSize !== "lgDesktop") {
       changeDeviceSize("lgDesktop");
-    } else if (window.innerWidth > tabletBreakpoint && deviceSize !== "smDesktop") {
-      changeDeviceSize("smDesktop")
-    } else if (window.innerWidth > mobileBreakpoint && deviceSize !== "tablet") {
-      changeDeviceSize("tablet")
-    } else if (window.innerWidth <= mobileBreakpoint && deviceSize !== "mobile"){
-      changeDeviceSize("mobile")
+    } else if (
+      window.innerWidth > tabletBreakpoint &&
+      deviceSize !== "smDesktop"
+    ) {
+      changeDeviceSize("smDesktop");
+    } else if (
+      window.innerWidth > mobileBreakpoint &&
+      deviceSize !== "tablet"
+    ) {
+      changeDeviceSize("tablet");
+    } else if (
+      window.innerWidth <= mobileBreakpoint &&
+      deviceSize !== "mobile"
+    ) {
+      changeDeviceSize("mobile");
     }
-    
   };
 
   useEffect(() => {
@@ -43,11 +51,13 @@ function MyApp({ Component, pageProps, router }) {
   }, []);
 
   return (
-    <AnimationsProvider route={router.route}>
+    <>
       <Header />
-      <Component {...pageProps} />
-      {/* <Cursor /> */}
-    </AnimationsProvider>
+      <AnimationsProvider route={router.route}>
+        <Component {...pageProps} />
+        {/* <Cursor /> */}
+      </AnimationsProvider>
+    </>
   );
 }
 

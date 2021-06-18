@@ -1,3 +1,4 @@
+import DefaultExit from "@components/animations/DefaultExit";
 import HomeExit from "@components/animations/HomeExit";
 import WorkExit from "@components/animations/WorkExit";
 
@@ -15,6 +16,7 @@ export default function AnimationsProvider({
       return <HomeExit>{children}</HomeExit>;
     case "/work":
       return <WorkExit>{children}</WorkExit>;
+    default:
+      return <DefaultExit>{children}</DefaultExit>;
   }
-  return <>{children}</>;
 }
