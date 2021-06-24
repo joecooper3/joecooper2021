@@ -52,7 +52,7 @@ function MyApp({ Component, pageProps, router }) {
 
   return (
     <>
-      <Header />
+      <Header route={router.route} />
       <AnimationsProvider route={router.route}>
         <Component {...pageProps} />
         {/* <Cursor /> */}

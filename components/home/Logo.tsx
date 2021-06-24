@@ -137,6 +137,9 @@ const LetterContainer = styled.div<LetterContainerProps>`
   @media ${mobileQuery} {
     width: ${(props) => convertToMobilePx(props.width)}px;
     height: ${(props) => convertToMobilePx(props.height)}px;
+    transform: translateX(
+      ${(props) => (props.xOffset ? 6 : 0)}px
+    ); /* assumes only the "J" is kerned, change later if need be */
   }
 `;
 

@@ -3,10 +3,15 @@ import styled from "styled-components";
 
 import { openNavigation, closeNavigation } from "@animations/menu";
 import Hamburger from "@components/global/Hamburger";
+import HeaderLogo from "@components/global/HeaderLogo";
 import Navigation from "@components/global/Navigation";
 import { mobileQuery } from "@styles/mediaQueries";
 
-export default function Header() {
+type HeaderProps = {
+  route: string;
+};
+
+export default function Header({ route }: HeaderProps): JSX.Element {
   const navRef = useRef<HTMLElement>(null);
 
   const toggleMenu = (isOpen: boolean) => {
@@ -20,6 +25,7 @@ export default function Header() {
   return (
     <Container>
       <Name className="sr-only">Joe Cooper</Name>
+      {route !== "/" ? <HeaderLogo /> : <Placeholder role="presentation" />}
       <Hamburger toggleMenuFn={toggleMenu} />
       <Navigation ref={navRef} />
     </Container>
@@ -32,10 +38,12 @@ const Container = styled.header`
   display: flex;
   width: 100%;
   box-sizing: border-box;
-  justify-content: flex-end;
+  justify-content: space-between;
   z-index: 5;
 `;
 
 const Name = styled.h1`
   color: var(--blue);
 `;
+
+const Placeholder = styled.div``;

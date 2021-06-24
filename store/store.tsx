@@ -11,6 +11,8 @@ type AppState = {
   ) => void;
   exitTransition: ExitTransition;
   changeExitTransition: (ExitTransition) => void;
+  logoVisible: boolean;
+  changeLogoVisible: (bool: boolean) => void;
 
   // home page
   matterEngine: Matter.Engine | null;
@@ -56,6 +58,10 @@ export const useStore = create<AppState>((set) => ({
   exitTransition: null,
   changeExitTransition: (func) => {
     set({ exitTransition: func });
+  },
+  logoVisible: false,
+  changeLogoVisible: (bool) => {
+    set({ logoVisible: bool });
   },
 
   // landing page
