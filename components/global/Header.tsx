@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 import { openNavigation, closeNavigation } from "@animations/menu";
@@ -12,13 +12,16 @@ type HeaderProps = {
 };
 
 export default function Header({ route }: HeaderProps): JSX.Element {
+  const [navOpen, setNavOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
 
   const toggleMenu = (isOpen: boolean) => {
     if (isOpen) {
       closeNavigation(navRef.current);
+      setNavOpen(false);
     } else {
       openNavigation(navRef.current);
+      setNavOpen(true);
     }
   };
 
@@ -26,8 +29,12 @@ export default function Header({ route }: HeaderProps): JSX.Element {
     <Container>
       <Name className="sr-only">Joe Cooper</Name>
       {route !== "/" ? <HeaderLogo /> : <Placeholder role="presentation" />}
-      <Hamburger toggleMenuFn={toggleMenu} />
-      <Navigation ref={navRef} />
+      <Hamburger
+        toggleMenuFn={toggleMenu}
+        navOpen={navOpen}
+        setNavOpen={setNavOpen}
+      />
+      <Navigation toggleMenuFn={toggleMenu} ref={navRef} />
     </Container>
   );
 }

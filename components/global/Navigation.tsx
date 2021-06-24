@@ -4,17 +4,28 @@ import styled from "styled-components";
 import { useTransitionLink } from "@hooks/hooks";
 import { mobileQuery, tabletQuery } from "@styles/mediaQueries";
 
+type NavigationProps = {
+  toggleMenuFn: (isOpen: boolean) => void;
+};
+
 type LinkItemProps = {
   children: React.ReactNode;
   href: string;
-  color: "white" | "tan"
+  color: "white" | "tan";
+  toggleMenuFn: (isOpen: boolean) => void;
 };
 
-function LinkItem({ children, href, color }: LinkItemProps): JSX.Element {
+function LinkItem({
+  children,
+  href,
+  color,
+  toggleMenuFn,
+}: LinkItemProps): JSX.Element {
   const pageTransition = useTransitionLink(href, color);
 
   const clickFn = (e: React.MouseEvent) => {
     e.preventDefault();
+    toggleMenuFn(true);
     pageTransition();
   };
 
@@ -28,18 +39,26 @@ function LinkItem({ children, href, color }: LinkItemProps): JSX.Element {
   );
 }
 
-export const Navigation = React.forwardRef<HTMLElement>(({}, ref) => {
-  return (
-    <Nav ref={ref}>
-      <ListContainer>
-        <LinkItem href="/about" color="white">About</LinkItem>
-        <LinkItem href="/work" color="white">Work</LinkItem>
-        <LinkItem href="/" color="tan">Contact</LinkItem>
-      </ListContainer>
-      <BottomBorder role="presentation" />
-    </Nav>
-  );
-});
+export const Navigation = React.forwardRef<HTMLElement, NavigationProps>(
+  ({ toggleMenuFn }, ref) => {
+    return (
+      <Nav ref={ref}>
+        <ListContainer>
+          <LinkItem href="/about" color="white" toggleMenuFn={toggleMenuFn}>
+            About
+          </LinkItem>
+          <LinkItem href="/work" color="white" toggleMenuFn={toggleMenuFn}>
+            Work
+          </LinkItem>
+          <LinkItem href="/" color="tan" toggleMenuFn={toggleMenuFn}>
+            Contact
+          </LinkItem>
+        </ListContainer>
+        <BottomBorder role="presentation" />
+      </Nav>
+    );
+  }
+);
 
 export default Navigation;
 

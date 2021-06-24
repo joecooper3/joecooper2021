@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { mobileQuery } from "@styles/mediaQueries";
 
 type HamburgerProps = {
+  navOpen: boolean;
   toggleMenuFn: (isOpen: boolean) => void;
 };
 
@@ -11,22 +12,21 @@ type OpenProps = {
   open: boolean;
 };
 
-const Hamburger = ({ toggleMenuFn }: HamburgerProps): JSX.Element => {
-  const [isOpen, setIsOpen] = useState(false);
+const Hamburger = ({ navOpen, toggleMenuFn }: HamburgerProps): JSX.Element => {
   const clickFn = () => {
-    setIsOpen(!isOpen);
-    toggleMenuFn(isOpen);
+    toggleMenuFn(navOpen);
+    console.log(navOpen);
   };
 
   return (
     <Container
-      open={isOpen}
+      open={navOpen}
       onClick={() => clickFn()}
       aria-label="Main menu"
-      aria-expanded={isOpen}
+      aria-expanded={navOpen}
     >
       <Box>
-        <Inner open={isOpen} />
+        <Inner open={navOpen} />
       </Box>
     </Container>
   );
