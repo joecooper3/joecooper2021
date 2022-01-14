@@ -6,6 +6,7 @@ import { mobileQuery, tabletQuery } from "@styles/mediaQueries";
 
 type NavigationProps = {
   toggleMenuFn: (isOpen: boolean) => void;
+  route: string;
 };
 
 type LinkItemProps = {
@@ -13,6 +14,7 @@ type LinkItemProps = {
   href: string;
   color: "white" | "tan";
   toggleMenuFn: (isOpen: boolean) => void;
+  currentRoute: string;
 };
 
 function LinkItem({
@@ -20,37 +22,62 @@ function LinkItem({
   href,
   color,
   toggleMenuFn,
+  currentRoute,
 }: LinkItemProps): JSX.Element {
   const pageTransition = useTransitionLink(href, color);
 
-  const clickFn = (e: React.MouseEvent) => {
+  const clickFn = (e: React.MouseEvent, href: string) => {
     e.preventDefault();
+    if (href === currentRoute) {
+      return;
+    }
     toggleMenuFn(true);
     pageTransition();
   };
 
   return (
     <ItemContainer>
-      <Anchor href={href} onClick={(e) => clickFn(e)}>
+      <Anchor
+        href={href}
+        onClick={(e) => clickFn(e, href)}
+        className={currentRoute === href && "active"}
+        tabIndex={currentRoute === href ? -1 : 0}
+      >
         {children}
       </Anchor>
       <TextStroke aria-hidden="true">{children}</TextStroke>
+      {currentRoute === href && <TanUnderline role="presentation" />}
     </ItemContainer>
   );
 }
 
 export const Navigation = React.forwardRef<HTMLElement, NavigationProps>(
-  ({ toggleMenuFn }, ref) => {
+  ({ toggleMenuFn, route }, ref) => {
     return (
       <Nav ref={ref}>
         <ListContainer>
-          <LinkItem href="/about" color="white" toggleMenuFn={toggleMenuFn}>
+          <LinkItem
+            href="/about"
+            color="white"
+            toggleMenuFn={toggleMenuFn}
+            currentRoute={route}
+          >
             About
           </LinkItem>
-          <LinkItem href="/work" color="white" toggleMenuFn={toggleMenuFn}>
+          <LinkItem
+            href="/work"
+            color="white"
+            toggleMenuFn={toggleMenuFn}
+            currentRoute={route}
+          >
             Work
           </LinkItem>
-          <LinkItem href="/" color="tan" toggleMenuFn={toggleMenuFn}>
+          <LinkItem
+            href="/"
+            color="tan"
+            toggleMenuFn={toggleMenuFn}
+            currentRoute={route}
+          >
             Contact
           </LinkItem>
         </ListContainer>
@@ -100,12 +127,17 @@ const Anchor = styled.a`
   text-decoration: none;
   transition: 0.15s opacity ease-out;
 
-  &:hover {
+  &:hover,
+  &.active {
     opacity: 0;
 
     & + span {
       opacity: 1;
     }
+  }
+
+  &.active {
+    cursor: default;
   }
 `;
 
@@ -133,4 +165,14 @@ const BottomBorder = styled.div`
   display: block;
   position: absolute;
   bottom: 0;
+`;
+
+const TanUnderline = styled.div`
+  height: 12px;
+  background: var(--tan);
+  width: 80%;
+  position: absolute;
+  right: 0;
+  bottom: -6px;
+  z-index: -1;
 `;

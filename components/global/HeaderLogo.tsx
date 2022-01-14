@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import styled from "styled-components";
 import { Tween } from "react-gsap";
 
+import { animateOutLogo } from "@animations/menu";
+import { useTransitionLink } from "@hooks/hooks";
 import { mobileQuery } from "@styles/mediaQueries";
 
 type HeaderProps = {
@@ -55,6 +57,15 @@ const letterSizeObj = [
 
 const HeaderLogo = (): JSX.Element => {
   const [inMotion, setInMotion] = useState(true);
+  const container = useRef(null);
+
+  const pageTransition = useTransitionLink("/", "tan");
+
+  const clickFn = (e: React.MouseEvent) => {
+    e.preventDefault();
+    animateOutLogo(container.current);
+    pageTransition();
+  };
 
   const motionDone = () => {
     if (inMotion) {
@@ -93,20 +104,19 @@ const HeaderLogo = (): JSX.Element => {
   const name = stringToSpans("Joe Cooper");
   return (
     <>
-      <Header aria-hidden="true" role="presentation" inMotion={inMotion}>
+      <Header ref={container} href="/" inMotion={inMotion} onClick={clickFn}>
         {name}
       </Header>
     </>
   );
 };
 
-const Header = styled.div<HeaderProps>`
+const Header = styled.a<HeaderProps>`
   margin: 0;
   font-size: 36px;
   font-family: "Quarto";
   color: var(--blue);
   line-height: 0.9;
-  pointer-events: none;
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;

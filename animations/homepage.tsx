@@ -57,7 +57,7 @@ export const stopPulsating = (rope: Matter.Composite) => {
   });
 };
 
-const getLogoLetters = (el: HTMLHeadingElement) => {
+export const getLogoLetters = (el: HTMLHeadingElement) => {
   const logoRows = [el.children[0], el.children[1]];
   const rowChildren = logoRows.map((row) => row.children);
   const rowChildrenArr = Array.from(rowChildren);

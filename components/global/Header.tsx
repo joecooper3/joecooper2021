@@ -29,12 +29,8 @@ export default function Header({ route }: HeaderProps): JSX.Element {
     <Container>
       <Name className="sr-only">Joe Cooper</Name>
       {route !== "/" ? <HeaderLogo /> : <Placeholder role="presentation" />}
-      <Hamburger
-        toggleMenuFn={toggleMenu}
-        navOpen={navOpen}
-        setNavOpen={setNavOpen}
-      />
-      <Navigation toggleMenuFn={toggleMenu} ref={navRef} />
+      <Hamburger toggleMenuFn={toggleMenu} navOpen={navOpen} />
+      <Navigation toggleMenuFn={toggleMenu} ref={navRef} route={route}/>
     </Container>
   );
 }

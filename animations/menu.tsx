@@ -1,4 +1,5 @@
 import gsap from "gsap";
+import { getLogoLetters } from "@animations/homepage";
 
 export const openNavigation = (nav: HTMLElement): void => {
   const navList = nav.children[0];
@@ -44,5 +45,15 @@ export const closeNavigation = (nav: HTMLElement): void => {
   gsap.to(bottomLine, {
     width: "0%",
     duration: 1,
+  });
+};
+
+export const animateOutLogo = (container: HTMLDivElement): void => {
+  const logoLetters = getLogoLetters(container);
+  console.log(logoLetters)
+  gsap.to(logoLetters, {
+    x: -100,
+    duration: 1,
+    opacity: 0,
   });
 };
