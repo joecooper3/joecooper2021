@@ -56,6 +56,7 @@ export default function PreviewImage(): JSX.Element {
                 width={item.width}
                 height={item.height}
                 alt={item.alt}
+                priority={true}
               />
             </InnerContainer>
           </ImageContainer>

@@ -107,3 +107,7 @@ body {
   white-space: nowrap;
   width: 1px;
 }
+
+a, a:visited {
+  color: var(--blue)
+}

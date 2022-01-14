@@ -58,10 +58,10 @@ export default function WorkList() {
   return (
     <Nav aria-label="Work Navigation">
       <Container ref={container}>
-        <LinkItem href="/" previewId="ueb">
+        <LinkItem href="/work/ueb" previewId="ueb">
           Unlimited EyeBrowsing
         </LinkItem>
-        <LinkItem href="/" previewId="starfish">
+        <LinkItem href="/work/starfish" previewId="starfish">
           Starfish
         </LinkItem>
         <LinkItem href="/" previewId="ueb">
