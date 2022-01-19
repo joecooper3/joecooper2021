@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import Image from "next/image";
 
-import { heroEnter } from "@animations/work-single";
+import { enterAnimations } from "@animations/work-single";
 
 type WorkTemplateProps = {
   lead: boolean;
@@ -18,22 +18,34 @@ export default function WorkTemplate({
   title,
 }: WorkTemplateProps): JSX.Element {
   const heroContainer = useRef<HTMLDivElement>(null);
+  const headline = useRef<HTMLHeadingElement>(null);
+  const whiteHeadline = useRef<HTMLHeadingElement>(null);
+  const leadDeveloper = useRef<HTMLElement>(null);
+  const copyContainer = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    heroEnter(heroContainer.current);
+    enterAnimations({
+      container: heroContainer.current,
+      headline: headline.current,
+      whiteHeadline: whiteHeadline.current,
+      leadDeveloper: leadDeveloper.current,
+      copyContainer: copyContainer.current
+    });
   }, [heroContainer.current]);
   return (
     <Main>
       <Container>
         <HeadlineContainer>
-          <Headline>{title}</Headline>
-          <WhiteHeadline>{title}</WhiteHeadline>
-          {lead && <LeadDeveloper>Lead Developer</LeadDeveloper>}
+          <Headline ref={headline}>{title}</Headline>
+          <WhiteHeadline ref={whiteHeadline}>{title}</WhiteHeadline>
+          {lead && (
+            <LeadDeveloper ref={leadDeveloper}>Lead Developer</LeadDeveloper>
+          )}
         </HeadlineContainer>
         <ImageContainer ref={heroContainer}>
           <Image src={hero} alt="An eyebrow-themed coloring book app" />
         </ImageContainer>
-        <CopyContainer>{children}</CopyContainer>
+        <CopyContainer ref={copyContainer}>{children}</CopyContainer>
       </Container>
     </Main>
   );
