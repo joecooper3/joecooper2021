@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Image from "next/image";
 
 import { enterAnimations } from "@animations/work-single";
+import { tabletQuery } from "@styles/mediaQueries";
 
 type WorkTemplateProps = {
   lead: boolean;
@@ -87,6 +88,10 @@ const Headline = styled.h1`
   width: 100%;
   z-index: 3;
   margin: 0 0 20px;
+  
+  @media ${tabletQuery} {
+    font-size: 59px;
+  }
 `;
 
 const WhiteHeadline = styled.h1`
@@ -100,6 +105,10 @@ const WhiteHeadline = styled.h1`
   position: absolute;
   top: 103px;
   left: 3px;
+
+  @media ${tabletQuery} {
+    font-size: 59px;
+  }
 `;
 
 const LeadDeveloper = styled.aside`

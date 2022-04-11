@@ -1,4 +1,5 @@
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 type EnterAnimationProps = {
   container: HTMLDivElement;
@@ -50,4 +51,29 @@ export const enterAnimations = ({
     duration: 0.45,
     startAt: { y: 300, opacity: 0 },
   });
+};
+
+type ImageEnterProps = {
+  container: HTMLDivElement;
+  imageContainer: HTMLDivElement;
+};
+
+export const ImageEnter = ({ container, imageContainer }: ImageEnterProps): void => {
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.fromTo(
+    imageContainer,
+    {
+      y: 500,
+      opacity: 0,
+    },
+    {
+      duration: 0.8,
+      opacity: 1,
+      y: 0,
+      scrollTrigger: {
+        trigger: container,
+        start: "top 40%",
+      },
+    }
+  );
 };

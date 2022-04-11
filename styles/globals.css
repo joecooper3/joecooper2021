@@ -70,12 +70,17 @@
   --tan: #ffebcb;
   --header-font: "Maison Extended", sans-serif;
   --body-font: "Maison Neue", sans-serif;
-  --desktop-side-mg: 55px;
-  --mobile-side-mg: 22px;
+  --side-padding: 55px;
   --lg-font-size: 5.493rem;
   --lg-font-size-mobile: 3.516rem;
   --font-size: 1.8rem;
   --container-max-width: 1280px;
+}
+
+@media all and (max-width: 600px) {
+  :root {
+    --side-padding: 22px;
+  }
 }
 
 html,
@@ -108,6 +113,7 @@ body {
   width: 1px;
 }
 
-a, a:visited {
-  color: var(--blue)
+a,
+a:visited {
+  color: var(--blue);
 }

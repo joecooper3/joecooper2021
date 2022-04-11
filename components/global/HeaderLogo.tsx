@@ -120,7 +120,7 @@ const Header = styled.a<HeaderProps>`
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
-  padding-left: var(--desktop-side-mg);
+  padding-left: var(--side-padding);
   padding-top: 18px;
 
   div {

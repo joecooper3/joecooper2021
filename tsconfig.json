@@ -19,13 +19,29 @@
     "jsx": "preserve",
     "baseUrl": "./",
     "paths": {
-      "@animations/*": ["animations/*"],
-      "@components/*": ["components/*"],
-      "@hooks/*": ["hooks/*"],
-      "@utils/*": ["utils/*"],
-      "@store/*": ["store/*"],
-      "@styles/*": ["styles/*"]
-    }
+      "@animations/*": [
+        "animations/*"
+      ],
+      "@components/*": [
+        "components/*"
+      ],
+      "@hooks/*": [
+        "hooks/*"
+      ],
+      "@images/*": [
+        "public/images/*"
+      ],
+      "@utils/*": [
+        "utils/*"
+      ],
+      "@store/*": [
+        "store/*"
+      ],
+      "@styles/*": [
+        "styles/*"
+      ]
+    },
+    "incremental": true
   },
   "include": [
     "next-env.d.ts",

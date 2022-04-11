@@ -30,7 +30,7 @@ const Container = styled.div`
   grid-template-columns: 1fr 400px;
   gap: 40px;
   width: 100%;
-  margin: 0 90px 0 var(--desktop-side-mg);
+  margin: 0 90px 0 var(--side-padding);
   max-width: clamp(var(--container-max-width), 89vw, 1600px);
   align-items: center;
 
@@ -40,10 +40,6 @@ const Container = styled.div`
 
   @media ${tabletQuery} {
     grid-template-columns: 1fr;
-    margin: 0 var(--desktop-side-mg);
-  }
-
-  @media ${mobileQuery} {
-    margin: 0 var(--mobile-side-mg);
+    margin: 0 var(--side-padding);
   }
 `;

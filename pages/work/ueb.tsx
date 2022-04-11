@@ -1,6 +1,29 @@
 import WorkTemplate from "@components/work/WorkTemplate";
+import DesktopImage from "@components/work-single/DesktopImage";
+import MobileImages, {MobileImageProps} from "@components/work-single/MobileImages";
 
 import Hero from "../../public/images/test-screenshot.png"
+import DesktopOne from "@images/work/ueb/ueb-desktop-1.png";
+import DesktopTwo from "@images/work/ueb/ueb-desktop-2.png";
+import DesktopThree from "@images/work/ueb/ueb-desktop-3.png";
+import MobileOne from "@images/work/ueb/ueb-mobile-1.png";
+import MobileTwo from "@images/work/ueb/ueb-mobile-2.png";
+import MobileThree from "@images/work/ueb/ueb-mobile-3.png";
+
+const mobileImageArr: MobileImageProps[] = [
+  {
+    image: MobileOne,
+    alt: "Unlimited Eyebrowsing screenshot for mobile",
+  },
+  {
+    image: MobileTwo,
+    alt: "Unlimited Eyebrowsing screenshot for mobile",
+  },
+  {
+    image: MobileThree,
+    alt: "Unlimited Eyebrowsing screenshot for mobile",
+  },
+]
 
 export default function UEB() {
   return (
@@ -25,9 +48,13 @@ export default function UEB() {
         .
       </p>
       <p>
-        Some of the tech we used included React, Barba.js, Anime.js, Face Mesh,
+        Some of the tech we used included React, Barba.js, GreenSock, Face Mesh,
         Phaser.js, and WordPress.
       </p>
+      <DesktopImage image={DesktopOne} alt="Unlimited Eyebrowsing screenshot for desktop" />
+      <DesktopImage image={DesktopTwo} alt="Unlimited Eyebrowsing screenshot for desktop" />
+      <DesktopImage image={DesktopThree} alt="Unlimited Eyebrowsing screenshot for desktop" />
+      <MobileImages images={mobileImageArr} />
     </WorkTemplate>
   );
 }

@@ -109,7 +109,7 @@ export const pageExit = (href: string, color: string, args: workExitAnimArgs) =>
   });
 
   if (color === "tan") {
-    const duration = isDesktop ? 3.25 : 1.25;
+    const duration = isDesktop ? 2 : 1.25;
     const scale = isDesktop ? 8 : 4;
 
     tl.to(squareText, {
