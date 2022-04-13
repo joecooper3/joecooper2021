@@ -58,7 +58,10 @@ type ImageEnterProps = {
   imageContainer: HTMLDivElement;
 };
 
-export const ImageEnter = ({ container, imageContainer }: ImageEnterProps): void => {
+export const ImageEnter = ({
+  container,
+  imageContainer,
+}: ImageEnterProps): void => {
   gsap.registerPlugin(ScrollTrigger);
   gsap.fromTo(
     imageContainer,
@@ -76,4 +79,35 @@ export const ImageEnter = ({ container, imageContainer }: ImageEnterProps): void
       },
     }
   );
+};
+
+type MobileImageEnterProps = {
+  container: HTMLDivElement;
+  imageContainers: HTMLDivElement[];
+};
+
+export const MobileImageEnter = ({
+  container,
+  imageContainers,
+}: MobileImageEnterProps): void => {
+  gsap.registerPlugin(ScrollTrigger);
+  imageContainers.forEach((item, i) => {
+    gsap.fromTo(
+      item,
+      {
+        y: 500,
+        opacity: 0,
+      },
+      {
+        duration: 0.8,
+        opacity: 1,
+        y: 0,
+        delay: i * 0.15,
+        scrollTrigger: {
+          trigger: container,
+          start: "top 40%",
+        },
+      }
+    );
+  });
 };

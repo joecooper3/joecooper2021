@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import Image from "next/image";
-import gsap from "gsap";
 
 import { ImageEnter } from "@animations/work-single";
 

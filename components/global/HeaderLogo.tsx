@@ -128,7 +128,8 @@ const Header = styled.a<HeaderProps>`
   }
 
   @media ${mobileQuery} {
-    font-size: 24px;
+    font-size: 30px;
+    z-index: 2;
   }
 `;
 
@@ -139,6 +140,9 @@ const LetterContainer = styled.div<LetterContainerProps>`
   transform: translateX(${(props) => props.xOffset ?? 0}px);
 
   @media ${mobileQuery} {
+    width: ${(props) => props.width * 0.83}px;
+    height: ${(props) => props.height * 0.83}px;
+    transform: translateX(${(props) => props.xOffset * 0.83}px);
   }
 `;
 

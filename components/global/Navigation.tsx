@@ -98,6 +98,11 @@ const Nav = styled.nav`
   justify-content: flex-end;
   opacity: 0;
   pointer-events: none;
+
+  @media ${mobileQuery} {
+    background: var(--white);
+    height: 100vh;
+  }
 `;
 
 const ListContainer = styled.ul`
@@ -110,6 +115,12 @@ const ListContainer = styled.ul`
   box-sizing: border-box;
   margin: 0;
   padding: 10px 70px 0 0;
+
+  @media ${mobileQuery} {
+    padding: 0;
+    flex-flow: column nowrap;
+    justify-content: center;
+  }
 `;
 
 const ItemContainer = styled.li`
@@ -120,6 +131,11 @@ const ItemContainer = styled.li`
   margin-right: 40px;
   position: relative;
   opacity: 0;
+
+  @media ${mobileQuery} {
+    margin: 0 0 12px;
+    font-size: 5rem;
+  }
 `;
 
 const Anchor = styled.a`
@@ -175,4 +191,8 @@ const TanUnderline = styled.div`
   right: 0;
   bottom: -6px;
   z-index: -1;
+
+  @media ${mobileQuery} {
+    bottom: 5px;
+  }
 `;
