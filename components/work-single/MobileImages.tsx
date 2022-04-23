@@ -42,7 +42,7 @@ export default function MobileImage({
           key={`image.alt${i}`}
           ref={(el) => (imageContainersRef.current[i] = el)}
         >
-          <Image src={image.image} alt={image.alt} layout="responsive" />
+          <Image src={image.image} alt={image.alt} layout="responsive" loading="eager" />
         </ImageContainer>
       ))}
     </Container>
