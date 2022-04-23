@@ -16,9 +16,9 @@ export const previewImages: PreviewImage[] = [
   },
   {
     id: "starfish",
-    path: "/images/test-screenshot-sf.png",
+    path: "/images/work/starfish/starfish-square.png",
     alt: "Preview of Starfish website",
-    height: 275,
+    height: 400,
     width: 400,
   },
   {
@@ -37,9 +37,9 @@ export const previewImages: PreviewImage[] = [
   },
   {
     id: "knomad",
-    path: "/images/test-screenshot.png",
+    path: "/images/work/knomad/knomad-square.png",
     alt: "Preview of Knomad e-commerce site",
-    height: 380,
+    height: 400,
     width: 400,
   },
 ];

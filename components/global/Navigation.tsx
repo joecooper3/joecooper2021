@@ -101,7 +101,7 @@ const Nav = styled.nav`
 
   @media ${mobileQuery} {
     background: var(--white);
-    height: 100vh;
+    height: 100%;
   }
 `;
 

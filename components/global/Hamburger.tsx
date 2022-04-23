@@ -53,6 +53,7 @@ const Container = styled.button<OpenProps>`
 display: flex;
 align-items: center;
 justify-content: center;
+pointer-events: auto;
   cursor: pointer;
   transition-property: opacity, filter;
   transition-duration: 0.15s;

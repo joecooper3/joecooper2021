@@ -4,6 +4,8 @@ import Image from "next/image";
 
 import { ImageEnter } from "@animations/work-single";
 
+// suggested size for desktop sites: 1300x800 (but scaled up for retina, obviously)
+
 type DesktopImageProps = {
   image: StaticImageData;
   alt: string;

@@ -43,6 +43,11 @@ const Container = styled.header`
   box-sizing: border-box;
   justify-content: space-between;
   z-index: 5;
+
+  @media ${mobileQuery} {
+    height: 100%;
+    pointer-events: none;
+  }
 `;
 
 const Name = styled.h1`

@@ -70,7 +70,7 @@ export default function WorkList() {
         <LinkItem href="/" previewId="starfish">
           Tap Out
         </LinkItem>
-        <LinkItem href="/" previewId="ueb">
+        <LinkItem href="/work/knomad" previewId="knomad">
           Knomad
         </LinkItem>
       </Container>

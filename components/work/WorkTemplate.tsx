@@ -10,11 +10,13 @@ type WorkTemplateProps = {
   children: React.ReactNode;
   title: string;
   hero: StaticImageData;
+  heroAlt: string;
 };
 
 export default function WorkTemplate({
   children,
   hero,
+  heroAlt,
   lead,
   title,
 }: WorkTemplateProps): JSX.Element {
@@ -30,7 +32,7 @@ export default function WorkTemplate({
       headline: headline.current,
       whiteHeadline: whiteHeadline.current,
       leadDeveloper: leadDeveloper.current,
-      copyContainer: copyContainer.current
+      copyContainer: copyContainer.current,
     });
   }, [heroContainer.current]);
   return (
@@ -44,7 +46,7 @@ export default function WorkTemplate({
           )}
         </HeadlineContainer>
         <ImageContainer ref={heroContainer}>
-          <Image src={hero} alt="An eyebrow-themed coloring book app" />
+          <Image src={hero} alt={heroAlt} />
         </ImageContainer>
         <CopyContainer ref={copyContainer}>{children}</CopyContainer>
       </Container>
@@ -64,7 +66,7 @@ const Main = styled.main`
 
 const Container = styled.div`
   display: grid;
-  grid-template-columns: 400px 1fr;
+  grid-template-columns: 400px 400px;
 `;
 
 const ImageContainer = styled.div`
@@ -88,7 +90,7 @@ const Headline = styled.h1`
   width: 100%;
   z-index: 3;
   margin: 0 0 20px;
-  
+
   @media ${tabletQuery} {
     font-size: 59px;
   }

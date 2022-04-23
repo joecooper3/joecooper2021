@@ -8,7 +8,6 @@ export const openNavigation = (nav: HTMLElement): void => {
   gsap.to(nav, {
     opacity: 1,
     pointerEvents: "auto",
-    duration: 0,
   });
   gsap.to(navList.children, {
     x: 0,
@@ -46,6 +45,12 @@ export const closeNavigation = (nav: HTMLElement): void => {
     width: "0%",
     duration: 1,
   });
+
+  gsap.to(nav, {
+    opacity: 0,
+    pointerEvents: "none",
+    delay: 1,
+  })
 };
 
 export const animateOutLogo = (container: HTMLDivElement): void => {

@@ -130,6 +130,8 @@ const Header = styled.a<HeaderProps>`
   @media ${mobileQuery} {
     font-size: 30px;
     z-index: 2;
+    height: 30px;
+    pointer-events: auto;
   }
 `;
 

@@ -4,6 +4,8 @@ import Image from "next/image";
 
 import { MobileImageEnter } from "@animations/work-single";
 
+// suggested image size: 375x670px (but scaled up for retina, obviously)
+
 export type MobileImageProps = {
   image: StaticImageData;
   alt: string;

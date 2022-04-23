@@ -1,8 +1,10 @@
 import WorkTemplate from "@components/work/WorkTemplate";
 import DesktopImage from "@components/work-single/DesktopImage";
-import MobileImages, {MobileImageProps} from "@components/work-single/MobileImages";
+import MobileImages, {
+  MobileImageProps,
+} from "@components/work-single/MobileImages";
 
-import Hero from "../../public/images/test-screenshot.png"
+import Hero from "../../public/images/test-screenshot.png";
 import DesktopOne from "@images/work/ueb/ueb-desktop-1.png";
 import DesktopTwo from "@images/work/ueb/ueb-desktop-2.png";
 import DesktopThree from "@images/work/ueb/ueb-desktop-3.png";
@@ -23,11 +25,16 @@ const mobileImageArr: MobileImageProps[] = [
     image: MobileThree,
     alt: "Unlimited Eyebrowsing screenshot for mobile",
   },
-]
+];
 
 export default function UEB() {
   return (
-    <WorkTemplate title="Unlimited Eyebrowsing" lead hero={Hero}>
+    <WorkTemplate
+      title="Unlimited Eyebrowsing"
+      lead
+      hero={Hero}
+      heroAlt="An eyebrow-themed coloring book app"
+    >
       <p>
         Unlimited Eyebrowsing was a sprawling web app that simulated an endless
         stream of eyebrow-related content. The site also featured face detection
@@ -51,9 +58,18 @@ export default function UEB() {
         Some of the tech we used included React, Barba.js, GreenSock, Face Mesh,
         Phaser.js, and WordPress.
       </p>
-      <DesktopImage image={DesktopOne} alt="Unlimited Eyebrowsing screenshot for desktop" />
-      <DesktopImage image={DesktopTwo} alt="Unlimited Eyebrowsing screenshot for desktop" />
-      <DesktopImage image={DesktopThree} alt="Unlimited Eyebrowsing screenshot for desktop" />
+      <DesktopImage
+        image={DesktopOne}
+        alt="Unlimited Eyebrowsing screenshot for desktop"
+      />
+      <DesktopImage
+        image={DesktopTwo}
+        alt="Unlimited Eyebrowsing screenshot for desktop"
+      />
+      <DesktopImage
+        image={DesktopThree}
+        alt="Unlimited Eyebrowsing screenshot for desktop"
+      />
       <MobileImages images={mobileImageArr} />
     </WorkTemplate>
   );
