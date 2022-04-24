@@ -64,6 +64,14 @@ export const getLogoLetters = (el: HTMLHeadingElement) => {
   const containerArrs = rowChildrenArr.map((item) => Array.from(item));
   const allContainers = [...containerArrs[0], ...containerArrs[1]];
   const letterEls = allContainers.map((item) => item.children[0]);
+  console.log(letterEls);
+  return letterEls;
+};
+
+export const getLogoLettersHeader = (el: HTMLHeadingElement) => {
+  const letterContainers = Array.from(el.children);
+  const letterEls = letterContainers.map((item) => item.children[0]);
+  console.log(letterEls);
   return letterEls;
 };
 

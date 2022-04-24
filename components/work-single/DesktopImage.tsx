@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Image from "next/image";
 
 import { ImageEnter } from "@animations/work-single";
+import { mobileQuery } from "@styles/mediaQueries";
 
 // suggested size for desktop sites: 1300x800 (but scaled up for retina, obviously)
 
@@ -39,6 +40,10 @@ const Container = styled.div`
   width: 100%;
   max-width: 1200px;
   overflow: hidden;
+
+  @media ${mobileQuery} {
+    margin: 12px 0;
+  }
 `;
 
 // const ImageContainer = styled.div`

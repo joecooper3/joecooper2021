@@ -45,9 +45,13 @@ export const workListEnter = (
   const delay = isDesktop ? 1 : 3;
 
   gsap.to(listArr.children, {
+    pointerEvents: "none",
+  });
+  gsap.to(listArr.children, {
     y: 0,
     opacity: 1,
     duration: 1,
+    pointerEvents: "auto",
     delay: delay,
     stagger: 0.3,
     startAt: {
@@ -91,14 +95,12 @@ export const previewImageExit = (container: HTMLDivElement) => {
   });
 };
 
-export const pageExit = (href: string, color: string, args: workExitAnimArgs) => {
-  const {
-    router,
-    squareContainer,
-    squareText,
-    workList,
-    isDesktop,
-  } = args;
+export const pageExit = (
+  href: string,
+  color: string,
+  args: workExitAnimArgs
+) => {
+  const { router, squareContainer, squareText, workList, isDesktop } = args;
 
   const tl = gsap.timeline({
     onComplete: () => {

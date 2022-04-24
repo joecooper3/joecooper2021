@@ -46,15 +46,15 @@ export default function UEB() {
       </p>
       <DesktopImage
         image={DesktopOne}
-        alt="Unlimited Eyebrowsing screenshot for desktop"
+        alt="Knomad screenshot for desktop"
       />
       <DesktopImage
         image={DesktopTwo}
-        alt="Unlimited Eyebrowsing screenshot for desktop"
+        alt="Knomad screenshot for desktop"
       />
       <DesktopImage
         image={DesktopThree}
-        alt="Unlimited Eyebrowsing screenshot for desktop"
+        alt="Knomad screenshot for desktop"
       />
       <MobileImages images={mobileImageArr} />
     </WorkTemplate>

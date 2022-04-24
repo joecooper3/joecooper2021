@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Image from "next/image";
 
 import { MobileImageEnter } from "@animations/work-single";
+import { mobileQuery } from "@styles/mediaQueries";
+import { useStore } from "@store/store";
 
 // suggested image size: 375x670px (but scaled up for retina, obviously)
 
@@ -20,6 +22,7 @@ export default function MobileImage({
 }: MobileImagesProps): JSX.Element {
   const containerRef = useRef<HTMLDivElement>(null);
   const imageContainersRef = useRef([]);
+  const isDesktop = useStore((state) => state.isDesktop);
 
   useEffect(() => {
     imageContainersRef.current = imageContainersRef.current.slice(
@@ -32,6 +35,7 @@ export default function MobileImage({
     MobileImageEnter({
       container: containerRef.current,
       imageContainers: imageContainersRef.current,
+      isDesktop: isDesktop,
     });
   }, [imageContainersRef.current]);
 
@@ -42,7 +46,12 @@ export default function MobileImage({
           key={`image.alt${i}`}
           ref={(el) => (imageContainersRef.current[i] = el)}
         >
-          <Image src={image.image} alt={image.alt} layout="responsive" loading="eager" />
+          <Image
+            src={image.image}
+            alt={image.alt}
+            layout="responsive"
+            loading="eager"
+          />
         </ImageContainer>
       ))}
     </Container>
@@ -55,6 +64,11 @@ const Container = styled.div`
   max-width: 1200px;
   margin: 35px 0;
   overflow: hidden;
+
+  @media ${mobileQuery} {
+    flex-flow: column nowrap;
+    margin: 24px 0;
+  }
 `;
 
 const ImageContainer = styled.div`
@@ -63,5 +77,13 @@ const ImageContainer = styled.div`
   margin-right: 20px;
   &:last-child {
     margin-right: 0;
+  }
+
+  @media ${mobileQuery} {
+    margin-right: 0;
+    margin-bottom: 12px;
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 `;

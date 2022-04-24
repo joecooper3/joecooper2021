@@ -7,6 +7,7 @@ type EnterAnimationProps = {
   whiteHeadline: HTMLHeadingElement;
   leadDeveloper: HTMLElement;
   copyContainer: HTMLDivElement;
+  isDesktop: boolean;
 };
 
 export const enterAnimations = ({
@@ -15,19 +16,22 @@ export const enterAnimations = ({
   whiteHeadline,
   leadDeveloper,
   copyContainer,
+  isDesktop,
 }: EnterAnimationProps): void => {
   const tl = gsap.timeline();
   tl.to([container, headline, whiteHeadline, leadDeveloper, copyContainer], {
     opacity: 0,
     duration: 0,
   });
-  tl.to(container, {
-    y: 0,
-    opacity: 1,
-    ease: "power2.out",
-    duration: 0.45,
-    startAt: { y: 300, opacity: 0 },
-  });
+  if (isDesktop) {
+    tl.to(container, {
+      y: 0,
+      opacity: 1,
+      ease: "power2.out",
+      duration: 0.45,
+      startAt: { y: 300, opacity: 0 },
+    });
+  }
   tl.to([headline, whiteHeadline], {
     y: 0,
     opacity: 1,
@@ -35,6 +39,15 @@ export const enterAnimations = ({
     duration: 0.45,
     startAt: { y: 300, opacity: 0 },
   });
+  if (!isDesktop) {
+    tl.to(container, {
+      y: 0,
+      opacity: 1,
+      ease: "power2.out",
+      duration: 0.45,
+      startAt: { y: 300, opacity: 0 },
+    });
+  }
   if (leadDeveloper) {
     tl.to(leadDeveloper, {
       y: 0,
@@ -75,7 +88,7 @@ export const ImageEnter = ({
       y: 0,
       scrollTrigger: {
         trigger: container,
-        start: "top 40%",
+        start: "bottom bottom",
       },
     }
   );
@@ -84,28 +97,30 @@ export const ImageEnter = ({
 type MobileImageEnterProps = {
   container: HTMLDivElement;
   imageContainers: HTMLDivElement[];
+  isDesktop: boolean;
 };
 
 export const MobileImageEnter = ({
   container,
   imageContainers,
+  isDesktop,
 }: MobileImageEnterProps): void => {
   gsap.registerPlugin(ScrollTrigger);
   imageContainers.forEach((item, i) => {
     gsap.fromTo(
       item,
       {
-        y: 500,
+        y: isDesktop ? 500 : 200,
         opacity: 0,
       },
       {
         duration: 0.8,
         opacity: 1,
         y: 0,
-        delay: i * 0.15,
+        delay: isDesktop ? i * 0.15 : 0,
         scrollTrigger: {
-          trigger: container,
-          start: "top 40%",
+          trigger: isDesktop ? container : imageContainers[i],
+          start: isDesktop ? "bottom 95%" : "top bottom",
         },
       }
     );

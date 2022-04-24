@@ -73,7 +73,7 @@ export const Navigation = React.forwardRef<HTMLElement, NavigationProps>(
             Work
           </LinkItem>
           <LinkItem
-            href="/"
+            href="mailto:joecooper3@gmail.com"
             color="tan"
             toggleMenuFn={toggleMenuFn}
             currentRoute={route}

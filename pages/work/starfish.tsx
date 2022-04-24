@@ -1,6 +1,32 @@
 import WorkTemplate from "@components/work/WorkTemplate";
+import DesktopImage from "@components/work-single/DesktopImage";
+import MobileImages, {
+  MobileImageProps,
+} from "@components/work-single/MobileImages";
+
 
 import Hero from "@images/work/starfish/starfish-square.png";
+import DesktopOne from "@images/work/starfish/starfish-desktop-1.png";
+import DesktopTwo from "@images/work/starfish/starfish-desktop-2.png";
+import DesktopThree from "@images/work/starfish/starfish-desktop-3.png";
+import MobileOne from "@images/work/starfish/starfish-mobile-1.png";
+import MobileTwo from "@images/work/starfish/starfish-mobile-2.png";
+import MobileThree from "@images/work/starfish/starfish-mobile-3.png";
+
+const mobileImageArr: MobileImageProps[] = [
+  {
+    image: MobileOne,
+    alt: "Starfish screenshot for mobile",
+  },
+  {
+    image: MobileTwo,
+    alt: "Starfish screenshot for mobile",
+  },
+  {
+    image: MobileThree,
+    alt: "Starfish screenshot for mobile",
+  },
+];
 
 export default function Starfish() {
   return (
@@ -32,6 +58,19 @@ export default function Starfish() {
         Tech used for the site included Barba.js, Anime.js, and bespoke in-house
         Gutenberg blocks for WordPress.
       </p>
+      <DesktopImage
+        image={DesktopOne}
+        alt="Unlimited Eyebrowsing screenshot for desktop"
+      />
+      <DesktopImage
+        image={DesktopTwo}
+        alt="Unlimited Eyebrowsing screenshot for desktop"
+      />
+      <DesktopImage
+        image={DesktopThree}
+        alt="Unlimited Eyebrowsing screenshot for desktop"
+      />
+      <MobileImages images={mobileImageArr} />
     </WorkTemplate>
   );
 }

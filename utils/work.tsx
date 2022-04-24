@@ -9,9 +9,9 @@ export type PreviewImage = {
 export const previewImages: PreviewImage[] = [
   {
     id: "ueb",
-    path: "/images/test-screenshot.png",
+    path: "/images/work/ueb/ueb-square.png",
     alt: "Preview of Unlimited EyeBrowsing site",
-    height: 380,
+    height: 400,
     width: 400,
   },
   {
@@ -22,17 +22,17 @@ export const previewImages: PreviewImage[] = [
     width: 400,
   },
   {
-    id: "cheer-cards",
-    path: "/images/test-screenshot.png",
+    id: "cheercards",
+    path: "/images/work/cheercards/cheercards-square.png",
     alt: "Preview of Cheer Cards",
-    height: 380,
+    height: 400,
     width: 400,
   },
   {
     id: "tap-out",
-    path: "/images/test-screenshot-sf.png",
+    path: "/images/work/tap-out/tap-out-square.jpeg",
     alt: "Preview of Tap Out game",
-    height: 275,
+    height: 400,
     width: 400,
   },
   {

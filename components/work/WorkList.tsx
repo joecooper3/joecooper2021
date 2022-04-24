@@ -64,10 +64,10 @@ export default function WorkList() {
         <LinkItem href="/work/starfish" previewId="starfish">
           Starfish
         </LinkItem>
-        <LinkItem href="/" previewId="ueb">
+        <LinkItem href="/work/cheercards" previewId="cheercards">
           Cheer Cards
         </LinkItem>
-        <LinkItem href="/" previewId="starfish">
+        <LinkItem href="/work/tap-out" previewId="tap-out">
           Tap Out
         </LinkItem>
         <LinkItem href="/work/knomad" previewId="knomad">

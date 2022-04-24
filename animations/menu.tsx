@@ -1,5 +1,5 @@
 import gsap from "gsap";
-import { getLogoLetters } from "@animations/homepage";
+import { getLogoLettersHeader } from "@animations/homepage";
 
 export const openNavigation = (nav: HTMLElement): void => {
   const navList = nav.children[0];
@@ -50,15 +50,14 @@ export const closeNavigation = (nav: HTMLElement): void => {
     opacity: 0,
     pointerEvents: "none",
     delay: 1,
-  })
+  });
 };
 
 export const animateOutLogo = (container: HTMLDivElement): void => {
-  const logoLetters = getLogoLetters(container);
-  console.log(logoLetters)
+  const logoLetters = getLogoLettersHeader(container);
   gsap.to(logoLetters, {
     x: -100,
-    duration: 1,
+    duration: 2,
     opacity: 0,
   });
 };

@@ -3,10 +3,11 @@ import styled from "styled-components";
 import Image from "next/image";
 
 import { enterAnimations } from "@animations/work-single";
-import { tabletQuery } from "@styles/mediaQueries";
+import { tabletQuery, mobileQuery } from "@styles/mediaQueries";
+import { useStore } from "@store/store";
 
 type WorkTemplateProps = {
-  lead: boolean;
+  lead?: boolean;
   children: React.ReactNode;
   title: string;
   hero: StaticImageData;
@@ -25,6 +26,7 @@ export default function WorkTemplate({
   const whiteHeadline = useRef<HTMLHeadingElement>(null);
   const leadDeveloper = useRef<HTMLElement>(null);
   const copyContainer = useRef<HTMLDivElement>(null);
+  const isDesktop = useStore((state) => state.isDesktop);
 
   useEffect(() => {
     enterAnimations({
@@ -33,6 +35,7 @@ export default function WorkTemplate({
       whiteHeadline: whiteHeadline.current,
       leadDeveloper: leadDeveloper.current,
       copyContainer: copyContainer.current,
+      isDesktop: isDesktop,
     });
   }, [heroContainer.current]);
   return (
@@ -46,7 +49,7 @@ export default function WorkTemplate({
           )}
         </HeadlineContainer>
         <ImageContainer ref={heroContainer}>
-          <Image src={hero} alt={heroAlt} />
+          <Image src={hero} alt={heroAlt} loading="eager" />
         </ImageContainer>
         <CopyContainer ref={copyContainer}>{children}</CopyContainer>
       </Container>
@@ -60,17 +63,27 @@ const Main = styled.main`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 100px 40px;
+  padding: 100px var(--side-padding);
   box-sizing: border-box;
 `;
 
 const Container = styled.div`
   display: grid;
-  grid-template-columns: 400px 400px;
+  grid-template-columns: 400px minmax(300px, 500px);
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @media ${mobileQuery} {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const ImageContainer = styled.div`
   grid-column: 2;
+
+  @media ${mobileQuery} {
+    grid-column: 1;
+  }
 `;
 
 const HeadlineContainer = styled.div`
@@ -80,6 +93,10 @@ const HeadlineContainer = styled.div`
   flex-flow: column nowrap;
   position: relative;
   padding-top: 100px;
+
+  @media ${mobileQuery} {
+    padding-top: 0px;
+  }
 `;
 
 const Headline = styled.h1`
@@ -93,6 +110,10 @@ const Headline = styled.h1`
 
   @media ${tabletQuery} {
     font-size: 59px;
+  }
+
+  @media ${mobileQuery} {
+    font-size: 42px;
   }
 `;
 
@@ -111,6 +132,11 @@ const WhiteHeadline = styled.h1`
   @media ${tabletQuery} {
     font-size: 59px;
   }
+
+  @media ${mobileQuery} {
+    font-size: 42px;
+    top: 3px;
+  }
 `;
 
 const LeadDeveloper = styled.aside`
@@ -119,6 +145,10 @@ const LeadDeveloper = styled.aside`
   font-weight: 700;
   font-size: 20px;
   padding-left: 6px;
+
+  @media ${mobileQuery} {
+    display: none;
+  }
 `;
 
 const CopyContainer = styled.article`
@@ -129,10 +159,19 @@ const CopyContainer = styled.article`
   grid-column: 1 / -1;
   margin: 50px 0;
 
+  @media ${mobileQuery} {
+    margin: 16px 0;
+  }
+
   p {
     font-size: 20px;
     line-height: 1.5;
     max-width: 600px;
     margin: 12px 0;
+
+    @media ${mobileQuery} {
+      font-size: 16px;
+      margin: 8px 0;
+    }
   }
 `;

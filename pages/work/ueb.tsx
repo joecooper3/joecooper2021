@@ -4,7 +4,7 @@ import MobileImages, {
   MobileImageProps,
 } from "@components/work-single/MobileImages";
 
-import Hero from "../../public/images/test-screenshot.png";
+import Hero from "@images/work/ueb/ueb-square.png";
 import DesktopOne from "@images/work/ueb/ueb-desktop-1.png";
 import DesktopTwo from "@images/work/ueb/ueb-desktop-2.png";
 import DesktopThree from "@images/work/ueb/ueb-desktop-3.png";

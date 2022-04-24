@@ -63,6 +63,7 @@ const HeaderLogo = (): JSX.Element => {
 
   const clickFn = (e: React.MouseEvent) => {
     e.preventDefault();
+    setInMotion(true);
     animateOutLogo(container.current);
     pageTransition();
   };
