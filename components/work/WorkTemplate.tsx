@@ -47,7 +47,7 @@ export default function WorkTemplate({
       copyContainer: copyContainer.current,
       isDesktop: isDesktop,
     });
-  }, [heroContainer.current]);
+  }, []);
   return (
     <>
       <Main>
