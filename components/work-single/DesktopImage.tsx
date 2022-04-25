@@ -51,6 +51,6 @@ const Container = styled.div`
 //   transform: translateY(500px);
 //   opacity: 0;
 // `;
-const ImageContainer = styled.div`
+const ImageContainer = styled.figure`
   width: 100%;
 `;

@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
+import Head from "next/head";
 import dynamic from "next/dynamic";
 
 import AnimationsProvider from "@components/animations/AnimationsProvider";
@@ -52,6 +53,14 @@ function MyApp({ Component, pageProps, router }) {
 
   return (
     <>
+      <Head>
+        <title>Joe Cooper • Web Developer & Creative Technologist</title>
+        <meta
+          name="description"
+          content="Joe Cooper is a New York-based web developer and creative
+          technologist."
+        />
+      </Head>
       <Header route={router.route} />
       <AnimationsProvider route={router.route}>
         <Component {...pageProps} />

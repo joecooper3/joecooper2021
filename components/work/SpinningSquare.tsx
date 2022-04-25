@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import styled, { keyframes } from "styled-components";
 
 import { spinningSquareEnter } from "@animations/work";
@@ -88,7 +88,7 @@ const Square = styled.div`
   }
 `;
 
-const Heading = styled.h2`
+const Heading = styled.h1`
   text-transform: lowercase;
   color: var(--white);
   font-family: var(--header-font);

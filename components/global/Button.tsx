@@ -103,6 +103,7 @@ const shared = css<ElProps>`
   box-sizing: border-box;
   padding-right: ${(props) => (props.arrow ? "10px" : "0")};
   transition: background 0.25s ease-out, color 0.25s ease-out;
+  cursor: pointer;
   &:hover {
     background: var(--blue);
     color: var(--white);
@@ -128,7 +129,6 @@ const ButtonEl = styled.button`
 
 const Anchor = styled.a`
   ${shared}
-  cursor: pointer;
 `;
 
 const ArrowSvg = styled.svg<ArrowProps>`

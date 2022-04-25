@@ -85,6 +85,7 @@ const HeaderLogo = (): JSX.Element => {
           height={h}
           xOffset={xOffset}
           key={letter + i}
+          aria-hidden="true"
         >
           <Tween
             to={{
@@ -107,6 +108,7 @@ const HeaderLogo = (): JSX.Element => {
     <>
       <Header ref={container} href="/" inMotion={inMotion} onClick={clickFn}>
         {name}
+        <span className="sr-only">Joe Cooper</span>
       </Header>
     </>
   );

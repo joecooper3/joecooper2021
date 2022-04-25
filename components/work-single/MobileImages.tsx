@@ -71,7 +71,7 @@ const Container = styled.div`
   }
 `;
 
-const ImageContainer = styled.div`
+const ImageContainer = styled.figure`
   max-width: 100%;
   flex: 1 1 100%;
   margin-right: 20px;

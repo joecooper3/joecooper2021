@@ -1,3 +1,5 @@
+import Head from "next/head";
+
 import WorkTemplate from "@components/work/WorkTemplate";
 import DesktopImage from "@components/work-single/DesktopImage";
 import MobileImages, {
@@ -29,34 +31,35 @@ const mobileImageArr: MobileImageProps[] = [
 
 export default function UEB() {
   return (
-    <WorkTemplate
-      title="Knomad"
-      lead
-      hero={Hero}
-      heroAlt="A woman wearing a sweater clutching yarn"
-    >
-      <p>
-        Knomad needed a B2B e-commerce site to help make its vibrat, high
-        quality fibres stand out from its peers. I led the development of a
-        WooCommerce site that allowed customers to easily discover and order
-        yarn via a number of taxonomies you'd only ever encounter if you were
-        the type to buy wholesale yarn. The site was created using a more
-        traditional WooCommerce tech stack, including PHP, SCSS, and
-        vanilla JavaScript.
-      </p>
-      <DesktopImage
-        image={DesktopOne}
-        alt="Knomad screenshot for desktop"
-      />
-      <DesktopImage
-        image={DesktopTwo}
-        alt="Knomad screenshot for desktop"
-      />
-      <DesktopImage
-        image={DesktopThree}
-        alt="Knomad screenshot for desktop"
-      />
-      <MobileImages images={mobileImageArr} />
-    </WorkTemplate>
+    <>
+      <Head>
+        <title>Knomad • Joe Cooper</title>
+      </Head>
+      <WorkTemplate
+        title="Knomad"
+        lead
+        hero={Hero}
+        heroAlt="A woman wearing a sweater clutching yarn"
+        prevSlug="tap-out"
+        prevTitle="Tap Out"
+      >
+        <p>
+          Knomad needed a B2B e-commerce site to help make its vibrat, high
+          quality fibres stand out from its peers. I led the development of a
+          WooCommerce site that allowed customers to easily discover and order
+          yarn via a number of taxonomies you'd only ever encounter if you were
+          the type to buy wholesale yarn. The site was created using a more
+          traditional WooCommerce tech stack, including PHP, SCSS, and vanilla
+          JavaScript.
+        </p>
+        <DesktopImage image={DesktopOne} alt="Knomad screenshot for desktop" />
+        <DesktopImage image={DesktopTwo} alt="Knomad screenshot for desktop" />
+        <DesktopImage
+          image={DesktopThree}
+          alt="Knomad screenshot for desktop"
+        />
+        <MobileImages images={mobileImageArr} />
+      </WorkTemplate>
+    </>
   );
 }

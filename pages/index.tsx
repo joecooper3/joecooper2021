@@ -71,10 +71,11 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Joe Cooper</title>
+        <title>Joe Cooper • Web Developer & Creative Technologist</title>
         <meta
           name="description"
-          content="Joe Cooper is a creative technologist in the New York City area"
+          content="Joe Cooper is a New York-based web developer and creative
+          technologist."
         />
       </Head>
 

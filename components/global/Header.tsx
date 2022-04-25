@@ -27,8 +27,7 @@ export default function Header({ route }: HeaderProps): JSX.Element {
 
   return (
     <Container>
-      <Name className="sr-only">Joe Cooper</Name>
-      {route !== "/" ? <HeaderLogo /> : <Placeholder role="presentation" />}
+      {route !== "/" ? <HeaderLogo /> : <Placeholder role="presentation" aria-hidden />}
       <Hamburger toggleMenuFn={toggleMenu} navOpen={navOpen} />
       <Navigation toggleMenuFn={toggleMenu} ref={navRef} route={route}/>
     </Container>
@@ -48,10 +47,6 @@ const Container = styled.header`
     height: 100%;
     pointer-events: none;
   }
-`;
-
-const Name = styled.h1`
-  color: var(--blue);
 `;
 
 const Placeholder = styled.div``;

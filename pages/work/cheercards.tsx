@@ -1,3 +1,5 @@
+import Head from "next/head";
+
 import WorkTemplate from "@components/work/WorkTemplate";
 import DesktopImage from "@components/work-single/DesktopImage";
 import MobileImages, {
@@ -29,39 +31,49 @@ const mobileImageArr: MobileImageProps[] = [
 
 export default function UEB() {
   return (
-    <WorkTemplate
-      title="Cheer Cards"
-      hero={Hero}
-      heroAlt="A Cheer Card on display in Times Square"
-    >
-      <p>
-        The TCS New York City Marathon wanted to find a way to encourage friends
-        and family to support their runners; enter the Cheer Cards. I helped
-        develop a mobile app that allowed users to upload, edit, and tag photos
-        to cheer on their loved ones.
-      </p>
-      <p>
-        After the user-generated images were sufficiently plastered with
-        colorful stickers, messages, and frames, they were uploaded and
-        integrated into TCS's existing runner database. Chips in the runners'
-        racing bibs triggered nearby billboards to display Cheer Cards created
-        by their supporters.
-      </p>
-      <p>
-        The app was built with React, Redux, Konva.js, and used WordPress on the
-        back end.
-      </p>
+    <>
+      <Head>
+        {" "}
+        <title>Cheer Cards • Joe Cooper</title>
+      </Head>
+      <WorkTemplate
+        title="Cheer Cards"
+        hero={Hero}
+        heroAlt="A Cheer Card on display in Times Square"
+        prevSlug="starfish"
+        prevTitle="Starfish"
+        nextSlug="tap-out"
+        nextTitle="Tap Out"
+      >
+        <p>
+          The TCS New York City Marathon wanted to find a way to encourage
+          friends and family to support their runners; enter the Cheer Cards. I
+          helped develop a mobile app that allowed users to upload, edit, and
+          tag photos to cheer on their loved ones.
+        </p>
+        <p>
+          After the user-generated images were sufficiently plastered with
+          colorful stickers, messages, and frames, they were uploaded and
+          integrated into TCS's existing runner database. Chips in the runners'
+          racing bibs triggered nearby billboards to display Cheer Cards created
+          by their supporters.
+        </p>
+        <p>
+          The app was built with React, Redux, Konva.js, and used WordPress on
+          the back end.
+        </p>
 
-      <DesktopImage image={DesktopOne} alt="A sampling of Cheer Cards" />
-      <DesktopImage
-        image={DesktopTwo}
-        alt="A Cheer Card on display in Times Square"
-      />
-      <DesktopImage
-        image={DesktopThree}
-        alt="Runners react as they see encouragement via Cheer Cards"
-      />
-      <MobileImages images={mobileImageArr} />
-    </WorkTemplate>
+        <DesktopImage image={DesktopOne} alt="A sampling of Cheer Cards" />
+        <DesktopImage
+          image={DesktopTwo}
+          alt="A Cheer Card on display in Times Square"
+        />
+        <DesktopImage
+          image={DesktopThree}
+          alt="Runners react as they see encouragement via Cheer Cards"
+        />
+        <MobileImages images={mobileImageArr} />
+      </WorkTemplate>
+    </>
   );
 }

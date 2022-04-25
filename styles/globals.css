@@ -93,13 +93,16 @@ body {
   font-family: var(--body-font);
   height: 100%;
   min-height: -webkit-fill-available;
+  -webkit-font-smoothing: antialiased;
+}
+
+figure {
+  margin: 0;
 }
 
 #__next {
-  display: flex;
   height: 100%;
   width: 100%;
-  flex-flow: column nowrap;
   min-height: -webkit-fill-available;
 }
 

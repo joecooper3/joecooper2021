@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import SpinningSquare from "@components/work/SpinningSquare";
 import WorkList from "@components/work/WorkList";
-import { smDesktopQuery, mobileQuery, tabletQuery } from "@styles/mediaQueries";
+import { smDesktopQuery, tabletQuery } from "@styles/mediaQueries";
 
 export default function Work() {
   return (

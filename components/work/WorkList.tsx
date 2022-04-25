@@ -59,7 +59,7 @@ export default function WorkList() {
     <Nav aria-label="Work Navigation">
       <Container ref={container}>
         <LinkItem href="/work/ueb" previewId="ueb">
-          Unlimited EyeBrowsing
+          Unlimited Eyebrowsing
         </LinkItem>
         <LinkItem href="/work/starfish" previewId="starfish">
           Starfish
@@ -120,6 +120,7 @@ const Anchor = styled.a`
   text-decoration: none;
   z-index: 2;
   transition: 0.15s opacity ease-out;
+  cursor: pointer;
 
   &:hover {
     opacity: 0;
