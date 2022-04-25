@@ -13,7 +13,7 @@ export default function TapOut() {
   return (
     <>
       <Head>
-        <title>Unlimited Eyebrowsing • Joe Cooper</title>
+        <title>Tap Out • Joe Cooper</title>
       </Head>
       <WorkTemplate
         title="Tap Out"
