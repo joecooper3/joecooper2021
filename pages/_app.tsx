@@ -60,6 +60,7 @@ function MyApp({ Component, pageProps, router }) {
           content="Joe Cooper is a New York-based web developer and creative
           technologist."
         />
+        <meta property="og:image" content="/images/og-image.png" />
       </Head>
       <Header route={router.route} />
       <AnimationsProvider route={router.route}>
