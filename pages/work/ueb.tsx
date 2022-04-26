@@ -6,13 +6,13 @@ import MobileImages, {
   MobileImageProps,
 } from "@components/work-single/MobileImages";
 
-import Hero from "@images/work/ueb/ueb-square.png";
-import DesktopOne from "@images/work/ueb/ueb-desktop-1.png";
-import DesktopTwo from "@images/work/ueb/ueb-desktop-2.png";
-import DesktopThree from "@images/work/ueb/ueb-desktop-3.png";
-import MobileOne from "@images/work/ueb/ueb-mobile-1.png";
-import MobileTwo from "@images/work/ueb/ueb-mobile-2.png";
-import MobileThree from "@images/work/ueb/ueb-mobile-3.png";
+import Hero from "@images/work/ueb/ueb-square.jpg";
+import DesktopOne from "@images/work/ueb/ueb-desktop-1.jpg";
+import DesktopTwo from "@images/work/ueb/ueb-desktop-2.jpg";
+import DesktopThree from "@images/work/ueb/ueb-desktop-3.jpg";
+import MobileOne from "@images/work/ueb/ueb-mobile-1.jpg";
+import MobileTwo from "@images/work/ueb/ueb-mobile-2.jpg";
+import MobileThree from "@images/work/ueb/ueb-mobile-3.jpg";
 
 const mobileImageArr: MobileImageProps[] = [
   {

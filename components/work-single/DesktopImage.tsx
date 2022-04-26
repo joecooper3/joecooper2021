@@ -24,7 +24,7 @@ export default function DesktopImage({
       container: containerRef.current,
       imageContainer: imageContainerRef.current,
     });
-  }, [imageContainerRef.current]);
+  }, []);
 
   return (
     <Container ref={containerRef}>

@@ -9,21 +9,21 @@ export type PreviewImage = {
 export const previewImages: PreviewImage[] = [
   {
     id: "ueb",
-    path: "/images/work/ueb/ueb-square.png",
+    path: "/images/work/ueb/ueb-square.jpg",
     alt: "Preview of Unlimited EyeBrowsing site",
     height: 400,
     width: 400,
   },
   {
     id: "starfish",
-    path: "/images/work/starfish/starfish-square.png",
+    path: "/images/work/starfish/starfish-square.jpg",
     alt: "Preview of Starfish website",
     height: 400,
     width: 400,
   },
   {
     id: "cheercards",
-    path: "/images/work/cheercards/cheercards-square.png",
+    path: "/images/work/cheercards/cheercards-square.jpg",
     alt: "Preview of Cheer Cards",
     height: 400,
     width: 400,

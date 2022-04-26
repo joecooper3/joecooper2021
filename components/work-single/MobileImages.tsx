@@ -32,12 +32,14 @@ export default function MobileImage({
   }, [images]);
 
   useEffect(() => {
-    MobileImageEnter({
-      container: containerRef.current,
-      imageContainers: imageContainersRef.current,
-      isDesktop: isDesktop,
-    });
-  }, [imageContainersRef.current]);
+    if (isDesktop !== null) {
+      MobileImageEnter({
+        container: containerRef.current,
+        imageContainers: imageContainersRef.current,
+        isDesktop: isDesktop,
+      });
+    }
+  }, [isDesktop]);
 
   return (
     <Container ref={containerRef}>

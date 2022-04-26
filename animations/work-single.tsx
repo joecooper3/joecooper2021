@@ -76,6 +76,7 @@ export const ImageEnter = ({
   imageContainer,
 }: ImageEnterProps): void => {
   gsap.registerPlugin(ScrollTrigger);
+  console.log('sfsfs')
   gsap.fromTo(
     imageContainer,
     {
@@ -88,7 +89,7 @@ export const ImageEnter = ({
       y: 0,
       scrollTrigger: {
         trigger: container,
-        start: "bottom bottom",
+        start: "50% bottom",
       },
     }
   );
@@ -106,6 +107,7 @@ export const MobileImageEnter = ({
   isDesktop,
 }: MobileImageEnterProps): void => {
   gsap.registerPlugin(ScrollTrigger);
+
   imageContainers.forEach((item, i) => {
     gsap.fromTo(
       item,

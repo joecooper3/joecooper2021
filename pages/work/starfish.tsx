@@ -5,13 +5,13 @@ import MobileImages, {
 } from "@components/work-single/MobileImages";
 
 
-import Hero from "@images/work/starfish/starfish-square.png";
-import DesktopOne from "@images/work/starfish/starfish-desktop-1.png";
-import DesktopTwo from "@images/work/starfish/starfish-desktop-2.png";
-import DesktopThree from "@images/work/starfish/starfish-desktop-3.png";
-import MobileOne from "@images/work/starfish/starfish-mobile-1.png";
-import MobileTwo from "@images/work/starfish/starfish-mobile-2.png";
-import MobileThree from "@images/work/starfish/starfish-mobile-3.png";
+import Hero from "@images/work/starfish/starfish-square.jpg";
+import DesktopOne from "@images/work/starfish/starfish-desktop-1.jpg";
+import DesktopTwo from "@images/work/starfish/starfish-desktop-2.jpg";
+import DesktopThree from "@images/work/starfish/starfish-desktop-3.jpg";
+import MobileOne from "@images/work/starfish/starfish-mobile-1.jpg";
+import MobileTwo from "@images/work/starfish/starfish-mobile-2.jpg";
+import MobileThree from "@images/work/starfish/starfish-mobile-3.jpg";
 
 const mobileImageArr: MobileImageProps[] = [
   {

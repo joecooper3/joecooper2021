@@ -6,13 +6,13 @@ import MobileImages, {
   MobileImageProps,
 } from "@components/work-single/MobileImages";
 
-import Hero from "@images/work/knomad/knomad-square.png";
-import DesktopOne from "@images/work/knomad/knomad-desktop-1.png";
-import DesktopTwo from "@images/work/knomad/knomad-desktop-2.png";
-import DesktopThree from "@images/work/knomad/knomad-desktop-3.png";
-import MobileOne from "@images/work/knomad/knomad-mobile-1.png";
-import MobileTwo from "@images/work/knomad/knomad-mobile-2.png";
-import MobileThree from "@images/work/knomad/knomad-mobile-3.png";
+import Hero from "@images/work/knomad/knomad-square.jpg";
+import DesktopOne from "@images/work/knomad/knomad-desktop-1.jpg";
+import DesktopTwo from "@images/work/knomad/knomad-desktop-2.jpg";
+import DesktopThree from "@images/work/knomad/knomad-desktop-3.jpg";
+import MobileOne from "@images/work/knomad/knomad-mobile-1.jpg";
+import MobileTwo from "@images/work/knomad/knomad-mobile-2.jpg";
+import MobileThree from "@images/work/knomad/knomad-mobile-3.jpg";
 
 const mobileImageArr: MobileImageProps[] = [
   {
