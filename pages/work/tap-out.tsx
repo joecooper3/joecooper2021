@@ -26,11 +26,12 @@ export default function TapOut() {
         nextTitle="Knomad"
       >
         <p>
-          As part of Visible's Phonetopia event, our dev team was tasked with
+          As part of Visible's Phonetopia pop up, our dev team was tasked with
           creating a host of tech-y activations. My assignment was to program an
           arcade game about receiving too many text messages. The game supported
           up to four players and connected to a central external database to
-          help display high scores at different screens at the event.
+          help display high scores on different screens at various locations
+          throughout the event space.
         </p>
         <p>
           The game was built with Phaser.js and transformed into a Windows app

@@ -46,7 +46,7 @@ export default function UEB() {
         <p>
           Unlimited Eyebrowsing was a sprawling web app that simulated an
           endless stream of eyebrow-related content. The site also featured face
-          detection integration, allowing users to browse the site by moving
+          detection software, allowing users to browse the site by moving
           their eyebrows. With over 300 unique pages—including games like Brow
           Pong, Brow or Stache, and an eyebrow-themed dating app—the site was
           made possible via a creative tech stack and a clever CMS integration.

@@ -52,14 +52,14 @@ export default function UEB() {
           tag photos to cheer on their loved ones.
         </p>
         <p>
-          After the user-generated images were sufficiently plastered with
+          After the user-uploaded photos were sufficiently plastered with
           colorful stickers, messages, and frames, they were uploaded and
           integrated into TCS's existing runner database. Chips in the runners'
           racing bibs triggered nearby billboards to display Cheer Cards created
           by their supporters.
         </p>
         <p>
-          The app was built with React, Redux, Konva.js, and used WordPress on
+          The app was built with React.js, Redux, Konva.js, and used WordPress on
           the back end.
         </p>
 

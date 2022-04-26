@@ -44,9 +44,9 @@ export default function UEB() {
         prevTitle="Tap Out"
       >
         <p>
-          Knomad needed a B2B e-commerce site to help make its vibrat, high
-          quality fibres stand out from its peers. I led the development of a
-          WooCommerce site that allowed customers to easily discover and order
+          Knomad needed a B2B e-commerce site to help make its vibrant,
+          high-quality fibers stand out from its peers. I led the development of
+          a WooCommerce site that allowed customers to easily discover and order
           yarn via a number of taxonomies you'd only ever encounter if you were
           the type to buy wholesale yarn. The site was created using a more
           traditional WooCommerce tech stack, including PHP, SCSS, and vanilla

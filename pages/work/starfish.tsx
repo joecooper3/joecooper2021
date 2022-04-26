@@ -4,7 +4,6 @@ import MobileImages, {
   MobileImageProps,
 } from "@components/work-single/MobileImages";
 
-
 import Hero from "@images/work/starfish/starfish-square.jpg";
 import DesktopOne from "@images/work/starfish/starfish-desktop-1.jpg";
 import DesktopTwo from "@images/work/starfish/starfish-desktop-2.jpg";
@@ -47,9 +46,9 @@ export default function Starfish() {
         is Madwell's in-house production studio. I'm big on the page transitions
         and zany easter eggs here (see what happens when you click on "Release
         the Swarm"). It was challenging to create a site that could could
-        properly showcase Starfish's quality photography and videos without
-        sacrificing page performance, but we were able to pull it off with some
-        clever architecture. The site won an{" "}
+        properly showcase Starfish's quality photography and video production
+        without sacrificing page performance, but we were able to pull it off
+        with some clever architecture. The site won an{" "}
         <a
           href="https://www.awwwards.com/sites/starfish-projects"
           target="_blank"
