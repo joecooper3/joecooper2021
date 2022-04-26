@@ -27,43 +27,47 @@ export const enterAnimations = ({
     tl.to(container, {
       y: 0,
       opacity: 1,
-      ease: "power2.out",
-      duration: 0.45,
-      startAt: { y: 300, opacity: 0 },
+      // ease: "power2.out",
+      duration: 0.8,
+      startAt: { y: 500, opacity: 0 },
     });
   }
   tl.to([headline, whiteHeadline], {
     y: 0,
     opacity: 1,
-    ease: "power2.out",
-    duration: 0.45,
-    startAt: { y: 300, opacity: 0 },
+    // ease: "power2.out",
+    duration: 0.8,
+    startAt: { y: 500, opacity: 0 },
   });
   if (!isDesktop) {
     tl.to(container, {
       y: 0,
       opacity: 1,
-      ease: "power2.out",
-      duration: 0.45,
-      startAt: { y: 300, opacity: 0 },
+      // ease: "power2.out",
+      duration: 0.8,
+      startAt: { y: 500, opacity: 0 },
     });
   }
+  tl.to(
+    copyContainer,
+    {
+      y: 0,
+      opacity: 1,
+      // ease: "power2.out",
+      duration: 0.8,
+      startAt: { y: 500, opacity: 0 },
+    },
+    "-=0.3"
+  );
   if (leadDeveloper) {
     tl.to(leadDeveloper, {
       y: 0,
       opacity: 1,
-      ease: "power2.out",
+      // ease: "power2.out",
       duration: 1.5,
       startAt: { y: 30, opacity: 0 },
     });
   }
-  tl.to(copyContainer, {
-    y: 0,
-    opacity: 1,
-    ease: "power2.out",
-    duration: 0.45,
-    startAt: { y: 300, opacity: 0 },
-  });
 };
 
 type ImageEnterProps = {

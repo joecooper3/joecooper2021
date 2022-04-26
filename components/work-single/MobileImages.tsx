@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import Image from "next/image";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 import { MobileImageEnter } from "@animations/work-single";
 import { mobileQuery } from "@styles/mediaQueries";
@@ -39,6 +40,9 @@ export default function MobileImage({
         isDesktop: isDesktop,
       });
     }
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
   }, [isDesktop]);
 
   return (

@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
 import { CgArrowLongLeft, CgArrowLongRight } from "react-icons/cg";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 import { enterAnimations } from "@animations/work-single";
 import { tabletQuery, mobileQuery } from "@styles/mediaQueries";
@@ -49,6 +50,9 @@ export default function WorkTemplate({
         isDesktop: isDesktop,
       });
     }
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
   }, [isDesktop]);
   return (
     <>
@@ -115,6 +119,7 @@ const Container = styled.div`
 
 const ImageContainer = styled.figure`
   grid-column: 2;
+  opacity: 0;
 
   @media ${mobileQuery} {
     grid-column: 1;
@@ -142,6 +147,7 @@ const Headline = styled.h1`
   width: 100%;
   z-index: 3;
   margin: 0 0 20px;
+  opacity: 0;
 
   @media ${tabletQuery} {
     font-size: 59px;
@@ -163,6 +169,7 @@ const WhiteHeadline = styled.h1`
   position: absolute;
   top: 103px;
   left: 3px;
+  opacity: 0;
 
   @media ${tabletQuery} {
     font-size: 59px;
@@ -180,6 +187,7 @@ const LeadDeveloper = styled.aside`
   font-weight: 700;
   font-size: 20px;
   padding-left: 6px;
+  opacity: 0;
 
   @media ${mobileQuery} {
     display: none;
@@ -193,6 +201,7 @@ const CopyContainer = styled.article`
   flex-flow: column nowrap;
   grid-column: 1 / -1;
   margin: 50px 0;
+  opacity: 0;
 
   @media ${mobileQuery} {
     margin: 16px 0;
