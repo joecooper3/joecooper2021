@@ -39,22 +39,26 @@ export default function WorkTemplate({
   const isDesktop = useStore((state) => state.isDesktop);
 
   useEffect(() => {
-    enterAnimations({
-      container: heroContainer.current,
-      headline: headline.current,
-      whiteHeadline: whiteHeadline.current,
-      leadDeveloper: leadDeveloper.current,
-      copyContainer: copyContainer.current,
-      isDesktop: isDesktop,
-    });
-  }, []);
+    if (isDesktop !== null) {
+      enterAnimations({
+        container: heroContainer.current,
+        headline: headline.current,
+        whiteHeadline: whiteHeadline.current,
+        leadDeveloper: leadDeveloper.current,
+        copyContainer: copyContainer.current,
+        isDesktop: isDesktop,
+      });
+    }
+  }, [isDesktop]);
   return (
     <>
       <Main>
         <Container>
           <HeadlineContainer>
             <Headline ref={headline}>{title}</Headline>
-            <WhiteHeadline ref={whiteHeadline} aria-hidden>{title}</WhiteHeadline>
+            <WhiteHeadline ref={whiteHeadline} aria-hidden>
+              {title}
+            </WhiteHeadline>
             {lead && (
               <LeadDeveloper ref={leadDeveloper}>Lead Developer</LeadDeveloper>
             )}

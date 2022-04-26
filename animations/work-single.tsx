@@ -76,7 +76,6 @@ export const ImageEnter = ({
   imageContainer,
 }: ImageEnterProps): void => {
   gsap.registerPlugin(ScrollTrigger);
-  console.log('sfsfs')
   gsap.fromTo(
     imageContainer,
     {
