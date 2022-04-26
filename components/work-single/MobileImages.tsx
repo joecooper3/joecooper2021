@@ -34,11 +34,15 @@ export default function MobileImage({
 
   useEffect(() => {
     if (isDesktop !== null) {
-      MobileImageEnter({
-        container: containerRef.current,
-        imageContainers: imageContainersRef.current,
-        isDesktop: isDesktop,
-      });
+      setTimeout(
+        () =>
+          MobileImageEnter({
+            container: containerRef.current,
+            imageContainers: imageContainersRef.current,
+            isDesktop: isDesktop,
+          }),
+        0
+      );
     }
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
