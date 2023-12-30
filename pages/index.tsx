@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import styled from "styled-components";
-import { Tween } from "react-gsap";
+import gsap from "gsap";
 
 import { exitAnimArgs, exitAnimation } from "@animations/homepage";
 import Button from "@components/global/Button";
@@ -68,6 +68,28 @@ export default function Home() {
     mobileWall,
   ]);
 
+  useLayoutEffect(() => {
+    const q = gsap.utils.selector(subCopy.current);
+    console.log('q(".copy-line"):', q(".copy-line"));
+    gsap.to(q(".copy-line"), {
+      opacity: 1,
+      y: 0,
+      stagger: 0.45,
+      duration: 0.8,
+      delay: isDesktop ? 2.5 : 1.75,
+    });
+  }, [deviceSize]);
+
+  useLayoutEffect(() => {
+    // const q = gsap.utils.selector(buttonContainer.current);
+    gsap.to(buttonContainer.current, {
+      opacity: 1,
+      y: 0,
+      duration: 0.5,
+      delay: isDesktop ? 4.1 : 3.3,
+    });
+  }, [deviceSize]);
+
   return (
     <>
       <Head>
@@ -87,26 +109,23 @@ export default function Home() {
           )}
           <SubCopy ref={subCopy}>
             {deviceSize !== null && (
-              <Tween
-                to={{ y: 0, opacity: 1 }}
-                stagger={0.45}
-                delay={isDesktop ? 2.5 : 1.75}
-              >
-                <CopyLine>
+              <>
+                <CopyLine className="copy-line">
                   <span className="sr-only">Joe Cooper </span>is a New
                   York-based
                 </CopyLine>
-                <CopyLine>web developer and</CopyLine>
-                <CopyLine>creative technologist.</CopyLine>
+                <CopyLine className="copy-line">web developer and</CopyLine>
+                <CopyLine className="copy-line">
+                  creative technologist.
+                </CopyLine>
                 <noscript>
                   Joe Cooper is a New York-based web developer and creative
                   technologist.
                 </noscript>
-              </Tween>
+              </>
             )}
           </SubCopy>
           {deviceSize !== null && (
-            <Tween to={{ y: 0, opacity: 1 }} delay={isDesktop ? 4.2 : 3.5}>
               <ButtonContainer ref={buttonContainer}>
                 <Button
                   onClick={async () => exitAnimation("/about", exitAnimArgs)}
@@ -123,7 +142,6 @@ export default function Home() {
                   Work
                 </Button>
               </ButtonContainer>
-            </Tween>
           )}
         </CopyContainer>
         <MobileWall ref={mobileWall} />

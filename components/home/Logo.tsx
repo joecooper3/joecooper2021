@@ -1,6 +1,6 @@
-import { forwardRef, MutableRefObject } from "react";
+import { forwardRef, MutableRefObject, useLayoutEffect } from "react";
 import styled from "styled-components";
-import { Tween } from "react-gsap";
+import gsap from "gsap";
 
 import { mobileQuery } from "@styles/mediaQueries";
 
@@ -60,19 +60,14 @@ const convertToMobilePx = (num: number): number => {
   return num * MULTIPLIER;
 };
 
-const stringToSpans = (
-  text: string,
-  animDelay: number
-): React.ReactElement[] => {
+const stringToSpans = (text: string): React.ReactElement[] => {
   const stringArr = text.split("");
   const spanArr = stringArr.map((letter, i) => {
     const { w, h, x } = letterSizeObj.find((obj) => obj.char === letter);
     const xOffset = x ?? 0;
     return (
       <LetterContainer width={w} height={h} xOffset={xOffset} key={letter + i}>
-        <Tween to={{ x: 0, opacity: 1, delay: animDelay }}>
-          <Letter>{letter}</Letter>
-        </Tween>
+        <Letter className="letter">{letter}</Letter>
       </LetterContainer>
     );
   });
@@ -80,8 +75,20 @@ const stringToSpans = (
 };
 
 const Logo = forwardRef<any, LogoProps>((props, ref): JSX.Element => {
-  const first = stringToSpans("Joe", props.animDelay);
-  const last = stringToSpans("Cooper", props.animDelay);
+  useLayoutEffect(() => {
+    // @ts-ignore
+    const q = gsap.utils.selector(ref.current);
+    gsap.to(q(".letter"), {
+      duration: 2,
+      // stagger: 0.1,
+      x: 0,
+      opacity: 1,
+      delay: props.animDelay,
+      ease: "power4.inOut",
+    });
+  }, []);
+  const first = stringToSpans("Joe");
+  const last = stringToSpans("Cooper");
   return (
     <>
       <Header className="sr-only">Joe Cooper</Header>

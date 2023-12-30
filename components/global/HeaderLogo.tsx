@@ -1,6 +1,6 @@
-import { useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { Tween } from "react-gsap";
+import gsap from "gsap";
 
 import { animateOutLogo } from "@animations/menu";
 import { useTransitionLink } from "@hooks/hooks";
@@ -61,6 +61,19 @@ const HeaderLogo = (): JSX.Element => {
 
   const pageTransition = useTransitionLink("/", "tan");
 
+  useLayoutEffect(() => {
+    const q = gsap.utils.selector(container.current);
+    gsap.to(q(".letter-container"), {
+      duration: 2,
+      // stagger: 0.1,
+      x: 0,
+      opacity: 1,
+      delay: 0.5,
+      ease: "power4.inOut",
+      onComplete: () => motionDone(),
+    });
+  }, []);
+
   const clickFn = (e: React.MouseEvent) => {
     e.preventDefault();
     setInMotion(true);
@@ -87,16 +100,7 @@ const HeaderLogo = (): JSX.Element => {
           key={letter + i}
           aria-hidden="true"
         >
-          <Tween
-            to={{
-              x: 0,
-              opacity: 1,
-              delay: 0.5,
-              onComplete: () => motionDone(),
-            }}
-          >
-            <Letter>{letter}</Letter>
-          </Tween>
+          <Letter className="letter-container">{letter}</Letter>
         </LetterContainer>
       );
     });
