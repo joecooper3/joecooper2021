@@ -42,4 +42,18 @@ export const previewImages: PreviewImage[] = [
     height: 400,
     width: 400,
   },
+  {
+    id: "snapchat",
+    path: "/images/work/snapchat/snapchat-square.webp",
+    alt: "Preview of Snapchat Agency (Ad)venture",
+    height: 400,
+    width: 400,
+  },
+  {
+    id: "wim",
+    path: "/images/work/wim/wim-square.webp",
+    alt: "Preview of What Is Missing?",
+    height: 400,
+    width: 400,
+  },
 ];

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import styled from "styled-components";
 import Image from "next/image";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
@@ -20,15 +20,14 @@ export default function DesktopImage({
   const containerRef = useRef<HTMLDivElement>(null);
   const imageContainerRef = useRef(null);
 
-  useEffect(() => {
-    setTimeout(
-      () =>
-        ImageEnter({
-          container: containerRef.current,
-          imageContainer: imageContainerRef.current,
-        }),
-      0
-    );
+  useLayoutEffect(() => {
+    setTimeout(() => {
+      ImageEnter({
+        container: containerRef.current,
+        imageContainer: imageContainerRef.current,
+      }),
+        10;
+    });
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
@@ -47,7 +46,7 @@ const Container = styled.div`
   margin: 35px 0;
   width: 100%;
   max-width: 1200px;
-  overflow: hidden;
+  overflow: clip;
 
   @media ${mobileQuery} {
     margin: 12px 0;

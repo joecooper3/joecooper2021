@@ -27,25 +27,27 @@ export const enterAnimations = ({
     tl.to(container, {
       y: 0,
       opacity: 1,
-      // ease: "power2.out",
+      scaleY: 1,
+      ease: "power4.out",
       duration: 0.8,
-      startAt: { y: 500, opacity: 0 },
+      startAt: { y: 150, opacity: 0, scaleY: 1.3 },
     });
   }
   tl.to([headline, whiteHeadline], {
     y: 0,
     opacity: 1,
-    // ease: "power2.out",
+    ease: "power4.out",
     duration: 0.8,
-    startAt: { y: 500, opacity: 0 },
-  });
+    scaleY: 1,
+    startAt: { y: 0, opacity: 0, scaleY: 1.3 },
+  }, "<");
   if (!isDesktop) {
     tl.to(container, {
       y: 0,
       opacity: 1,
-      // ease: "power2.out",
+      ease: "power4.out",
       duration: 0.8,
-      startAt: { y: 500, opacity: 0 },
+      startAt: { y: 150, opacity: 0 },
     });
   }
   tl.to(
@@ -55,7 +57,7 @@ export const enterAnimations = ({
       opacity: 1,
       // ease: "power2.out",
       duration: 0.8,
-      startAt: { y: 500, opacity: 0 },
+      startAt: { y: 150, opacity: 0 },
     },
     "-=0.3"
   );
@@ -83,16 +85,21 @@ export const ImageEnter = ({
   gsap.fromTo(
     imageContainer,
     {
-      y: 500,
+      scaleY: 1.5,
+      y: 150,
       opacity: 0,
+      transformOrigin: "top",
     },
     {
-      duration: 0.8,
+      scale: 1,
+      duration: 1,
       opacity: 1,
       y: 0,
+      ease: "power4.out",
       scrollTrigger: {
         trigger: container,
         start: "50% bottom",
+        // markers: true,
       },
     }
   );

@@ -34,10 +34,10 @@ export default function Starfish() {
       lead
       hero={Hero}
       heroAlt="A still of an animation of a starfish leaping out of a hot cup of coffee."
-      prevSlug="ueb"
-      prevTitle="Unlimited Eyebrowsing"
-      nextSlug="cheercards"
-      nextTitle="Cheer Cards"
+      prevSlug="cheercards"
+      prevTitle="Cheer Cards"
+      nextSlug="tap-out"
+      nextTitle="Tap Out"
     >
       <p>
         <a href="https://www.starfishprojects.com" target="_blank">

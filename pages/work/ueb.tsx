@@ -36,12 +36,14 @@ export default function UEB() {
         <title>Unlimited Eyebrowsing • Joe Cooper</title>
       </Head>
       <WorkTemplate
-        title="Unlimited Eyebrowsing"
+        title="Visible Unlimited Eyebrowsing"
         lead
         hero={Hero}
         heroAlt="An eyebrow-themed coloring book app"
-        nextSlug="starfish"
-        nextTitle="Starfish"
+        prevTitle="What Is Missing?"
+        prevSlug="what-is-missing"
+        nextSlug="cheercards"
+        nextTitle="Cheer Cards"
       >
         <p>
           Unlimited Eyebrowsing was a sprawling web app that simulated an

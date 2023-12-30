@@ -58,20 +58,23 @@ export default function WorkList() {
   return (
     <Nav aria-label="Work Navigation">
       <Container ref={container}>
+        <LinkItem href="/work/snapchat" previewId="snapchat">
+          Snapchat Agency (Ad)venture
+        </LinkItem>
+        <LinkItem href="/work/what-is-missing" previewId="wim">
+          What Is Missing?
+        </LinkItem>
         <LinkItem href="/work/ueb" previewId="ueb">
           Unlimited Eyebrowsing
-        </LinkItem>
-        <LinkItem href="/work/starfish" previewId="starfish">
-          Starfish
         </LinkItem>
         <LinkItem href="/work/cheercards" previewId="cheercards">
           Cheer Cards
         </LinkItem>
+        <LinkItem href="/work/starfish" previewId="starfish">
+          Starfish
+        </LinkItem>
         <LinkItem href="/work/tap-out" previewId="tap-out">
           Tap Out
-        </LinkItem>
-        <LinkItem href="/work/knomad" previewId="knomad">
-          Knomad
         </LinkItem>
       </Container>
     </Nav>
@@ -95,10 +98,11 @@ const Container = styled.ul`
 const ItemContainer = styled.li`
   font-family: var(--header-font);
   margin-bottom: clamp(3.6rem, 4.9vh, 5.4rem);
-  font-size: clamp(var(--lg-font-size), 7.5vh, 8.1rem);
+  font-size: clamp(3.2rem, 5.2vh, 7.1rem);
   line-height: 0.9;
-  font-weight: 800;
+  font-weight: 600;
   position: relative;
+  max-width: 20ch;
   line-height: 1;
   opacity: 0;
 

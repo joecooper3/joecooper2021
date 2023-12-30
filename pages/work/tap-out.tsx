@@ -20,10 +20,8 @@ export default function TapOut() {
         lead
         hero={Hero}
         heroAlt="Tap Out logo"
-        prevSlug="cheercards"
-        prevTitle="Cheer Cards"
-        nextSlug="knomad"
-        nextTitle="Knomad"
+        prevSlug="starfish"
+        prevTitle="Starfish"
       >
         <p>
           As part of Visible's Phonetopia pop up, our dev team was tasked with

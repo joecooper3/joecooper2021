@@ -1,3 +1,6 @@
+import { useLayoutEffect, useRef } from "react";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import gsap from "gsap";
 import Link from "next/link";
 import Head from "next/head";
 import styled from "styled-components";
@@ -6,13 +9,32 @@ import Button from "@components/global/Button";
 import { mobileQuery, tabletQuery } from "@styles/mediaQueries";
 
 export default function About() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  gsap.registerPlugin(ScrollTrigger);
+  useLayoutEffect(() => {
+    gsap.fromTo(
+      containerRef.current,
+      {
+        autoAlpha: 0,
+        scaleY: 1.5,
+      },
+      {
+        autoAlpha: 1,
+        scaleY: 1,
+        duration: 1.8,
+        ease: "power4.out",
+      }
+    );
+  }, []);
+
   return (
     <>
       <Head>
         <title>About • Joe Cooper</title>
       </Head>
       <Main>
-        <Container>
+        <Container ref={containerRef}>
           <CopyContainer>
             <h1>About</h1>
             <p>
@@ -40,7 +62,8 @@ export default function About() {
                 Madwell
               </a>
               , a Brooklyn-based creative agency where I worked as a Front End
-              Developer before becoming a Senior Developer. These days, I've been working with the brilliant folks at{" "}
+              Developer before becoming a Senior Developer. These days, I've
+              been working with the brilliant folks at{" "}
               <a href="https://www.oddcommon.com/" target="_blank">
                 OddCommon
               </a>
@@ -83,8 +106,13 @@ export default function About() {
             </ul>
             <h3>The Shorty Awards</h3>
             <ul className="add-mt">
-              <li>Match Group x Visible Singles Registry - Winner in Micro-site (2023)</li>
-              <li>Visible Unlimited Eyebrowsing - Finalist in Micro-site (2021) </li>
+              <li>
+                Match Group x Visible Singles Registry - Winner in Micro-site
+                (2023)
+              </li>
+              <li>
+                Visible Unlimited Eyebrowsing - Finalist in Micro-site (2021){" "}
+              </li>
             </ul>
           </AwardsContainer>
         </Container>
@@ -112,6 +140,7 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: 450px 450px;
   gap: 250px;
+  visibility: hidden;
 
   @media ${tabletQuery} {
     display: flex;
@@ -172,7 +201,8 @@ const AwardsContainer = styled.div`
     margin-bottom: 0;
   }
 
-  p, ul {
+  p,
+  ul {
     font-size: 1.4rem;
   }
 

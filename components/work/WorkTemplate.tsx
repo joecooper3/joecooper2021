@@ -64,7 +64,7 @@ export default function WorkTemplate({
               {title}
             </WhiteHeadline>
             {lead && (
-              <LeadDeveloper ref={leadDeveloper}>Lead Developer</LeadDeveloper>
+              <LeadDeveloper ref={leadDeveloper}>Technical Lead</LeadDeveloper>
             )}
           </HeadlineContainer>
           <ImageContainer ref={heroContainer}>

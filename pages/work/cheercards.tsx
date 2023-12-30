@@ -37,13 +37,13 @@ export default function UEB() {
         <title>Cheer Cards • Joe Cooper</title>
       </Head>
       <WorkTemplate
-        title="Cheer Cards"
+        title="TCS NYC Marathon Cheer Cards"
         hero={Hero}
         heroAlt="A Cheer Card on display in Times Square"
-        prevSlug="starfish"
-        prevTitle="Starfish"
-        nextSlug="tap-out"
-        nextTitle="Tap Out"
+        prevSlug="ueb"
+        prevTitle="Unlimited Eyebrowsing"
+        nextSlug="starfish"
+        nextTitle="Starfish"
       >
         <p>
           The TCS New York City Marathon wanted to find a way to encourage
