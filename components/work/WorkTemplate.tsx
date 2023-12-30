@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import styled, { css } from "styled-components";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 import { CgArrowLongLeft, CgArrowLongRight } from "react-icons/cg";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
@@ -74,21 +74,18 @@ export default function WorkTemplate({
         </Container>
       </Main>
       <PrevNextContainer>
+        {nextSlug && nextTitle && !prevSlug && (<span/>)}
         {prevSlug && prevTitle && (
-          <Link href={"/work/" + prevSlug}>
-            <PrevLink>
+          <PrevLink href={"/work/" + prevSlug} style={{ textDecoration: "none"}}>
               <CgArrowLongLeft size={20} />
               <PrevTitle>{prevTitle}</PrevTitle>
-            </PrevLink>
-          </Link>
+          </PrevLink>
         )}
         {nextSlug && nextTitle && (
-          <Link href={"/work/" + nextSlug}>
-            <NextLink>
+          <NextLink href={"/work/" + nextSlug} style={{ textDecoration: "none"}}>
               <NextTitle>{nextTitle}</NextTitle>
               <CgArrowLongRight size={20} aria-hidden />
-            </NextLink>
-          </Link>
+          </NextLink>
         )}
       </PrevNextContainer>
     </>
@@ -226,6 +223,7 @@ const PrevNextContainer = styled.div`
   background: var(--white);
   padding: 20px var(--side-padding);
   box-sizing: border-box;
+  width: 100%;
 `;
 
 const sharedLinkStyles = css`
@@ -238,7 +236,7 @@ const sharedLinkStyles = css`
   }
 `;
 
-const PrevLink = styled.a`
+const PrevLink = styled(Link)`
   ${sharedLinkStyles}
   grid-column: 1;
 
@@ -249,7 +247,7 @@ const PrevLink = styled.a`
   }
 `;
 
-const NextLink = styled.a`
+const NextLink = styled(Link)`
   ${sharedLinkStyles}
   grid-column: 2;
   justify-self: end;

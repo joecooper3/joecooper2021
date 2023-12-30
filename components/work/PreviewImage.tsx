@@ -7,7 +7,7 @@ import {
   useState,
 } from "react";
 import styled from "styled-components";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 import { previewImageEnter, previewImageExit } from "@animations/work";
 import { useStore } from "@store/store";

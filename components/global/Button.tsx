@@ -49,12 +49,10 @@ export default function Button({
 }: ButtonProps): JSX.Element {
   if (href && !external) {
     return (
-      <Link href={href}>
         <Anchor href={href} arrow={arrow} responsiveHeight={responsiveHeight}>
           {children}
           {arrow && <Arrow responsiveHeight={responsiveHeight} />}
         </Anchor>
-      </Link>
     );
   } else if (href && external) {
     return (
@@ -127,7 +125,7 @@ const ButtonEl = styled.button`
   ${shared}
 `;
 
-const Anchor = styled.a`
+const Anchor = styled(Link)`
   ${shared}
 `;
 
