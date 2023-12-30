@@ -1,3 +1,4 @@
+import { ReactLenis, useLenis } from '@studio-freight/react-lenis'
 import { useEffect } from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
@@ -63,10 +64,12 @@ function MyApp({ Component, pageProps, router }) {
         <meta property="og:image" content="/images/og-image.png" />
       </Head>
       <Header route={router.route} />
-      <AnimationsProvider route={router.route}>
-        <Component {...pageProps} />
-        {/* <Cursor /> */}
-      </AnimationsProvider>
+<ReactLenis root>
+        <AnimationsProvider route={router.route}>
+          <Component {...pageProps} />
+          {/* <Cursor /> */}
+        </AnimationsProvider>
+</ReactLenis>
     </>
   );
 }

@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@studio-freight/react-lenis": "^0.0.39",
     "@types/matter-js": "^0.14.12",
     "@types/styled-components": "^5.1.9",
     "gsap": "^3.10.2",
