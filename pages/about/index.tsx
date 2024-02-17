@@ -67,7 +67,7 @@ export default function About() {
               <a href="https://www.oddcommon.com/" target="_blank">
                 OddCommon
               </a>
-              , where I currently work as a Senior Developer.
+              , where I currently work as the agency's Technical Lead.
             </p>
             <p>
               In addition to anything web tech, I also enjoy record and tape
