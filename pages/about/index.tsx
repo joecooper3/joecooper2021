@@ -66,7 +66,7 @@ export default function About() {
               some time working with the brilliant folks at{" "}
               <a href="https://www.oddcommon.com/" target="_blank">
                 OddCommon
-              </a>
+              </a>{" "}
               as a Senior Developer and a Technical Lead. These days, I'm back
               at Madwell as the Director of Software Engineering.
             </p>
@@ -83,7 +83,7 @@ export default function About() {
             <h2>Awards & Recognition</h2>
             <h3>Webby Awards</h3>
             <p>3x Winner</p>
-            <ul>
+            <ul className="no-mb">
               <li>What Is Missing? - Activism (2023)</li>
               <li>What Is Missing? - Best Navigation/Structure (2023)</li>
               <li>What Is Missing? - Activism (2024)</li>
