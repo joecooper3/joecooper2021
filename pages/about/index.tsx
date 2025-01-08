@@ -62,12 +62,13 @@ export default function About() {
                 Madwell
               </a>
               , a Brooklyn-based creative agency where I worked as a Front End
-              Developer before becoming a Senior Developer. These days, I've
-              been working with the brilliant folks at{" "}
+              Developer before becoming a Senior Developer. After that, I spent
+              some time working with the brilliant folks at{" "}
               <a href="https://www.oddcommon.com/" target="_blank">
                 OddCommon
               </a>
-              , where I currently work as the agency's Technical Lead.
+              as a Senior Developer and a Technical Lead. These days, I'm back
+              at Madwell as the Director of Software Engineering.
             </p>
             <p>
               In addition to anything web tech, I also enjoy record and tape
@@ -81,10 +82,23 @@ export default function About() {
           <AwardsContainer>
             <h2>Awards & Recognition</h2>
             <h3>Webby Awards</h3>
-            <p>2x Winner</p>
+            <p>3x Winner</p>
             <ul>
               <li>What Is Missing? - Activism (2023)</li>
               <li>What Is Missing? - Best Navigation/Structure (2023)</li>
+              <li>What Is Missing? - Activism (2024)</li>
+            </ul>
+            <p>3x Nominee</p>
+            <ul>
+              <li>
+                Snapchat Agency (Ad)venture - Game or Application Advertising
+                (2024)
+              </li>
+              <li>Snapchat Agency (Ad)venture - B2B Advertising (2024)</li>
+              <li>
+                Exo Iris - Best Use of Animation or Motion Graphics Websites and
+                Mobile Sites (2024)
+              </li>
             </ul>
             <h3>Awwwards</h3>
             <p>2x SOTD</p>
