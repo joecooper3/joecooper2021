@@ -67,8 +67,13 @@ export default function About() {
               <a href="https://www.oddcommon.com/" target="_blank">
                 OddCommon
               </a>{" "}
-              as a Senior Developer and a Technical Lead. These days, I'm back
-              at Madwell as the Director of Software Engineering.
+              as a Senior Developer and a Technical Lead. After that, I returned
+              to Madwell as the Director of Software Engineering. These days,
+              I'm the Technical Director at{" "}
+              <a href="https://www.elegantseagulls.com/" target="_blank">
+                Elegant Seagulls
+              </a>
+              .
             </p>
             <p>
               In addition to anything web tech, I also enjoy record and tape
