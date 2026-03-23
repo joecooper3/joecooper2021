@@ -87,13 +87,14 @@ export default function About() {
           <AwardsContainer>
             <h2>Awards & Recognition</h2>
             <h3>Webby Awards</h3>
-            <p>3x Winner</p>
+            <p>4x Winner</p>
             <ul className="no-mb">
               <li>What Is Missing? - Activism (2023)</li>
               <li>What Is Missing? - Best Navigation/Structure (2023)</li>
               <li>What Is Missing? - Activism (2024)</li>
+              <li>OddCommon - Best Practices Websites and Mobile Sites (2025)</li>
             </ul>
-            <p>3x Nominee</p>
+            <p>4x Nominee</p>
             <ul>
               <li>
                 Snapchat Agency (Ad)venture - Game or Application Advertising
@@ -104,24 +105,28 @@ export default function About() {
                 Exo Iris - Best Use of Animation or Motion Graphics Websites and
                 Mobile Sites (2024)
               </li>
+              <li>OddCommon - Best Home Page (2025)</li>
             </ul>
             <h3>Awwwards</h3>
-            <p>2x SOTD</p>
+            <p>3x SOTD</p>
             <ul className="no-mb">
               <li>Snapchat Agency (Ad)venture</li>
               <li>Borderless VR</li>
+              <li>OddCommon</li>
             </ul>
-            <p>2x Developer Award</p>
+            <p>3x Developer Award</p>
             <ul>
               <li>Snapchat Agency (Ad)venture</li>
               <li>Borderless VR</li>
+              <li>OddCommon</li>
             </ul>
             <h3>The FWA</h3>
-            <p>3x SOTD</p>
+            <p>4x SOTD</p>
             <ul>
               <li>Snapchat Agency (Ad)venture</li>
               <li>What Is Missing?</li>
               <li>Borderless VR</li>
+              <li>OddCommon</li>
             </ul>
             <h3>The Shorty Awards</h3>
             <ul className="add-mt">
